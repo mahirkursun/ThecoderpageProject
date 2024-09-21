@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ThecoderpageProject.Domain.Entities
+namespace ThecoderpageProject.Application.Models.DTOs
 {
-    public class User
+    public class CreateUserDTO
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -15,7 +15,6 @@ namespace ThecoderpageProject.Domain.Entities
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public ICollection<Problem> Problems { get; set; }
-
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }

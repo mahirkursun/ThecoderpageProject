@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ThecoderpageProject.Domain.Entities
+namespace ThecoderpageProject.Application.Models.VMs
 {
-    public class User
+    public class UserVM
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Role { get; set; }
-        public string Username { get; set; }
+        public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public ICollection<Problem> Problems { get; set; }
+        public string Role { get; set; }
+        //public string ProfilePicture { get; set; }
+        
 
     }
 }
