@@ -1,0 +1,6 @@
+@ThecoderpageProject.API_HostAddress = http://localhost:5188
+
+GET {{ThecoderpageProject.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
