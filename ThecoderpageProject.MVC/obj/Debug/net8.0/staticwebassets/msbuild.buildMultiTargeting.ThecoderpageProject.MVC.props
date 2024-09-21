@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ThecoderpageProject.MVC.props" />
+</Project>
