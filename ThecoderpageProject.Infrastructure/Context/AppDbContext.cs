@@ -80,6 +80,24 @@ namespace ThecoderpageProject.Infrastructure.Context
                 .HasForeignKey(r => r.CommentId)
                 .OnDelete(DeleteBehavior.Restrict); // ON DELETE NO ACTION
 
+            builder.Entity<Vote>()
+                .HasOne(v => v.User)
+                .WithMany(u => u.Votes)
+                .HasForeignKey(v => v.UserId)
+                .OnDelete(DeleteBehavior.Restrict); // ON DELETE NO ACTION
+
+            builder.Entity<Vote>()
+                .HasOne(v => v.Problem)
+                .WithMany(p => p.Votes)
+                .HasForeignKey(v => v.ProblemId)
+                .OnDelete(DeleteBehavior.Restrict); // ON DELETE NO ACTION
+
+            builder.Entity<Vote>()
+                .HasOne(v => v.Comment)
+                .WithMany(c => c.Votes)
+                .HasForeignKey(v => v.CommentId)
+                .OnDelete(DeleteBehavior.Restrict); // ON DELETE NO ACTION
+
             //En altta kalsın.
             base.OnModelCreating(builder);
         }
