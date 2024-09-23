@@ -17,34 +17,51 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
         private readonly IUserRepository<User> _userRepository;
         private readonly IMapper _mapper;
 
-        public UserManager(IUserRepository<User> userRepository, IMapper mapper) 
+        public UserManager(IUserRepository<User> userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mapper = mapper;
         }
 
-
-        public Task Create(CreateUserDTO model)
+        public async Task Create(CreateUserDTO model)
         {
-            throw new NotImplementedException();
-        }
-        public Task Update(UpdateUserDTO model) {
-            throw new NotImplementedException();
+            var user = _mapper.Map<User>(model);
+            await _userRepository.CreateUser(user); // Asenkron isimlendirme
         }
 
-        public Task Delete(int id)
+        public async Task Update(UpdateUserDTO model)
         {
-            throw new NotImplementedException();
+            var user = await _userRepository.GetUserById(model.Id); // Kullanıcıyı ID ile bul
+            if (user != null)
+            {
+                _mapper.Map(model, user); // DTO'dan mevcut kullanıcıya verileri kopyala
+                await _userRepository.UpdateUser(user); // Güncelle
+            }
+            else
+            {
+                throw new KeyNotFoundException($"User with ID {model.Id} not found."); // Hata mesajı
+            }
         }
 
-        public Task<IEnumerable<UserVM>> GetAll()
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var user = await _userRepository.GetUserById(id); // Kullanıcıyı ID ile bul
+            if (user != null)
+            {
+                await _userRepository.DeleteUser(user.Id); // Sil
+            }
+            else
+            {
+                throw new KeyNotFoundException($"User with ID {id} not found."); // Hata mesajı
+            }
         }
 
-        public Task<UserVM> GetFullName(string firstName, string lastName)
+        public async Task<IEnumerable<UserVM>> GetAll()
         {
-            throw new NotImplementedException();
+            var users = await _userRepository.GetUsers(); // Tüm kullanıcıları al
+            return _mapper.Map<IEnumerable<UserVM>>(users); // VM'e dönüştür
         }
+
+       
     }
 }

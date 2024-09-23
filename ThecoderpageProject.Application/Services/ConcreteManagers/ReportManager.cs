@@ -17,27 +17,35 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
         private readonly IReportRepository<Report> _reportRepository;
         private readonly IMapper _mapper;
 
-        public ReportManager(IReportRepository<Report> reportRepository, IMapper mapper) 
+        public ReportManager(IReportRepository<Report> reportRepository, IMapper mapper)
         {
             _reportRepository = reportRepository;
             _mapper = mapper;
-
         }
 
-
-        public Task Create(CreateReportDTO model)
+        public async Task Create(CreateReportDTO model)
         {
-            throw new NotImplementedException();
+            var report = _mapper.Map<Report>(model);
+            await _reportRepository.CreateReport(report); 
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var report = await _reportRepository.GetReportById(id); 
+            if (report != null)
+            {
+                await _reportRepository.DeleteReport(report.Id);
+            }
+            else
+            {
+                throw new KeyNotFoundException($"Report with ID {id} not found."); 
+            }
         }
 
-        public Task<IEnumerable<ReportVM>> GetAll()
+        public async Task<IEnumerable<ReportVM>> GetAll()
         {
-            throw new NotImplementedException();
+            var reports = await _reportRepository.GetReports();
+            return _mapper.Map<IEnumerable<ReportVM>>(reports); 
         }
     }
 }

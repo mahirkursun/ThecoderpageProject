@@ -19,6 +19,6 @@ namespace ThecoderpageProject.Application.Services.AbstractServices
         
 
 
-        Task<UserVM> GetFullName(string firstName, string lastName);
+        //Task<UserVM> GetFullName(string firstName, string lastName);
     }
 }

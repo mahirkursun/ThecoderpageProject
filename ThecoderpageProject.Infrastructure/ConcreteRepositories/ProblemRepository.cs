@@ -52,9 +52,6 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
             return Task.CompletedTask;
         }
 
-        Task IProblemRepository<Problem>.GetProblemById(int id)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

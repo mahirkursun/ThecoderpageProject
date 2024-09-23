@@ -13,12 +13,10 @@ namespace ThecoderpageProject.Domain.Entities
         public DateTime CreatedAt { get; set; }
 
         public int UserId { get; set; }
-        public User User { get; set; }
+
 
         public int ProblemId { get; set; }
-        public Problem Problem { get; set; }
 
-        public ICollection<Report> Reports { get; set; } = new List<Report>();
-        public ICollection<Vote> Votes { get; set; } = new List<Vote>();
+
     }
 }

@@ -9,7 +9,9 @@
       "ThecoderpageProject.API/1.0.0": {
         "dependencies": {
           "Autofac.Extensions.DependencyInjection": "10.0.0",
+          "Microsoft.EntityFrameworkCore": "8.0.8",
           "Microsoft.EntityFrameworkCore.Design": "8.0.8",
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8",
           "Microsoft.EntityFrameworkCore.Tools": "8.0.8",
           "Swashbuckle.AspNetCore": "6.4.0",
           "ThecoderpageProject.Application": "1.0.0",

@@ -23,19 +23,29 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             _mapper = mapper;
         }
 
-        public Task Create(CreateCommentDTO model)
+        public async Task Create(CreateCommentDTO model)
         {
-            throw new NotImplementedException();
+            var comment = _mapper.Map<Comment>(model);
+            await _commentRepository.CreateComment(comment); 
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var comment = await _commentRepository.GetCommentById(id); 
+            if (comment != null)
+            {
+                await _commentRepository.DeleteComment(comment.Id); 
+            }
+            else
+            {
+                throw new KeyNotFoundException($"Comment with ID {id} not found.");
+            }
         }
 
-        public Task<IEnumerable<CommentVM>> GetAll()
+        public async Task<IEnumerable<CommentVM>> GetAll()
         {
-            throw new NotImplementedException();
+            var comments = await _commentRepository.GetComments(); 
+            return _mapper.Map<IEnumerable<CommentVM>>(comments);
         }
     }
 }

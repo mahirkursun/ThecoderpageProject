@@ -18,25 +18,36 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
         private readonly IProblemRepository<Problem> _problemRepository;
         private readonly IMapper _mapper;
 
-        public ProblemManager(IProblemRepository<Problem> problemRepository, IMapper mapper) 
+        public ProblemManager(IProblemRepository<Problem> problemRepository, IMapper mapper)
         {
             _problemRepository = problemRepository;
             _mapper = mapper;
-
-        }
-        public Task Create(CreateProblemDTO model)
-        {
-            throw new NotImplementedException();
         }
 
-        public Task Delete(int id)
+        public async Task Create(CreateProblemDTO model)
         {
-            throw new NotImplementedException();
+            var problem = _mapper.Map<Problem>(model);
+            await _problemRepository.CreateProblem(problem); // Asenkron isimlendirme
         }
 
-        public Task<IEnumerable<ProblemVM>> GetAll()
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var problem = await _problemRepository.GetProblemById(id);
+            if (problem != null)
+            {
+                await _problemRepository.DeleteProblem(problem.Id); 
+            }
+            else
+            {
+                throw new KeyNotFoundException($"Problem with ID {id} not found."); 
+            }
         }
+
+        public async Task<IEnumerable<ProblemVM>> GetAll()
+        {
+            var problems = await _problemRepository.GetProblems(); 
+            return _mapper.Map<IEnumerable<ProblemVM>>(problems); 
+        }
+        
     }
 }

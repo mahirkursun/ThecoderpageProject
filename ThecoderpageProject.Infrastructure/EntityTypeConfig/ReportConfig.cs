@@ -31,14 +31,7 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
             builder.Property(r => r.ReportedAt)
                 .IsRequired();
 
-            // Relationships
-            builder.HasOne(r => r.Problem)
-                .WithMany(p => p.Reports)
-                .HasForeignKey(r => r.ProblemId);
-
-            builder.HasOne(r => r.Comment)
-                .WithMany(c => c.Reports)
-                .HasForeignKey(r => r.CommentId);
+           
         }
     }
 }

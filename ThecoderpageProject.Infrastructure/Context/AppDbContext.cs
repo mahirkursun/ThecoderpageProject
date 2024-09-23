@@ -50,53 +50,7 @@ namespace ThecoderpageProject.Infrastructure.Context
                 }
                 );
 
-            builder.Entity<Comment>()
-                .HasOne(c => c.User)
-                .WithMany(u => u.Comments)
-                .HasForeignKey(c => c.UserId)
-                .OnDelete(DeleteBehavior.Restrict); // ON DELETE NO ACTION
-
-            builder.Entity<Comment>()
-                .HasOne(c => c.Problem)
-                .WithMany(p => p.Comments)
-                .HasForeignKey(c => c.ProblemId)
-                .OnDelete(DeleteBehavior.Restrict); // ON DELETE NO ACTION
-
-            builder.Entity<Report>()
-                .HasOne(r => r.User)
-                .WithMany(u => u.Reports)
-                .HasForeignKey(r => r.UserId)
-                .OnDelete(DeleteBehavior.Restrict); // ON DELETE NO ACTION
-
-            builder.Entity<Report>()
-                .HasOne(r => r.Problem)
-                .WithMany(p => p.Reports)
-                .HasForeignKey(r => r.ProblemId)
-                .OnDelete(DeleteBehavior.Restrict); // ON DELETE NO ACTION
-
-            builder.Entity<Report>()
-                .HasOne(r => r.Comment)
-                .WithMany(c => c.Reports)
-                .HasForeignKey(r => r.CommentId)
-                .OnDelete(DeleteBehavior.Restrict); // ON DELETE NO ACTION
-
-            builder.Entity<Vote>()
-                .HasOne(v => v.User)
-                .WithMany(u => u.Votes)
-                .HasForeignKey(v => v.UserId)
-                .OnDelete(DeleteBehavior.Restrict); // ON DELETE NO ACTION
-
-            builder.Entity<Vote>()
-                .HasOne(v => v.Problem)
-                .WithMany(p => p.Votes)
-                .HasForeignKey(v => v.ProblemId)
-                .OnDelete(DeleteBehavior.Restrict); // ON DELETE NO ACTION
-
-            builder.Entity<Vote>()
-                .HasOne(v => v.Comment)
-                .WithMany(c => c.Votes)
-                .HasForeignKey(v => v.CommentId)
-                .OnDelete(DeleteBehavior.Restrict); // ON DELETE NO ACTION
+            
 
             //En altta kalsın.
             base.OnModelCreating(builder);

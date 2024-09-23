@@ -17,19 +17,22 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
         private readonly IVoteRepository<Vote> _voteRepository;
         private readonly IMapper _mapper;
 
-        public VoteManager(IVoteRepository<Vote> voteRepository, IMapper mapper) 
+        public VoteManager(IVoteRepository<Vote> voteRepository, IMapper mapper)
         {
             _voteRepository = voteRepository;
             _mapper = mapper;
         }
-        public Task Create(CreateVoteDTO model)
+
+        public async Task Create(CreateVoteDTO model)
         {
-            throw new NotImplementedException();
+            var vote = _mapper.Map<Vote>(model);
+            await _voteRepository.CreateVote(vote); // Asenkron isimlendirme
         }
 
-        public Task<IEnumerable<VoteVM>> GetAll()
+        public async Task<IEnumerable<VoteVM>> GetAll()
         {
-            throw new NotImplementedException();
+            var votes = await _voteRepository.GetVotes(); // Tüm oyları al
+            return _mapper.Map<IEnumerable<VoteVM>>(votes); // VM'e dönüştür
         }
     }
 }

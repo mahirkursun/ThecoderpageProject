@@ -24,14 +24,7 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
                 .IsRequired()
                 .HasMaxLength(500);
 
-            // Relationships
-            builder.HasOne(c => c.Problem)
-                .WithMany(p => p.Comments)
-                .HasForeignKey(c => c.ProblemId);
-
-            builder.HasOne(c => c.User)
-                .WithMany(u => u.Comments)
-                .HasForeignKey(c => c.UserId);
+            
         }
     }
 }

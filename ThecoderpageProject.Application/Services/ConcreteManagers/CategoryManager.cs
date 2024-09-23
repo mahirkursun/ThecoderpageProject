@@ -23,24 +23,44 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             _mapper = mapper;
         }
 
-        public Task Create(CreateCategoryDTO model)
+        public async Task Create(CreateCategoryDTO model)
         {
-            throw new NotImplementedException();
+            var category = _mapper.Map<Category>(model);
+            await _categoryRepository.CreateCategory(category);
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var category = await _categoryRepository.GetCategoryById(id);
+            if (category != null)
+            {
+                await _categoryRepository.DeleteCategory(category.Id);
+            }
+            else
+            {
+                throw new KeyNotFoundException("Category not found");
+            }
         }
 
-        public Task<IEnumerable<CategoryVM>> GetAll()
+        public async Task<IEnumerable<CategoryVM>> GetAll()
         {
-            throw new NotImplementedException();
+            var categories = await _categoryRepository.GetCategories();
+            return _mapper.Map<IEnumerable<CategoryVM>>(categories);
         }
 
-        public Task Update(UpdateCategoryDTO model)
+        public async Task Update(UpdateCategoryDTO model)
         {
-            throw new NotImplementedException();
+            var category = await _categoryRepository.GetCategoryById(model.Id); // Fix for CS1061: Use GetCategoryById instead of GetByIdAsync
+            if (category != null)
+            {
+                category.Name = model.Name; 
+                await _categoryRepository.UpdateCategory(category);
+            }
+            else
+            {
+                throw new KeyNotFoundException("Category not found");
+            }
         }
     }
+    
 }

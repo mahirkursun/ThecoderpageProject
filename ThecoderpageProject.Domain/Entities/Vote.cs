@@ -15,12 +15,11 @@ namespace ThecoderpageProject.Domain.Entities
         public DateTime VotedAt { get; set; }
  
         public int UserId { get; set; }
-        public User User { get; set; }
 
         public int ProblemId { get; set; }
-        public Problem Problem { get; set; }
+
 
         public int CommentId { get; set; }
-        public Comment Comment { get; set; }
+    
     }
 }

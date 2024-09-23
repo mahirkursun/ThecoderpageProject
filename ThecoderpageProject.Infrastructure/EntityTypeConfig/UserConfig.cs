@@ -31,16 +31,7 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
                 .HasConversion<string>()
                 .IsRequired();
 
-            // Relationships
-            builder.HasMany(u => u.Problems)
-                .WithOne(p => p.User)
-                .HasForeignKey(p => p.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasMany(u => u.Comments) 
-                .WithOne(c => c.User)
-                .HasForeignKey(c => c.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+            
         }
     }
 }

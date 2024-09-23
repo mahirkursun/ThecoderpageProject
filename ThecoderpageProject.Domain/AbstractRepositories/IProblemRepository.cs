@@ -10,7 +10,7 @@ namespace ThecoderpageProject.Domain.AbstractRepositories
     public interface IProblemRepository<T> where T : Problem
     {
         Task CreateProblem(T problem);
-        Task GetProblemById(int id);
+        Task<T> GetProblemById(int id);
         Task<IEnumerable<T>> GetProblems();
         Task UpdateProblem(T problem);
         Task DeleteProblem(int id);

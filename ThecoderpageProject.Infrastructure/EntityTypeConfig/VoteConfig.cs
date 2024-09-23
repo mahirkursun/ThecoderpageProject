@@ -27,18 +27,7 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
                 .HasConversion<string>()
                 .IsRequired();
 
-            // Relationships
-            builder.HasOne(v => v.User)
-                .WithMany(u => u.Votes)
-                .HasForeignKey(v => v.UserId);
-
-            builder.HasOne(v => v.Problem)
-                .WithMany(p => p.Votes)
-                .HasForeignKey(v => v.ProblemId);
-
-            builder.HasOne(v => v.Comment)
-                .WithMany(c => c.Votes)
-                .HasForeignKey(v => v.CommentId);
+           
         }
     }
 }
