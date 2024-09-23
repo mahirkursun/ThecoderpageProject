@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Autofac;
+using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,21 +12,30 @@ using ThecoderpageProject.Application.Services.ConcreteManagers;
 
 namespace ThecoderpageProject.Application.IoC
 {
-    public static class DependencyResolver
+    public class DependencyResolver : Module
     {
-        public static void RegisterServices(IServiceCollection services)
+        protected override void Load(ContainerBuilder builder)
         {
-            services.AddAutoMapper(typeof(Mapping));
+            builder.RegisterType<UserManager>().As<IUserService>();
+            builder.RegisterType<ProblemManager>().As<IProblemService>();
+            builder.RegisterType<CommentManager>().As<ICommentService>();
+            builder.RegisterType<CategoryManager>().As<ICategoryService>();
+            builder.RegisterType<ReportManager>().As<IReportService>();
+            builder.RegisterType<VoteManager>().As<IVoteService>();
 
-            services.AddScoped<IUserService, UserManager>();
-            services.AddScoped<IProblemService, ProblemManager>();
-            services.AddScoped<ICommentService, CommentManager>();
-            services.AddScoped<ICategoryService, CategoryManager>();
-            services.AddScoped<IReportService, ReportManager>();
-            services.AddScoped<IVoteService, VoteManager>();
+            builder.Register(context => new  MapperConfiguration(config =>
+            {
+                config.AddProfile<Mapping>();
+            })).AsSelf().SingleInstance();
 
+            builder.Register(c =>
+            {
+                var context = c.Resolve<IComponentContext>();
+                var config = context.Resolve<MapperConfiguration>();
 
-
+                return config.CreateMapper(context.Resolve);
+            }).As<IMapper>().InstancePerLifetimeScope();
         }
+       
     }
 }

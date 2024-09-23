@@ -57,6 +57,10 @@
               "target": "Package",
               "version": "[13.0.1, )"
             },
+            "Autofac": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
               "version": "[5.0.17, )"

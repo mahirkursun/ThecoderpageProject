@@ -1,4 +1,11 @@
 
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using System;
+using ThecoderpageProject.Application.IoC;
+using ThecoderpageProject.Infrastructure.Context;
+
 namespace ThecoderpageProject.API
 {
     public class Program
@@ -13,6 +20,27 @@ namespace ThecoderpageProject.API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+
+
+            string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+            
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
+
+            //Identity Configuration burada yapýlacak.
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+            //Autofac için.
+            builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+            {
+                builder.RegisterModule(new DependencyResolver());
+            }); //IoC klasöründeki DependencyResolver sýnýfý burada configurasyon olarak algýlasýn istediðimiz için.
+
+
 
             var app = builder.Build();
 
