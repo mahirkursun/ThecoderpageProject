@@ -27,6 +27,7 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
         {
             var user = _mapper.Map<User>(model);
             await _userRepository.CreateUser(user); // Asenkron isimlendirme
+
         }
 
         public async Task Update(UpdateUserDTO model)

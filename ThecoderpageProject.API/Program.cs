@@ -2,8 +2,10 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using System;
 using ThecoderpageProject.Application.IoC;
+using ThecoderpageProject.Domain.AbstractRepositories;
+using ThecoderpageProject.Domain.Entities;
+using ThecoderpageProject.Infrastructure.ConcreteRepositories;
 using ThecoderpageProject.Infrastructure.Context;
 
 namespace ThecoderpageProject.API
@@ -39,7 +41,6 @@ namespace ThecoderpageProject.API
             {
                 builder.RegisterModule(new DependencyResolver());
             }); //IoC klasöründeki DependencyResolver sýnýfý burada configurasyon olarak algýlasýn istediðimiz için.
-
 
 
             var app = builder.Build();

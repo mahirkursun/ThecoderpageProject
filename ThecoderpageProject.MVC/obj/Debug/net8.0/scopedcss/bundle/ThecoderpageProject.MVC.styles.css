@@ -1,3 +1,101 @@
+/* _content/ThecoderpageProject.MVC/Areas/Admin/Views/Shared/_AdminLayout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-zvdewkrpkg] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-zvdewkrpkg] {
+  color: #0077cc;
+}
+
+.btn-primary[b-zvdewkrpkg] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-zvdewkrpkg], .nav-pills .show > .nav-link[b-zvdewkrpkg] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-zvdewkrpkg] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-zvdewkrpkg] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-zvdewkrpkg] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-zvdewkrpkg] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-zvdewkrpkg] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+/* _content/ThecoderpageProject.MVC/Areas/User/Views/Shared/_UserLayout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-f7rbzi02gl] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-f7rbzi02gl] {
+  color: #0077cc;
+}
+
+.btn-primary[b-f7rbzi02gl] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-f7rbzi02gl], .nav-pills .show > .nav-link[b-f7rbzi02gl] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-f7rbzi02gl] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-f7rbzi02gl] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-f7rbzi02gl] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-f7rbzi02gl] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-f7rbzi02gl] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
 /* _content/ThecoderpageProject.MVC/Views/Shared/_Layout.cshtml.rz.scp.css */
 /* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
