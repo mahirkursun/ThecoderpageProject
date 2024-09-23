@@ -1,0 +1,16 @@
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Application\bin\Debug\net8.0\ThecoderpageProject.Application.deps.json
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Application\bin\Debug\net8.0\ThecoderpageProject.Application.dll
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Application\bin\Debug\net8.0\ThecoderpageProject.Application.pdb
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Application\bin\Debug\net8.0\ThecoderpageProject.Domain.dll
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Application\bin\Debug\net8.0\ThecoderpageProject.Domain.pdb
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Application\obj\Debug\net8.0\ThecoderpageProject.Application.csproj.AssemblyReference.cache
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Application\obj\Debug\net8.0\ThecoderpageProject.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Application\obj\Debug\net8.0\ThecoderpageProject.Application.AssemblyInfoInputs.cache
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Application\obj\Debug\net8.0\ThecoderpageProject.Application.AssemblyInfo.cs
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Application\obj\Debug\net8.0\ThecoderpageProject.Application.csproj.CoreCompileInputs.cache
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Application\obj\Debug\net8.0\ThecoderpageProject.Application.sourcelink.json
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Application\obj\Debug\net8.0\Thecoder.BD4646E1.Up2Date
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Application\obj\Debug\net8.0\ThecoderpageProject.Application.dll
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Application\obj\Debug\net8.0\refint\ThecoderpageProject.Application.dll
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Application\obj\Debug\net8.0\ThecoderpageProject.Application.pdb
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Application\obj\Debug\net8.0\ref\ThecoderpageProject.Application.dll

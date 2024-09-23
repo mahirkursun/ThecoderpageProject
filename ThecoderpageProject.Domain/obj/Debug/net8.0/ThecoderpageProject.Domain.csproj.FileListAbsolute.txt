@@ -1,0 +1,12 @@
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\bin\Debug\net8.0\ThecoderpageProject.Domain.deps.json
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\bin\Debug\net8.0\ThecoderpageProject.Domain.dll
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\bin\Debug\net8.0\ThecoderpageProject.Domain.pdb
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\obj\Debug\net8.0\ThecoderpageProject.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\obj\Debug\net8.0\ThecoderpageProject.Domain.AssemblyInfoInputs.cache
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\obj\Debug\net8.0\ThecoderpageProject.Domain.AssemblyInfo.cs
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\obj\Debug\net8.0\ThecoderpageProject.Domain.csproj.CoreCompileInputs.cache
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\obj\Debug\net8.0\ThecoderpageProject.Domain.sourcelink.json
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\obj\Debug\net8.0\ThecoderpageProject.Domain.dll
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\obj\Debug\net8.0\refint\ThecoderpageProject.Domain.dll
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\obj\Debug\net8.0\ThecoderpageProject.Domain.pdb
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\obj\Debug\net8.0\ref\ThecoderpageProject.Domain.dll
