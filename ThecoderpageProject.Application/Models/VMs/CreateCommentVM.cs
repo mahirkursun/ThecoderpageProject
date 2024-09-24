@@ -9,10 +9,8 @@ namespace ThecoderpageProject.Application.Models.VMs
 {
     public class CreateCommentVM
     {
-        [Required]
-        [StringLength(600, MinimumLength = 3)]
+        
         public string Content { get; set; }
-
         public int UserId { get; set; }
         public int ProblemId { get; set; }
     }

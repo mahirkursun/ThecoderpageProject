@@ -24,7 +24,7 @@ namespace ThecoderpageProject.Infrastructure.Context
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Problem> Problems { get; set; }
-        public DbSet<User> Users { get; set; }
+        public new DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

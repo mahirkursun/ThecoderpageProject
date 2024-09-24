@@ -11,14 +11,10 @@ namespace ThecoderpageProject.Application.Services.AbstractServices
     public interface IUserService
     {
         Task Create(CreateUserDTO model);
+        Task<UpdateUserDTO> GetUserById(int id);
         Task Update(UpdateUserDTO model);
         Task Delete(int id);
-
         Task<IEnumerable<UserVM>> GetAll();
-
         
-
-
-        //Task<UserVM> GetFullName(string firstName, string lastName);
     }
 }

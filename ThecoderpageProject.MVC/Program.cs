@@ -24,13 +24,10 @@ namespace ThecoderpageProject.MVC
             builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 
-
-            string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
             
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(connectionString);
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
             //Identity Configuration burada yapýlacak.
@@ -78,6 +75,7 @@ namespace ThecoderpageProject.MVC
             app.UseRouting();
             app.UseAuthentication(); //Ekledik.
             app.UseAuthorization();
+
 
             app.MapControllerRoute(
                name: "areas",

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ThecoderpageProject.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e7ac8e47f7b4196a0300651a8a0f36ba989c1760")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f4512be962346f95b5d6338f7ff60d5fff271533")]
 [assembly: System.Reflection.AssemblyProductAttribute("ThecoderpageProject.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ThecoderpageProject.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

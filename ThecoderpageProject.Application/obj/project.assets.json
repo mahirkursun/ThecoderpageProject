@@ -103,6 +103,19 @@
           "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
+      "Portable.BouncyCastle/1.9.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.Diagnostics.DiagnosticSource/8.0.1": {
         "type": "package",
         "compile": {
@@ -289,6 +302,21 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Portable.BouncyCastle/1.9.0": {
+      "sha512": "eZZBCABzVOek+id9Xy04HhmgykF0wZg9wpByzrWN7q8qEI0Qen9b7tfd7w8VA3dOeesumMG7C5ZPy0jk7PSRHw==",
+      "type": "package",
+      "path": "portable.bouncycastle/1.9.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/BouncyCastle.Crypto.dll",
+        "lib/net40/BouncyCastle.Crypto.xml",
+        "lib/netstandard2.0/BouncyCastle.Crypto.dll",
+        "lib/netstandard2.0/BouncyCastle.Crypto.xml",
+        "portable.bouncycastle.1.9.0.nupkg.sha512",
+        "portable.bouncycastle.nuspec"
+      ]
+    },
     "System.Diagnostics.DiagnosticSource/8.0.1": {
       "sha512": "vaoWjvkG1aenR2XdjaVivlCV9fADfgyhW5bZtXT23qaEea0lWiUljdQuze4E31vKM7ZWJaSUsbYIKE3rnzfZUg==",
       "type": "package",
@@ -380,6 +408,7 @@
       "AutoMapper >= 13.0.1",
       "Autofac >= 8.1.0",
       "Microsoft.AspNetCore.Http.Features >= 5.0.17",
+      "Portable.BouncyCastle >= 1.9.0",
       "ThecoderpageProject.Domain >= 1.0.0"
     ]
   },
@@ -447,6 +476,10 @@
           "Microsoft.AspNetCore.Http.Features": {
             "target": "Package",
             "version": "[5.0.17, )"
+          },
+          "Portable.BouncyCastle": {
+            "target": "Package",
+            "version": "[1.9.0, )"
           }
         },
         "imports": [

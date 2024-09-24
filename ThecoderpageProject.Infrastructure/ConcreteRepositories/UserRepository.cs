@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThecoderpageProject.Domain.AbstractRepositories;
 using ThecoderpageProject.Domain.Entities;
+using ThecoderpageProject.Infrastructure.Context;
 using static ThecoderpageProject.Infrastructure.ConcreteRepositories.UserRepository;
 
 namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
@@ -12,44 +14,53 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
 
     public class UserRepository : IUserRepository<User>
     {
-        private readonly List<User> _users = new List<User>();
+   
 
-        public Task<User> CreateUser(User user)
+        private readonly AppDbContext _context;
+
+        public UserRepository(AppDbContext context)
         {
-            _users.Add(user);
-            return Task.FromResult(user);
+            _context = context;
         }
-
-        public Task<User> DeleteUser(int id)
+        private  DbSet<User> Users =>_context.Users; // Change this line
+        public async Task<User> CreateUser(User user)
         {
-            var user = _users.FirstOrDefault(u => u.Id == id);
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+            return user;
+        }
+        public async Task<User> DeleteUser(int id)
+        {
+            var user = await Users.FirstOrDefaultAsync(u => u.Id == id);
             if (user != null)
             {
-                _users.Remove(user);
+                Users.Remove(user);
+                await _context.SaveChangesAsync(); // Değişiklikleri kaydedin
             }
-            return Task.FromResult(user);
+            return user;
         }
 
-        public Task<User> GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
-            var user = _users.FirstOrDefault(u => u.Id == id);
-            return Task.FromResult(user);
-        }
-
-        public Task<IEnumerable<User>> GetUsers()
-        {
-            return Task.FromResult<IEnumerable<User>>(_users);
-        }
-
-        public Task<User> UpdateUser(User user)
-        {
-            var existingUser = _users.FirstOrDefault(u => u.Id == user.Id);
-            if (existingUser != null)
+            if (_context.Users == null) // Null kontrolü
             {
-                existingUser.Username = user.Username; // Update other properties as needed
-                existingUser.Email = user.Email; // Example property
+                throw new ArgumentNullException(nameof(_context.Users), "Users veritabanı tablosu null.");
             }
-            return Task.FromResult(existingUser);
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            return user;
+        }
+
+        public async Task<IEnumerable<User>> GetUsers()
+        {
+            return await Users.ToListAsync();
+        }
+
+        public async Task<User> UpdateUser(User user)
+        {
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+            return user;
         }
     }
 }

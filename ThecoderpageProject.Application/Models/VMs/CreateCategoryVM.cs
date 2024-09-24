@@ -9,7 +9,7 @@ namespace ThecoderpageProject.Application.Models.VMs
 {
     public class CreateCategoryVM
     {
-        [Required]
+        
         public string Name { get; set; }
 
 

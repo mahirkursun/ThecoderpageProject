@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "AU0ZgPnYj5Q=",
+  "dgSpecHash": "5WHJMBUAlKQ=",
   "success": true,
   "projectFilePath": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.Application\\ThecoderpageProject.Application.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\mahir\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\mahir\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
     "C:\\Users\\mahir\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\mahir\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
     "C:\\Users\\mahir\\.nuget\\packages\\system.diagnostics.diagnosticsource\\8.0.1\\system.diagnostics.diagnosticsource.8.0.1.nupkg.sha512",
     "C:\\Users\\mahir\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512",
     "C:\\Users\\mahir\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"

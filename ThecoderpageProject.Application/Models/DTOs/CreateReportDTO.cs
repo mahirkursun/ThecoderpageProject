@@ -11,9 +11,9 @@ namespace ThecoderpageProject.Application.Models.DTOs
         public int Id { get; set; }
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
         public int UserId { get; set; }
         public int ProblemId { get; set; }
-
         public int CommentId { get; set; }
     }
 }

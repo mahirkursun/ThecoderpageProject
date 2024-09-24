@@ -573,3 +573,4 @@ C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\bin\Debu
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\bin\Debug\net8.0\ThecoderpageProject.Domain.pdb
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\obj\Debug\net8.0\scopedcss\Areas\Admin\Views\Shared\_AdminLayout.cshtml.rz.scp.css
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\obj\Debug\net8.0\scopedcss\Areas\User\Views\Shared\_UserLayout.cshtml.rz.scp.css
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\bin\Debug\net8.0\BouncyCastle.Crypto.dll

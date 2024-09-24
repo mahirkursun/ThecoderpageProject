@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ThecoderpageProject.Application.Models.DTOs;
 using ThecoderpageProject.Application.Models.VMs;
 using ThecoderpageProject.Domain.Entities;
+using ThecoderpageProject.Domain.Enums;
 
 namespace ThecoderpageProject.Application.AutoMapper
 {
@@ -17,7 +18,7 @@ namespace ThecoderpageProject.Application.AutoMapper
         public Mapping()
         {
             CreateMap<User, CreateUserDTO>();
-            CreateMap<CreateUserDTO, User>();
+            CreateMap<CreateUserDTO, User>().ForMember(dest => dest.Role, opt => opt.MapFrom(src => Enum.Parse<UserRole>(src.Role.ToString()))); // Enum dönüşümü
             CreateMap<User,  UpdateUserDTO>();
             CreateMap<User, UserVM>();
 

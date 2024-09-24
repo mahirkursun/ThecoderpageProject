@@ -11,6 +11,7 @@
           "AutoMapper": "13.0.1",
           "Autofac": "8.1.0",
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
+          "Portable.BouncyCastle": "1.9.0",
           "ThecoderpageProject.Domain": "1.0.0"
         },
         "runtime": {
@@ -82,6 +83,14 @@
           }
         }
       },
+      "Portable.BouncyCastle/1.9.0": {
+        "runtime": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
+            "assemblyVersion": "1.9.0.0",
+            "fileVersion": "1.9.0.1"
+          }
+        }
+      },
       "System.Diagnostics.DiagnosticSource/8.0.1": {},
       "System.IO.Pipelines/5.0.2": {
         "runtime": {
@@ -149,6 +158,13 @@
       "sha512": "sha512-9+PnzmQFfEFNR9J2aDTfJGGupShHjOuGw4VUv+JB044biSHrnmCIMD+mJHmb2H7YryrfBEXDurxQ47gJZdCKNQ==",
       "path": "microsoft.extensions.primitives/6.0.0",
       "hashPath": "microsoft.extensions.primitives.6.0.0.nupkg.sha512"
+    },
+    "Portable.BouncyCastle/1.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-eZZBCABzVOek+id9Xy04HhmgykF0wZg9wpByzrWN7q8qEI0Qen9b7tfd7w8VA3dOeesumMG7C5ZPy0jk7PSRHw==",
+      "path": "portable.bouncycastle/1.9.0",
+      "hashPath": "portable.bouncycastle.1.9.0.nupkg.sha512"
     },
     "System.Diagnostics.DiagnosticSource/8.0.1": {
       "type": "package",

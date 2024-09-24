@@ -23,24 +23,34 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             _mapper = mapper;
         }
 
-        public async Task Create(CreateUserDTO model)
+        public async Task Create(CreateUserDTO user)
         {
-            var user = _mapper.Map<User>(model);
-            await _userRepository.CreateUser(user); // Asenkron isimlendirme
+            var newUser = _mapper.Map<User>(user);
+
+            // Ekstra loglama
+            Console.WriteLine($"Kullanıcı ekleniyor: {newUser.FirstName} {newUser.LastName}");
+
+            await _userRepository.CreateUser(newUser);
+            Console.WriteLine("Kullanıcı eklendi.");
 
         }
 
-        public async Task Update(UpdateUserDTO model)
+        public async Task Update(UpdateUserDTO userDTO)
         {
-            var user = await _userRepository.GetUserById(model.Id); // Kullanıcıyı ID ile bul
+            var user = await _userRepository.GetUserById(userDTO.Id);
             if (user != null)
             {
-                _mapper.Map(model, user); // DTO'dan mevcut kullanıcıya verileri kopyala
-                await _userRepository.UpdateUser(user); // Güncelle
-            }
-            else
-            {
-                throw new KeyNotFoundException($"User with ID {model.Id} not found."); // Hata mesajı
+                user.FirstName = userDTO.FirstName;
+                user.LastName = userDTO.LastName;
+                user.Role = userDTO.Role;
+                user.Username = userDTO.UserName;
+                user.Email = userDTO.Email;
+                // Şifre güncellemesi yapılacaksa, burada kontrol edilebilir:
+                if (userDTO.Password != null) { user.Password = userDTO.Password; }
+
+
+
+                await _userRepository.UpdateUser(user); // Kullanıcıyı güncelle
             }
         }
 
@@ -63,6 +73,14 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             return _mapper.Map<IEnumerable<UserVM>>(users); // VM'e dönüştür
         }
 
-       
+        public async Task<UpdateUserDTO> GetUserById(int id)
+        {
+            var user = await _userRepository.GetUserById(id);
+            if (user == null)
+            {
+                throw new ArgumentNullException($"User with ID {id} not found.");  // Kullanıcı yoksa hata
+            }
+            return _mapper.Map<UpdateUserDTO>(user);
+        }
     }
 }
