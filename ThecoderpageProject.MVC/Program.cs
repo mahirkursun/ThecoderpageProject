@@ -55,8 +55,8 @@ namespace ThecoderpageProject.MVC
             builder.Services.AddScoped<ICategoryRepository<Category>, CategoryRepository>();
             builder.Services.AddScoped<IReportRepository<Report>, ReportRepository>();
             builder.Services.AddScoped<IVoteRepository<Vote>, VoteRepository>();
-
           
+
 
 
             var app = builder.Build();

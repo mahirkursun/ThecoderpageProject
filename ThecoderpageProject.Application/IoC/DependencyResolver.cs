@@ -25,7 +25,7 @@ namespace ThecoderpageProject.Application.IoC
 
             builder.Register(context => new  MapperConfiguration(config =>
             {
-                config.AddProfile<Mapping>();
+                config.AddProfile<Mapping>(); 
             })).AsSelf().SingleInstance();
 
             builder.Register(c =>

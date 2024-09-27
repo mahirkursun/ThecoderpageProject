@@ -24,13 +24,10 @@ namespace ThecoderpageProject.API
             builder.Services.AddSwaggerGen();
 
 
-
-            string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
             
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(connectionString);
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
             //Identity Configuration burada yapýlacak.

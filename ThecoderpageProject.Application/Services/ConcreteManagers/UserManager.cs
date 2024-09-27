@@ -15,7 +15,7 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
     public class UserManager : IUserService
     {
         private readonly IUserRepository<User> _userRepository;
-        private readonly IMapper _mapper;
+        private readonly IMapper _mapper; 
 
         public UserManager(IUserRepository<User> userRepository, IMapper mapper)
         {
