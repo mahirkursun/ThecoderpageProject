@@ -1,53 +1,76 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using ThecoderpageProject.Domain.AbstractRepositories;
 using ThecoderpageProject.Domain.Entities;
+using ThecoderpageProject.Infrastructure.Context;
 
 namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
 {
     public class CommentRepository : ICommentRepository<Comment>
     {
-        private readonly List<Comment> _comments = new List<Comment>();
-        //Düzenle
-        public Task<Comment> CreateComment(Comment comment)
+        private readonly AppDbContext _context;
+
+        public CommentRepository(AppDbContext context)
         {
-            _comments.Add(comment);
-            return Task.FromResult(comment);
+            _context = context;
         }
 
-        public Task<Comment> DeleteComment(int id)
+        private DbSet<Comment> Comments => _context.Comments;
+
+
+        //Düzenle
+        public async Task<Comment> CreateComment(Comment comment)
         {
-            var comment = _comments.FirstOrDefault(c => c.Id == id);
+            _context.Comments.Add(comment);
+            await _context.SaveChangesAsync();
+            return comment;
+        }
+
+        public async Task<Comment> UpdateComment(Comment comment)
+        {
+            var commentToUpdate = Comments.FirstOrDefault(c => c.Id == comment.Id);
+            if(commentToUpdate != null)
+            {
+                commentToUpdate.Content = comment.Content;
+                commentToUpdate.CreatedAt = comment.CreatedAt;
+                commentToUpdate.UserId = comment.UserId;
+                commentToUpdate.ProblemId = comment.ProblemId;
+                await _context.SaveChangesAsync();
+            }
+            return commentToUpdate;
+        }
+
+        public async Task<Comment> DeleteComment(int id)
+        {
+            var comment = await Comments.FirstOrDefaultAsync(c => c.Id == id);
             if (comment != null)
             {
-                _comments.Remove(comment);
+                Comments.Remove(comment);
+                await _context.SaveChangesAsync();
             }
-            return Task.FromResult(comment);
+            return comment;
         }
 
-        public Task<Comment> GetCommentById(int id)
+        public async Task<Comment> GetCommentById(int id)
         {
-            var comment = _comments.FirstOrDefault(c => c.Id == id);
-            return Task.FromResult(comment);
-        }
-
-        public Task<IEnumerable<Comment>> GetComments()
-        {
-            return Task.FromResult<IEnumerable<Comment>>(_comments);
-        }
-
-        public Task<Comment> UpdateComment(Comment comment)
-        {
-            var existingComment = _comments.FirstOrDefault(c => c.Id == comment.Id);
-            if (existingComment != null)
+            if(_context.Comments == null)
             {
-                existingComment.Content = comment.Content; // Update other properties as needed
-                // Continue updating other relevant fields
+                throw new KeyNotFoundException($"Comment with ID {id} not found.");
             }
-            return Task.FromResult(existingComment);
+            var comment = await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
+            return comment;
         }
+
+        public async Task<IEnumerable<Comment>> GetComments()
+        {
+            return await Comments.ToListAsync();
+        }
+
+        
     }
 }

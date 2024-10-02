@@ -26,26 +26,52 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
         public async Task Create(CreateCommentDTO model)
         {
             var comment = _mapper.Map<Comment>(model);
-            await _commentRepository.CreateComment(comment); 
+            await _commentRepository.CreateComment(comment);
+        }
+        public async Task Update(UpdateCommentDTO commentDTO)
+        {
+            var comment = await _commentRepository.GetCommentById(commentDTO.Id);
+            if (comment == null)
+            {
+                throw new KeyNotFoundException($"Comment with ID {commentDTO.Id} not found.");
+            }
+            comment.Content = commentDTO.Content;
+            comment.CreatedAt = commentDTO.CreatedAt;
+            comment.UserId = commentDTO.UserId;
+            comment.ProblemId = commentDTO.ProblemId;
+            await _commentRepository.UpdateComment(comment);
         }
 
         public async Task Delete(int id)
         {
-            var comment = await _commentRepository.GetCommentById(id); 
+            var comment = await _commentRepository.GetCommentById(id);
             if (comment != null)
             {
-                await _commentRepository.DeleteComment(comment.Id); 
+                await _commentRepository.DeleteComment(comment.Id);
             }
             else
             {
                 throw new KeyNotFoundException($"Comment with ID {id} not found.");
             }
         }
+        public async Task<UpdateCommentDTO> GetCommentById(int id)
+        {
+            var comment = await _commentRepository.GetCommentById(id);
+            if (comment == null)
+            {
+                throw new KeyNotFoundException($"Comment with ID {id} not found.");
+            }
+            return _mapper.Map<UpdateCommentDTO>(comment);
+        }
 
         public async Task<IEnumerable<CommentVM>> GetAll()
         {
-            var comments = await _commentRepository.GetComments(); 
+            var comments = await _commentRepository.GetComments();
             return _mapper.Map<IEnumerable<CommentVM>>(comments);
         }
+
+
+
+
     }
 }

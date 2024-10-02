@@ -11,6 +11,8 @@ namespace ThecoderpageProject.Application.Services.AbstractServices
     public interface ICommentService
     {
         Task Create(CreateCommentDTO model);
+        Task Update(UpdateCommentDTO model);
+        Task<UpdateCommentDTO> GetCommentById(int id);
         Task Delete(int id);
 
         Task<IEnumerable<CommentVM>> GetAll();

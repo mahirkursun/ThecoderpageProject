@@ -58,6 +58,43 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // Admin/Problem/Update/5
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            var problem = await _problemService.GetProblemById(id);
+            if (problem == null)
+            {
+                return NotFound();
+            }
+
+            var problemDTO = new UpdateProblemDTO
+            {
+                Id = problem.Id,
+                Title = problem.Title,
+                Description = problem.Description,
+                Status = problem.Status,
+                CreatedAt = problem.CreatedAt,
+                CategoryId = problem.CategoryId,
+                UserId = problem.UserId
+            };
+            return View(problemDTO);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(UpdateProblemDTO problemDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["Error"] = "Girdiğiniz verileri kontrol edin";
+                return View(problemDTO);
+            }
+
+            await _problemService.Update(problemDTO);
+            TempData["Success"] = $"{problemDTO.Title} başarıyla güncellendi";
+            return RedirectToAction(nameof(Index));
+        }
+
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {

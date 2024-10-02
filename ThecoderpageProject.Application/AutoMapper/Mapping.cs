@@ -27,12 +27,13 @@ namespace ThecoderpageProject.Application.AutoMapper
             CreateMap<Category, UpdateCategoryDTO>();
             CreateMap<Category, CategoryVM>();
 
-            CreateMap<Comment, CreateCommentDTO>();
-
+            CreateMap<CreateCommentDTO, Comment>();
+            CreateMap<Comment, UpdateCommentDTO>();
             CreateMap<Comment, CommentVM>();
 
            
             CreateMap<CreateProblemDTO, Problem>();
+            CreateMap<Problem, UpdateProblemDTO>();
             CreateMap<Problem, ProblemVM>();
 
             CreateMap<Report, CreateReportDTO>();
