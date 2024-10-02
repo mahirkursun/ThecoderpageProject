@@ -31,6 +31,32 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             await _problemRepository.CreateProblem(problem); // Asenkron isimlendirme
         }
 
+        public async Task Update(UpdateProblemDTO problemDTO)
+        {
+            var problem = await _problemRepository.GetProblemById(problemDTO.Id);
+            if (problem == null)
+            {
+                throw new KeyNotFoundException($"Problem with ID {problemDTO.Id} not found.");
+            }
+            problem.Title = problemDTO.Title;
+            problem.Description = problemDTO.Description;
+            problem.Status = problemDTO.Status;
+            problem.CreatedAt = problemDTO.CreatedAt;
+            problem.UserId = problemDTO.UserId;
+            problem.CategoryId = problemDTO.CategoryId;
+            await _problemRepository.UpdateProblem(problem);
+        }
+        public async Task<UpdateProblemDTO> GetProblemById(int id)
+        {
+            var problem = await _problemRepository.GetProblemById(id);
+            if (problem == null)
+            {
+                throw new KeyNotFoundException($"Problem with ID {id} not found.");
+            }
+            return _mapper.Map<UpdateProblemDTO>(problem);
+
+        }
+
         public async Task Delete(int id)
         {
             var problem = await _problemRepository.GetProblemById(id);

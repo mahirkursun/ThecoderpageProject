@@ -10,6 +10,7 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
 {
     public class VoteRepository : IVoteRepository<Vote>
     {
+        //Düzenle
         private readonly List<Vote> _votes = new List<Vote>();
 
         public Task<Vote> CreateVote(Vote vote)

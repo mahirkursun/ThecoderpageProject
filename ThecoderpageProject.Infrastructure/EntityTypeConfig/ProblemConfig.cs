@@ -32,6 +32,8 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
             builder.Property(p => p.Status)
                 .HasConversion<string>();
 
+
+
             
         }
     }

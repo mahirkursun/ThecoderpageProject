@@ -11,7 +11,7 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
     public class CommentRepository : ICommentRepository<Comment>
     {
         private readonly List<Comment> _comments = new List<Comment>();
-
+        //Düzenle
         public Task<Comment> CreateComment(Comment comment)
         {
             _comments.Add(comment);

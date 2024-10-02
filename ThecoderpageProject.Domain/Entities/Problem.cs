@@ -21,7 +21,6 @@ namespace ThecoderpageProject.Domain.Entities
 
 
 
-
         
     }
 }

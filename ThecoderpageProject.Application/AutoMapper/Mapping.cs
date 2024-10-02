@@ -17,19 +17,22 @@ namespace ThecoderpageProject.Application.AutoMapper
 
         public Mapping()
         {
-            CreateMap<User, CreateUserDTO>();
+            
             CreateMap<CreateUserDTO, User>().ForMember(dest => dest.Role, opt => opt.MapFrom(src => Enum.Parse<UserRole>(src.Role.ToString()))); // Enum dönüşümü
             CreateMap<User,  UpdateUserDTO>();
             CreateMap<User, UserVM>();
 
-            CreateMap<Category, CreateCategoryDTO>();
+            
+            CreateMap<CreateCategoryDTO, Category>();
             CreateMap<Category, UpdateCategoryDTO>();
             CreateMap<Category, CategoryVM>();
 
             CreateMap<Comment, CreateCommentDTO>();
+
             CreateMap<Comment, CommentVM>();
 
-            CreateMap<Problem, CreateProblemDTO>();
+           
+            CreateMap<CreateProblemDTO, Problem>();
             CreateMap<Problem, ProblemVM>();
 
             CreateMap<Report, CreateReportDTO>();

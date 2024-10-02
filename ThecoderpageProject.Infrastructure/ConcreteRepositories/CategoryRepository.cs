@@ -1,53 +1,70 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThecoderpageProject.Domain.AbstractRepositories;
 using ThecoderpageProject.Domain.Entities;
+using ThecoderpageProject.Infrastructure.Context;
 
 namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
 {
     public class CategoryRepository : ICategoryRepository<Category>
     {
-        private readonly List<Category> _categories = new List<Category>();
+        private readonly AppDbContext _context;
 
-        public Task<Category> CreateCategory(Category category)
+        public CategoryRepository(AppDbContext context)
         {
-            _categories.Add(category);
-            return Task.FromResult(category);
+            _context = context;
         }
 
-        public Task<Category> DeleteCategory(int id)
+        private DbSet<Category> Categories => _context.Categories;
+
+        public async Task<Category> CreateCategory(Category category)
         {
-            var category = _categories.FirstOrDefault(c => c.Id == id);
+            _context.Categories.Add(category);
+            await _context.SaveChangesAsync();
+            return category;
+        }
+
+        public async Task<Category> DeleteCategory(int id)
+        {
+            var category = await Categories.FirstOrDefaultAsync(c => c.Id == id);
             if (category != null)
             {
-                _categories.Remove(category);
+                Categories.Remove(category);
+                await _context.SaveChangesAsync();
             }
-            return Task.FromResult(category);
+            return category;
         }
 
-        public Task<IEnumerable<Category>> GetCategories()
-        {
-            return Task.FromResult<IEnumerable<Category>>(_categories);
-        }
+    
 
-        public Task<Category> GetCategoryById(int id)
+        public async Task<Category> GetCategoryById(int id)
         {
-            var category = _categories.FirstOrDefault(c => c.Id == id);
-            return Task.FromResult(category);
-        }
-
-        public Task<Category> UpdateCategory(Category category)
-        {
-            var existingCategory = _categories.FirstOrDefault(c => c.Id == category.Id);
-            if (existingCategory != null)
+            if(_context.Categories == null)
             {
-                existingCategory.Name = category.Name; // Update other properties as needed
-                // Continue updating other relevant fields
+                throw new ArgumentNullException(nameof(_context.Categories), "Categories database table is null.");
             }
-            return Task.FromResult(existingCategory);
+            var category =await  _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
+            return category;
         }
+
+       
+        
+
+        public async Task<Category> UpdateCategory(Category category)
+        {
+            _context.Categories.Update(category);
+            await _context.SaveChangesAsync();
+            return category;
+        }
+
+        public async Task<IEnumerable<Category>> GetCategories()
+        {
+            return await Categories.ToListAsync();
+        }
+
     }
 }

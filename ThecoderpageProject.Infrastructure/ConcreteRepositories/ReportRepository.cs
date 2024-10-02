@@ -10,6 +10,7 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
 {
     public class ReportRepository : IReportRepository<Report>
     {
+        //Düzenle
         private readonly List<Report> _reports = new List<Report>();
 
         public Task<Report> CreateReport(Report report)

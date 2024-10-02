@@ -11,8 +11,8 @@ namespace ThecoderpageProject.Domain.AbstractRepositories
     {
         Task<T> CreateCategory(T category);
         Task<T> GetCategoryById(int id);
-        Task<IEnumerable<T>> GetCategories();
         Task<T> UpdateCategory(T category);
+        Task<IEnumerable<T>> GetCategories();
         Task<T> DeleteCategory(int id);
     }
 }

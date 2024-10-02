@@ -23,12 +23,24 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             _mapper = mapper;
         }
 
-        public async Task Create(CreateCategoryDTO model)
+        public async Task Create(CreateCategoryDTO categoryDTO)
         {
-            var category = _mapper.Map<Category>(model);
+            var category = _mapper.Map<Category>(categoryDTO);
             await _categoryRepository.CreateCategory(category);
         }
-
+        public async Task Update(UpdateCategoryDTO categoryDTO)
+        {
+            var category = await _categoryRepository.GetCategoryById(categoryDTO.Id); // Fix for CS1061: Use GetCategoryById instead of GetByIdAsync
+            if (category != null)
+            {
+                category.Name = categoryDTO.Name;
+                await _categoryRepository.UpdateCategory(category);
+            }
+            else
+            {
+                throw new KeyNotFoundException("Category not found");
+            }
+        }
         public async Task Delete(int id)
         {
             var category = await _categoryRepository.GetCategoryById(id);
@@ -42,25 +54,24 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             }
         }
 
+        
+
+
+        public async Task<UpdateCategoryDTO> GetCategoryById(int id)
+        {
+            var category = await _categoryRepository.GetCategoryById(id);
+            if (category == null)
+            {
+                throw new KeyNotFoundException("Category not found.");
+            }
+            return _mapper.Map<UpdateCategoryDTO>(category);
+        }
+
         public async Task<IEnumerable<CategoryVM>> GetAll()
         {
             var categories = await _categoryRepository.GetCategories();
             return _mapper.Map<IEnumerable<CategoryVM>>(categories);
         }
-
-        public async Task Update(UpdateCategoryDTO model)
-        {
-            var category = await _categoryRepository.GetCategoryById(model.Id); // Fix for CS1061: Use GetCategoryById instead of GetByIdAsync
-            if (category != null)
-            {
-                category.Name = model.Name; 
-                await _categoryRepository.UpdateCategory(category);
-            }
-            else
-            {
-                throw new KeyNotFoundException("Category not found");
-            }
-        }
     }
-    
+
 }

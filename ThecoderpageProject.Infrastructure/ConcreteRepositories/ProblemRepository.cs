@@ -1,56 +1,75 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThecoderpageProject.Domain.AbstractRepositories;
 using ThecoderpageProject.Domain.Entities;
+using ThecoderpageProject.Infrastructure.Context;
 
 namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
 {
     public class ProblemRepository : IProblemRepository<Problem>
     {
-        public ProblemRepository() { }
-        private readonly List<Problem> _problems = new List<Problem>();
+        private readonly AppDbContext _context;
 
-        public Task CreateProblem(Problem problem)
+        public ProblemRepository(AppDbContext context)
         {
-            _problems.Add(problem);
-            return Task.CompletedTask;
+            _context = context;
         }
 
-        public Task DeleteProblem(int id)
+        private DbSet<Problem> Problems => _context.Problems;
+
+        public async Task<Problem> CreateProblem(Problem problem)
         {
-            var problem = _problems.FirstOrDefault(p => p.Id == id);
+            _context.Problems.Add(problem);
+            await _context.SaveChangesAsync();
+            return problem;
+        }
+
+        public async Task<Problem> UpdateProblem(Problem problem)
+        {
+            var problemToUpdate = await Problems.FirstOrDefaultAsync(p => p.Id == problem.Id);
+            if (problemToUpdate != null)
+            {
+                problemToUpdate.Title = problem.Title;
+                problemToUpdate.Description = problem.Description;
+                problemToUpdate.CreatedAt = problem.CreatedAt;
+                problemToUpdate.UserId = problem.UserId;
+                problemToUpdate.Status = problem.Status;
+                problemToUpdate.CategoryId = problem.CategoryId;
+                await _context.SaveChangesAsync();
+            }
+            return problemToUpdate;
+        }
+
+        public async Task<Problem> DeleteProblem(int id)
+        {
+            var problem = await Problems.FirstOrDefaultAsync(p => p.Id == id);
             if (problem != null)
             {
-                _problems.Remove(problem);
+                Problems.Remove(problem);
+                await _context.SaveChangesAsync();
             }
-            return Task.CompletedTask;
+            return problem;
         }
 
-        public Task<Problem> GetProblemById(int id)
+        public async Task<Problem> GetProblemById(int id)
         {
-            var problem = _problems.FirstOrDefault(p => p.Id == id);
-            return Task.FromResult(problem);
-        }
-
-        public Task<IEnumerable<Problem>> GetProblems()
-        {
-            return Task.FromResult<IEnumerable<Problem>>(_problems);
-        }
-
-        public Task UpdateProblem(Problem problem)
-        {
-            var existingProblem = _problems.FirstOrDefault(p => p.Id == problem.Id);
-            if (existingProblem != null)
+            if (_context.Problems == null)
             {
-                existingProblem.Title = problem.Title; // Update other properties as needed
-                existingProblem.Description = problem.Description; // Example property
-                                                                   // Continue updating other relevant fields
+                throw new ArgumentNullException(nameof(_context.Problems), "Problems database table is null.");
             }
-            return Task.CompletedTask;
+            var problem = await _context.Problems.FirstOrDefaultAsync(p => p.Id == id);
+            return problem;
         }
+
+        public async Task<IEnumerable<Problem>> GetProblems()
+        {
+            return await Problems.ToListAsync();
+        }
+
 
         
     }

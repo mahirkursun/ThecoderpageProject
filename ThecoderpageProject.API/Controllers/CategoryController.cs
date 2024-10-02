@@ -43,7 +43,7 @@ namespace ThecoderpageProject.API.Controllers
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCategory), new { id = category.Id }, category);
+            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
         }
 
         // Update an existing category

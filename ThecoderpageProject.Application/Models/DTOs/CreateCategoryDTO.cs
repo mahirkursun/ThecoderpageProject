@@ -9,6 +9,7 @@ namespace ThecoderpageProject.Application.Models.DTOs
 {
     public class CreateCategoryDTO
     {
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
     }
