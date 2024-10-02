@@ -24,5 +24,7 @@ namespace ThecoderpageProject.Application.Models.DTOs
         public int UserId { get; set; }
         public int CategoryId { get; set; }
 
+        public VoteType VoteType { get; set; }
+
     }
 }

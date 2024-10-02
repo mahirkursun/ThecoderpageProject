@@ -11,11 +11,13 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
     public class ProblemController : Controller
     {
         private readonly IProblemService _problemService;
+        private readonly IVoteService _voteService;
 
-        public ProblemController(IProblemService problemService) // Update constructor
+        public ProblemController(IProblemService problemService, IVoteService voteService) // Update constructor
         {
             _problemService = problemService;
-           
+            _voteService = voteService;
+
         }
 
         string uri = "https://localhost:7244";
@@ -23,13 +25,19 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         // Admin/Problem/Index
         public async Task<IActionResult> Index()
         {
-            List<ProblemVM> problems = new List<ProblemVM>();
-            using (var httpClient = new HttpClient())
+            var problems = await _problemService.GetAll(); // Tüm problemleri al
+           // Kullanıcının ID'sini al
+           /*ÖNEMLİ */
+           /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+           var userId = 1; // Örnek olarak 1 numaralı kullanıcıyı al
+
+            foreach (var problem in problems)
             {
-                using (var response = await httpClient.GetAsync($"{uri}/api/Problem"))
+                // Kullanıcının bu problem için oy verip vermediğini kontrol edin
+                var userVote = await _voteService.GetVoteByUserIdAndProblemId(userId, problem.Id);
+                if (userVote != null)
                 {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    problems = JsonConvert.DeserializeObject<List<ProblemVM>>(apiResponse);
+                    problem.UserVoteType = userVote.VoteType; // Kullanıcının verdiği oy tipini sakla (upvote veya downvote)
                 }
             }
             return View(problems);

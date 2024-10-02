@@ -1,44 +1,51 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThecoderpageProject.Domain.AbstractRepositories;
 using ThecoderpageProject.Domain.Entities;
+using ThecoderpageProject.Infrastructure.Context;
 
 namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
 {
     public class VoteRepository : IVoteRepository<Vote>
     {
-        //Düzenle
-        private readonly List<Vote> _votes = new List<Vote>();
 
-        public Task<Vote> CreateVote(Vote vote)
+        private readonly AppDbContext _context;
+
+        public VoteRepository(AppDbContext context)
         {
-            _votes.Add(vote);
-            return Task.FromResult(vote);
+            _context = context;
+        }
+        public async Task AddVote(Vote vote)
+        {
+            await _context.Votes.AddAsync(vote);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Vote> GetVoteById(int id)
+        public async Task<Vote> GetVoteByUserIdAndProblemId(int userId, int problemId)
         {
-            var vote = _votes.FirstOrDefault(v => v.Id == id);
-            return Task.FromResult(vote);
+            return await _context.Votes.FirstOrDefaultAsync(v => v.UserId == userId && v.ProblemId == problemId);
         }
 
-        public Task<IEnumerable<Vote>> GetVotes()
-        {
-            return Task.FromResult<IEnumerable<Vote>>(_votes);
-        }
+        
 
-        public Task<Vote> UpdateVote(Vote vote)
+        public async Task RemoveVote(int voteId)
         {
-            var existingVote = _votes.FirstOrDefault(v => v.Id == vote.Id);
-            if (existingVote != null)
+            var vote = await _context.Votes.FindAsync(voteId);
+            if (vote != null)
             {
-                existingVote.VoteType = vote.VoteType; // Update other properties as needed
-                // Continue updating other relevant fields
+                _context.Votes.Remove(vote);
+                await _context.SaveChangesAsync();
             }
-            return Task.FromResult(existingVote);
+        }
+
+        public Task UpdateVote(Vote vote)
+        {
+            _context.Votes.Update(vote);
+            return _context.SaveChangesAsync();
         }
     }
 }

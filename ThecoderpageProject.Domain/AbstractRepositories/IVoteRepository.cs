@@ -9,9 +9,9 @@ namespace ThecoderpageProject.Domain.AbstractRepositories
 {
     public interface IVoteRepository<T> where T : Vote
     {
-        Task<T> CreateVote(T vote);
-        Task<T> GetVoteById(int id);
-        Task<IEnumerable<T>> GetVotes();
-        Task<T> UpdateVote(T vote);
+        Task AddVote(T vote);
+        Task<T> GetVoteByUserIdAndProblemId(int userId, int problemId);
+        Task RemoveVote(int voteId);
+        Task UpdateVote(T vote);
     }
 }

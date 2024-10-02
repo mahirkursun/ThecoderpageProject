@@ -51,15 +51,15 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "97b0b875-9cca-4011-8497-2ff94de431ff",
-                            ConcurrencyStamp = "e0a30091-6c9c-4226-96a5-52994b1e8b88",
+                            Id = "fe72162e-23e0-4838-a318-b5b95ccd5cfb",
+                            ConcurrencyStamp = "ca40af7d-a87d-45d8-bf38-b0dd43180bde",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "bddc5f58-e008-4b8e-b006-fd351bacc9e5",
-                            ConcurrencyStamp = "52c102cf-5bdf-4e3e-a690-f62f5eb4c138",
+                            Id = "57472712-d3a8-4971-bbed-749db7e7896f",
+                            ConcurrencyStamp = "b5265b77-9956-44d5-8761-52b82414d477",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -387,12 +387,6 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CommentId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsUpvote")
-                        .HasColumnType("bit");
 
                     b.Property<int>("ProblemId")
                         .HasColumnType("int");

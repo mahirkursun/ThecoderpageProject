@@ -18,9 +18,13 @@ namespace ThecoderpageProject.Domain.Entities
         public ProblemStatus Status { get; set; }
         public int CategoryId { get; set; }
 
+      
 
 
 
-        
+
+
+
+
     }
 }

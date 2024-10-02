@@ -30,7 +30,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.CategoryId)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserVoteType)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -54,6 +56,54 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CategoryId)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserVoteType)
+            </td>
+            
+@*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*@
+                @*input value'su    @User.Identity.GetUserId() yerine şimdilik UserId=1 girildi. Daha sonra oturum açan kullanıcıya göre güncellenecek.*@
+                <td>
+                    @if (item.UserVoteType == null)
+                    {
+                        // Kullanıcı oy vermemişse
+                        <form asp-controller="Vote" asp-action="UpVote" method="post" style="display:inline;">
+                            <input type="hidden" name="problemId" value="@item.Id" />
+
+                            <input type="hidden" name="userId" value="1" />
+
+                            <button type="submit" class="btn btn-success">UpVote</button>
+                        </form>
+                        <form asp-controller="Vote" asp-action="DownVote" method="post" style="display:inline;">
+                            <input type="hidden" name="problemId" value="@item.Id" />
+
+                            <input type="hidden" name="userId" value="1" />
+
+                            <button type="submit" class="btn btn-danger">DownVote</button>
+                        </form>
+                    }
+                    else if (item.UserVoteType == VoteType.UpVote)
+                    {
+                        // Kullanıcı UpVote vermişse, oyunu geri çekme butonu
+                        <form asp-controller="Vote" asp-action="RemoveVote" method="post" style="display:inline;">
+                            <input type="hidden" name="problemId" value="@item.Id" />
+
+                            <input type="hidden" name="userId" value="1" />
+
+                            <button type="submit" class="btn btn-warning">Remove UpVote</button>
+                        </form>
+                    }
+                    else if (item.UserVoteType == VoteType.DownVote)
+                    {
+                        // Kullanıcı DownVote vermişse, oyunu geri çekme butonu
+                        <form asp-controller="Vote" asp-action="RemoveVote" method="post" style="display:inline;">
+                            <input type="hidden" name="problemId" value="@item.Id" />
+
+                            <input type="hidden" name="userId" value="1" />
+
+                            <button type="submit" class="btn btn-warning">Remove DownVote</button>
+                        </form>
+                    }
+                </td>
             <td>
                 <a asp-action="Update" asp-route-id="@item.Id">Update</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

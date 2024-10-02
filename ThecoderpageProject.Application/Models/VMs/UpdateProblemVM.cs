@@ -19,5 +19,7 @@ namespace ThecoderpageProject.Application.Models.VMs
         public int UserId { get; set; }
         public int CategoryId { get; set; }
 
+        public VoteType VoteType { get; set; }
+
     }
 }

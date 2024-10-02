@@ -10,8 +10,7 @@ namespace ThecoderpageProject.Domain.Entities
     public class Vote
     {
         public int Id { get; set; }
-        public bool IsUpvote { get; set; }
-        public VoteType VoteType { get; set; }
+        public VoteType VoteType { get; set; } 
         public DateTime VotedAt { get; set; }
  
         public int UserId { get; set; }
@@ -19,7 +18,6 @@ namespace ThecoderpageProject.Domain.Entities
         public int ProblemId { get; set; }
 
 
-        public int CommentId { get; set; }
     
     }
 }

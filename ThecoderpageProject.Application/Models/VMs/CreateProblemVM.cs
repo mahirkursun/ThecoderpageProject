@@ -19,5 +19,7 @@ namespace ThecoderpageProject.Application.Models.VMs
         public int CategoryId { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        public VoteType VoteType { get; set; }
     }
 }

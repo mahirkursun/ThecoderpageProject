@@ -17,5 +17,8 @@ namespace ThecoderpageProject.Application.Models.VMs
 
         public int CategoryId { get; set; }
         public ProblemStatus Status { get; set; }
+
+        // Kullanıcıya ait **UpVote** ve **DownVote** sayıları
+        public VoteType? UserVoteType { get; set; }
     }
 }

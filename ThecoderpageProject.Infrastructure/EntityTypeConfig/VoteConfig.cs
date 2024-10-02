@@ -20,8 +20,7 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
             builder.HasKey(v => v.Id);
 
             // Properties
-            builder.Property(v => v.IsUpvote)
-                .IsRequired();
+  
 
             builder.Property(v => v.VoteType)
                 .HasConversion<string>()
