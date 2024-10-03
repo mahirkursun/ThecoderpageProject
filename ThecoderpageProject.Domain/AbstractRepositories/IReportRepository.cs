@@ -9,9 +9,9 @@ namespace ThecoderpageProject.Domain.AbstractRepositories
 {
     public interface IReportRepository<T> where T : Report
     {
-        Task<T> CreateReport(T report);
-        Task<T> GetReportById(int id);
-        Task<IEnumerable<T>> GetReports();
-        Task<T> DeleteReport(int id);
+        Task<IEnumerable<Report>> GetAllReports();
+        Task<Report> GetReportById(int id);
+        Task CreateReport(Report report);
+        Task DeleteReport(int id);
     }
 }

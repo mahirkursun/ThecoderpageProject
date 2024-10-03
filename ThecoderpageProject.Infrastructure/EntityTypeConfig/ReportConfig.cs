@@ -19,10 +19,7 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
             // Primary Key
             builder.HasKey(r => r.Id);
 
-            // Properties
-            builder.Property(r => r.Reason)
-                .IsRequired()
-                .HasMaxLength(250);
+            
 
             builder.Property(r => r.ReportReason)
                 .IsRequired()

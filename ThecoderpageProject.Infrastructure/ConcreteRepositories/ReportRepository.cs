@@ -1,43 +1,51 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThecoderpageProject.Domain.AbstractRepositories;
 using ThecoderpageProject.Domain.Entities;
+using ThecoderpageProject.Infrastructure.Context;
 
 namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
 {
     public class ReportRepository : IReportRepository<Report>
     {
-        //Düzenle
-        private readonly List<Report> _reports = new List<Report>();
+        private readonly AppDbContext _context;
 
-        public Task<Report> CreateReport(Report report)
+        public ReportRepository(AppDbContext context)
         {
-            _reports.Add(report);
-            return Task.FromResult(report);
+            _context = context;
         }
 
-        public Task<Report> DeleteReport(int id)
+        public async Task CreateReport(Report report)
         {
-            var report = _reports.FirstOrDefault(r => r.Id == id);
+            await _context.Reports.AddAsync(report);
+            await _context.SaveChangesAsync();
+
+        }
+
+        public async Task DeleteReport(int id)
+        {
+            var report = _context.Reports.FirstOrDefault(r => r.Id == id);
             if (report != null)
             {
-                _reports.Remove(report);
+                _context.Reports.Remove(report);
+                await _context.SaveChangesAsync();
             }
-            return Task.FromResult(report);
+           
         }
 
-        public Task<Report> GetReportById(int id)
+        public async Task<Report> GetReportById(int id)
         {
-            var report = _reports.FirstOrDefault(r => r.Id == id);
-            return Task.FromResult(report);
+            return await  _context.Reports.FirstOrDefaultAsync(r => r.Id == id);
+           
         }
 
-        public Task<IEnumerable<Report>> GetReports()
+        public async Task<IEnumerable<Report>> GetAllReports()
         {
-            return Task.FromResult<IEnumerable<Report>>(_reports);
+            return await _context.Reports.ToListAsync();
         }
     }
 }

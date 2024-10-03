@@ -42,11 +42,27 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ProblemId)
             </td>
-            <td>
-                <a asp-action="Update" asp-route-id="@item.Id">Update</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+
+
+
+                <!-- Dropdown Menü Başlangıcı -->
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <!-- Report Seçeneği -->
+                            <li>
+                                <a class="dropdown-item" asp-controller="Report" asp-action="Create" asp-route-commentId="@item.Id">Report</a>
+                            </li>
+                            <li><a class="dropdown-item" asp-action="Update" asp-route-id="@item.Id">Update</a></li>
+                            <li><a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id">Details</a></li>
+                            <li><a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id">Delete</a></li>
+                        </ul>
+                    </div>
+                </td>
+                <!-- Dropdown Menü Sonu -->
         </tr>
 }
     </tbody>

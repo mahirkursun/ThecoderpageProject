@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ThecoderpageProject.Domain.Enums;
 
 namespace ThecoderpageProject.Application.Models.VMs
 {
     public class ReportVM
     {
         public int Id { get; set; }
-        public int ProblemId { get; set; }
-        public string Description { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public ReportReason ReportReason { get; set; }
+        public DateTime ReportedAt { get; set; }
+
         public int UserId { get; set; }
+        public int ProblemId { get; set; }
+        public int CommentId { get; set; }
     }
 }

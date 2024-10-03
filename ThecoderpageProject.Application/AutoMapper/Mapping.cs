@@ -36,7 +36,8 @@ namespace ThecoderpageProject.Application.AutoMapper
             CreateMap<Problem, UpdateProblemDTO>();
             CreateMap<Problem, ProblemVM>();
 
-            CreateMap<Report, CreateReportDTO>();
+            CreateMap<CreateReportDTO, Report>();
+            CreateMap<Report, UpdateReportDTO>();
             CreateMap<Report, ReportVM>();
 
 

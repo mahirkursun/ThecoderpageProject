@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ThecoderpageProject.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class CreateInitial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -105,7 +105,6 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Reason = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReportReason = table.Column<int>(type: "int", nullable: false),
                     ReportedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
@@ -262,8 +261,8 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "57472712-d3a8-4971-bbed-749db7e7896f", "b5265b77-9956-44d5-8761-52b82414d477", "User", "USER" },
-                    { "fe72162e-23e0-4838-a318-b5b95ccd5cfb", "ca40af7d-a87d-45d8-bf38-b0dd43180bde", "Admin", "ADMIN" }
+                    { "d14b7352-9512-4f96-be40-2e9e94dc6af2", "a559467a-9727-42b3-ba1a-eee506082e35", "Admin", "ADMIN" },
+                    { "e61f5831-060b-4603-8f77-834c85c47ae6", "32de4aea-f5f3-42a9-aeae-6af7d6d30c0c", "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -1,0 +1,42 @@
+﻿@model CreateReportDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Report Problem</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        <form asp-action="Create" method="post">
+            @if (Model.ProblemId.HasValue)
+            {
+                <input type="hidden" asp-for="ProblemId" />
+            }
+
+            @if (Model.CommentId.HasValue)
+            {
+                <input type="hidden" asp-for="CommentId" />
+            }
+
+            <div class="form-group">
+                <label asp-for="ReportReason">Reason for reporting</label>
+                <select asp-for="ReportReason" class="form-control">
+                    @foreach (var reason in Enum.GetValues(typeof(ReportReason)))
+                    {
+                        <option value="@reason">@reason</option>
+                    }
+                </select>
+                <span asp-validation-for="ReportReason" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Report</button>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

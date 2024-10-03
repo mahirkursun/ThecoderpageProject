@@ -23,29 +23,29 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             _mapper = mapper;
         }
 
-        public async Task Create(CreateReportDTO model)
+        public async Task CreateReport(CreateReportDTO model)
         {
             var report = _mapper.Map<Report>(model);
-            await _reportRepository.CreateReport(report); 
+            await _reportRepository.CreateReport(report);
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteReport(int id)
         {
-            var report = await _reportRepository.GetReportById(id); 
-            if (report != null)
-            {
-                await _reportRepository.DeleteReport(report.Id);
-            }
-            else
-            {
-                throw new KeyNotFoundException($"Report with ID {id} not found."); 
-            }
+            await _reportRepository.DeleteReport(id);
         }
 
-        public async Task<IEnumerable<ReportVM>> GetAll()
+        public  async Task<IEnumerable<ReportVM>> GetAllReports()
         {
-            var reports = await _reportRepository.GetReports();
-            return _mapper.Map<IEnumerable<ReportVM>>(reports); 
+            var reports = await _reportRepository.GetAllReports();
+            return  _mapper.Map<IEnumerable<ReportVM>>(reports);
+
         }
+
+        public async Task<Report> GetReportById(int id)
+        {
+            return await _reportRepository.GetReportById(id);
+        }
+
+      
     }
 }

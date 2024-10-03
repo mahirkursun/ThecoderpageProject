@@ -12,8 +12,8 @@ using ThecoderpageProject.Infrastructure.Context;
 namespace ThecoderpageProject.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241002213439_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241003093408_CreateInitial")]
+    partial class CreateInitial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,15 +54,15 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fe72162e-23e0-4838-a318-b5b95ccd5cfb",
-                            ConcurrencyStamp = "ca40af7d-a87d-45d8-bf38-b0dd43180bde",
+                            Id = "d14b7352-9512-4f96-be40-2e9e94dc6af2",
+                            ConcurrencyStamp = "a559467a-9727-42b3-ba1a-eee506082e35",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "57472712-d3a8-4971-bbed-749db7e7896f",
-                            ConcurrencyStamp = "b5265b77-9956-44d5-8761-52b82414d477",
+                            Id = "e61f5831-060b-4603-8f77-834c85c47ae6",
+                            ConcurrencyStamp = "32de4aea-f5f3-42a9-aeae-6af7d6d30c0c",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -328,10 +328,6 @@ namespace ThecoderpageProject.Infrastructure.Migrations
 
                     b.Property<int>("ProblemId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Reason")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ReportReason")
                         .HasColumnType("int");

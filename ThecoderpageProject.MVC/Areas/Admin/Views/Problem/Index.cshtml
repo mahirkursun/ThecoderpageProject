@@ -36,31 +36,32 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserVoteType)
-            </td>
-            
-@*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*@
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserVoteType)
+                </td>
+
+                @*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*@
                 @*input value'su    @User.Identity.GetUserId() yerine şimdilik UserId=1 girildi. Daha sonra oturum açan kullanıcıya göre güncellenecek.*@
                 <td>
                     @if (item.UserVoteType == null)
@@ -104,12 +105,25 @@
                         </form>
                     }
                 </td>
-            <td>
-                <a asp-action="Update" asp-route-id="@item.Id">Update</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+                <!-- Dropdown Menü Başlangıcı -->
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <!-- Report Seçeneği -->
+                            <li>
+                                <a class="dropdown-item" asp-controller="Report" asp-action="Create" asp-route-problemId="@item.Id">Report</a>
+                            </li>
+                            <li><a class="dropdown-item" asp-action="Update" asp-route-id="@item.Id">Update</a></li>
+                            <li><a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id">Details</a></li>
+                            <li><a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id">Delete</a></li>
+                        </ul>
+                    </div>
+                </td>
+                <!-- Dropdown Menü Sonu -->
+            </tr>
+        }
     </tbody>
 </table>

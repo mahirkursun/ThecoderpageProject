@@ -10,9 +10,8 @@ namespace ThecoderpageProject.Domain.Entities
     public class Report
     {
         public int Id { get; set; }
-        public string Reason { get; set; }
         public ReportReason ReportReason { get; set; }
-        public DateTime ReportedAt { get; set; }
+        public DateTime ReportedAt { get; set; }= DateTime.Now;
 
         public int UserId { get; set; }
 
