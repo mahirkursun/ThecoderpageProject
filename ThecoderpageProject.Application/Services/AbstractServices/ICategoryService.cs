@@ -16,7 +16,7 @@ namespace ThecoderpageProject.Application.Services.AbstractServices
         Task Update(UpdateCategoryDTO model);
         Task Delete(int id);
 
-        Task<IEnumerable<CategoryVM>> GetAll();
+        Task<IEnumerable<CategoryVM>> GetCategories();
 
     }
 }

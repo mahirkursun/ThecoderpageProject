@@ -182,6 +182,9 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+              "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.Application\\ThecoderpageProject.Application.csproj": {
+                "projectPath": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.Application\\ThecoderpageProject.Application.csproj"
+              },
               "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.Domain\\ThecoderpageProject.Domain.csproj": {
                 "projectPath": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.Domain\\ThecoderpageProject.Domain.csproj"
               }

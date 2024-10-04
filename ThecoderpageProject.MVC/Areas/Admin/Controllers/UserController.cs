@@ -23,7 +23,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             
-            List<UserVM> users = new List<UserVM>();
+            var users = await _userService.GetAll();
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync($"{uri}/api/User"))

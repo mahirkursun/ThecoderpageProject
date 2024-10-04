@@ -28,13 +28,21 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
                 .IsRequired()
                 .HasColumnType("text");
 
-
             builder.Property(p => p.Status)
                 .HasConversion<string>();
 
+            // Relationships
+            builder.HasOne<User>() // Problem -> User
+                .WithMany() // Bir Kullanıcı birden çok Problem oluşturabilir
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade); // Kullanıcı silindiğinde ilgili Problemler silinsin
 
-
-            
+            builder.HasOne<Category>() // Problem -> Category
+                .WithMany() // Bir Kategori birden çok Problem içerebilir
+                .HasForeignKey(p => p.CategoryId)
+                .OnDelete(DeleteBehavior.Cascade); // Kategori silindiğinde ilgili Problemleri de sil
         }
     }
+
+
 }

@@ -51,15 +51,15 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d14b7352-9512-4f96-be40-2e9e94dc6af2",
-                            ConcurrencyStamp = "a559467a-9727-42b3-ba1a-eee506082e35",
+                            Id = "8e9f19b3-46af-4283-8d00-ce4466751c09",
+                            ConcurrencyStamp = "3ddf1cc7-65bc-4b9b-8ac9-37d264a44021",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "e61f5831-060b-4603-8f77-834c85c47ae6",
-                            ConcurrencyStamp = "32de4aea-f5f3-42a9-aeae-6af7d6d30c0c",
+                            Id = "51af6ef2-c956-4923-b2ff-018191d0b601",
+                            ConcurrencyStamp = "d57c0a77-1334-4086-98c3-2939f5bb4f4d",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -276,6 +276,10 @@ namespace ThecoderpageProject.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProblemId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("Comments");
                 });
 
@@ -309,6 +313,10 @@ namespace ThecoderpageProject.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("Problems");
                 });
 
@@ -320,10 +328,10 @@ namespace ThecoderpageProject.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CommentId")
+                    b.Property<int?>("CommentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProblemId")
+                    b.Property<int?>("ProblemId")
                         .HasColumnType("int");
 
                     b.Property<int>("ReportReason")
@@ -336,6 +344,12 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CommentId");
+
+                    b.HasIndex("ProblemId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reports");
                 });
@@ -398,6 +412,10 @@ namespace ThecoderpageProject.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProblemId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("Votes");
                 });
 
@@ -450,6 +468,98 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ThecoderpageProject.Domain.Entities.Comment", b =>
+                {
+                    b.HasOne("ThecoderpageProject.Domain.Entities.Problem", "Problem")
+                        .WithMany("Comments")
+                        .HasForeignKey("ProblemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ThecoderpageProject.Domain.Entities.User", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Problem");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ThecoderpageProject.Domain.Entities.Problem", b =>
+                {
+                    b.HasOne("ThecoderpageProject.Domain.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ThecoderpageProject.Domain.Entities.User", "User")
+                        .WithMany("Problems")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ThecoderpageProject.Domain.Entities.Report", b =>
+                {
+                    b.HasOne("ThecoderpageProject.Domain.Entities.Comment", "Comment")
+                        .WithMany()
+                        .HasForeignKey("CommentId");
+
+                    b.HasOne("ThecoderpageProject.Domain.Entities.Problem", "Problem")
+                        .WithMany()
+                        .HasForeignKey("ProblemId");
+
+                    b.HasOne("ThecoderpageProject.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
+
+                    b.Navigation("Problem");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ThecoderpageProject.Domain.Entities.Vote", b =>
+                {
+                    b.HasOne("ThecoderpageProject.Domain.Entities.Problem", "Problem")
+                        .WithMany()
+                        .HasForeignKey("ProblemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ThecoderpageProject.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Problem");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ThecoderpageProject.Domain.Entities.Problem", b =>
+                {
+                    b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("ThecoderpageProject.Domain.Entities.User", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Problems");
                 });
 #pragma warning restore 612, 618
         }

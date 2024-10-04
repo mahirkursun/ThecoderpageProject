@@ -16,3 +16,5 @@ C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Infrastructu
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Infrastructure\obj\Debug\net8.0\ThecoderpageProject.Infrastructure.pdb
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Infrastructure\obj\Debug\net8.0\ThecoderpageProject.Infrastructure.genruntimeconfig.cache
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Infrastructure\obj\Debug\net8.0\ref\ThecoderpageProject.Infrastructure.dll
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Infrastructure\bin\Debug\net8.0\ThecoderpageProject.Application.dll
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Infrastructure\bin\Debug\net8.0\ThecoderpageProject.Application.pdb

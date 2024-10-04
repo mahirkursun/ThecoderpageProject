@@ -18,13 +18,14 @@ namespace ThecoderpageProject.Domain.Entities
         public ProblemStatus Status { get; set; }
         public int CategoryId { get; set; }
 
-      
 
 
+        // Navigation property
+
+        public virtual ICollection<Comment> Comments { get; set; }
 
 
-
-
-
+        public virtual User User { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

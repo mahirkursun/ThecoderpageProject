@@ -24,7 +24,16 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
                 .IsRequired()
                 .HasMaxLength(500);
 
-            
+            // Relationships
+            builder.HasOne<Problem>() // Comment -> Problem
+                .WithMany() // Bir Problem birden çok Yorum alabilir
+                .HasForeignKey(c => c.ProblemId)
+                .OnDelete(DeleteBehavior.Cascade); // Problem silindiğinde ilgili Yorumlar silinsin
+
+            builder.HasOne<User>() // Comment -> User
+                .WithMany() // Bir Kullanıcı birden çok Yorum yazabilir
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict); // Kullanıcı silindiğinde ilgili Yorumlar silinmesin
         }
     }
 }

@@ -17,7 +17,11 @@ namespace ThecoderpageProject.Domain.Entities
 
         public int ProblemId { get; set; }
 
+        // Navigation property
 
-    
+        public virtual Problem Problem { get; set; }
+        public virtual User User { get; set; }
+
+
     }
 }

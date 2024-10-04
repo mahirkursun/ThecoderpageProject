@@ -14,7 +14,7 @@ namespace ThecoderpageProject.Application.Models.VMs
         public DateTime ReportedAt { get; set; }
 
         public int UserId { get; set; }
-        public int ProblemId { get; set; }
-        public int CommentId { get; set; }
+        public int? ProblemId { get; set; }
+        public int? CommentId { get; set; }
     }
 }

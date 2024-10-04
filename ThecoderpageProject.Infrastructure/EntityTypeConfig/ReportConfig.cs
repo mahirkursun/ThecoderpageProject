@@ -19,8 +19,7 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
             // Primary Key
             builder.HasKey(r => r.Id);
 
-            
-
+            // Properties
             builder.Property(r => r.ReportReason)
                 .IsRequired()
                 .HasConversion<string>();
@@ -28,7 +27,22 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
             builder.Property(r => r.ReportedAt)
                 .IsRequired();
 
-           
+
+            // Relationships
+            builder.HasOne<Problem>() // Report -> Problem
+                .WithMany() // Bir Problem birden çok Rapor alabilir
+                .HasForeignKey(r => r.ProblemId)
+                .OnDelete(DeleteBehavior.Cascade); // Problem silindiğinde ilgili Raporlar silinsin
+
+            builder.HasOne<Comment>() // Report -> Comment
+                .WithMany() // Bir Yorum birden çok Rapor alabilir
+                .HasForeignKey(r => r.CommentId)
+                .OnDelete(DeleteBehavior.Cascade); // Yorum silindiğinde ilgili Raporlar silinsin
+
+            builder.HasOne<User>() // Report -> User
+                .WithMany() // Bir Kullanıcı birden çok Rapor yazabilir
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.Cascade); // Kullanıcı silindiğinde ilgili Raporlar silinsin
         }
     }
 }

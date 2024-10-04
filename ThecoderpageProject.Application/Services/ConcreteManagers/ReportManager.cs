@@ -25,10 +25,17 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
 
         public async Task CreateReport(CreateReportDTO model)
         {
-            var report = _mapper.Map<Report>(model);
+            var report = new Report
+            {
+                ProblemId = model.ProblemId,
+                CommentId = model.CommentId,
+                ReportReason = model.ReportReason,
+                ReportedAt = DateTime.UtcNow,
+                UserId = 1
+            };
+
             await _reportRepository.CreateReport(report);
         }
-
         public async Task DeleteReport(int id)
         {
             await _reportRepository.DeleteReport(id);

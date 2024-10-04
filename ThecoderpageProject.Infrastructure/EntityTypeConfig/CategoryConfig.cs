@@ -23,6 +23,12 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
             builder.Property(c => c.Name)
                 .IsRequired()
                 .HasMaxLength(100);
+
+            // Relationships
+            builder.HasMany<Problem>() // Category -> Problems
+                .WithOne() // Bir Kategori birden çok Problem içerebilir
+                .HasForeignKey(p => p.CategoryId)
+                .OnDelete(DeleteBehavior.Cascade); // Kategori silindiğinde ilgili Problemler silinsin
         }
     }
 }

@@ -22,7 +22,8 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         // Admin/Comment/Index
         public async Task<IActionResult> Index()
         {
-            List<CommentVM> comments = new List<CommentVM>();
+           var comments = await _commentService.GetAll();
+
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync($"{uri}/api/Comment"))

@@ -12,10 +12,14 @@ namespace ThecoderpageProject.Domain.Entities
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
 
+
         public int UserId { get; set; }
-
-
         public int ProblemId { get; set; }
+
+        // Navigation property
+
+        public virtual Problem Problem { get; set; }
+        public virtual User User { get; set; }
 
 
     }

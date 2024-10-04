@@ -16,11 +16,14 @@ namespace ThecoderpageProject.Domain.Entities
         public int UserId { get; set; }
 
 
-        public int ProblemId { get; set; }
+        public int? ProblemId { get; set; }
+        public int? CommentId { get; set; }
 
+        // Navigation property
 
-        public int CommentId { get; set; }
- 
+        public virtual Problem Problem { get; set; }
+        public virtual User User { get; set; }
+        public virtual Comment Comment { get; set; }
 
 
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ThecoderpageProject.Application.Models.VMs;
 using ThecoderpageProject.Domain.AbstractRepositories;
 using ThecoderpageProject.Domain.Entities;
 using ThecoderpageProject.Infrastructure.Context;
@@ -39,7 +40,7 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
             return category;
         }
 
-    
+        
 
         public async Task<Category> GetCategoryById(int id)
         {
@@ -63,8 +64,11 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
 
         public async Task<IEnumerable<Category>> GetCategories()
         {
-            return await Categories.ToListAsync();
+
+            return await _context.Categories.ToListAsync();
+
         }
+
 
     }
 }

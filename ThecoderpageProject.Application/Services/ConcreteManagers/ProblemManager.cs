@@ -22,7 +22,7 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
         {
             _problemRepository = problemRepository;
             _mapper = mapper;
-            
+
         }
 
         public async Task Create(CreateProblemDTO model)
@@ -62,19 +62,19 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             var problem = await _problemRepository.GetProblemById(id);
             if (problem != null)
             {
-                await _problemRepository.DeleteProblem(problem.Id); 
+                await _problemRepository.DeleteProblem(problem.Id);
             }
             else
             {
-                throw new KeyNotFoundException($"Problem with ID {id} not found."); 
+                throw new KeyNotFoundException($"Problem with ID {id} not found.");
             }
         }
 
         public async Task<IEnumerable<ProblemVM>> GetAll()
         {
-            var problems = await _problemRepository.GetProblems(); 
-            return _mapper.Map<IEnumerable<ProblemVM>>(problems); 
+            var problems = await _problemRepository.GetProblems();
+            return _mapper.Map<IEnumerable<ProblemVM>>(problems);
         }
-        
+
     }
 }

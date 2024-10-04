@@ -12,11 +12,13 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
     {
         private readonly IProblemService _problemService;
         private readonly IVoteService _voteService;
+        private readonly ICategoryService _categoryService;
 
-        public ProblemController(IProblemService problemService, IVoteService voteService) // Update constructor
+        public ProblemController(IProblemService problemService, IVoteService voteService,ICategoryService categoryService) // Update constructor
         {
             _problemService = problemService;
             _voteService = voteService;
+            _categoryService = categoryService;
 
         }
 
@@ -26,10 +28,10 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var problems = await _problemService.GetAll(); // Tüm problemleri al
-           // Kullanıcının ID'sini al
-           /*ÖNEMLİ */
-           /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-           var userId = 1; // Örnek olarak 1 numaralı kullanıcıyı al
+                                                           // Kullanıcının ID'sini al
+            /*ÖNEMLİ */
+            /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+            var userId = 1; // Örnek olarak 1 numaralı kullanıcıyı al
 
             foreach (var problem in problems)
             {
@@ -43,23 +45,26 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
             return View(problems);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var categories = await _categoryService.GetCategories();
             
-            return View();
+
+            var model = new CreateProblemDTO
+            {
+                Categories = categories.Select(c => new CategoryVM
+                {
+                    Id = c.Id,
+                    Name = c.Name // İsim eklenmeli
+                }).ToList()
+            };
+
+            return View(model);
         }
-
-
         [HttpPost]
         public async Task<IActionResult> Create(CreateProblemDTO problemDTO)
         {
-            
-
-            if (!ModelState.IsValid)
-            {
-                TempData["Error"] = "Girdiğiniz verileri kontrol edin";
-                return View(problemDTO);
-            }
+           
 
             await _problemService.Create(problemDTO);
             TempData["Success"] = $"{problemDTO.Title} başarıyla eklendi";

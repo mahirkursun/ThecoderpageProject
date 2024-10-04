@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Org.BouncyCastle.Asn1.X509.Qualified;
+using System.Data;
 using ThecoderpageProject.Application.Models.DTOs;
 using ThecoderpageProject.Application.Services.AbstractServices;
 
@@ -14,7 +18,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
             _reportService = reportService;
         }
 
-
+        /*İncele*/
         public async Task<IActionResult> Index()
         {
             var reports = await _reportService.GetAllReports();
@@ -24,11 +28,13 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create(int problemId, int commentId)
         {
+
             var model = new CreateReportDTO
             {
                 ProblemId = problemId,
-                CommentId = commentId 
+                CommentId = commentId
             };
+
             return View(model);
         }
 
@@ -41,21 +47,36 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
                 return View(model);
             }
 
+
+
+
+
+            if (model.ProblemId > 0)
+            {
+                model.CommentId = null; // Eğer Problem varsa Comment 0 olmalı
+            }
+            else if (model.CommentId > 0)
+            {
+                model.ProblemId = null; // Eğer Comment varsa Problem 0 olmalı
+            }
+            else
+            {
+                TempData["Error"] = "Lütfen ya bir Problem ya da bir Comment seçin.";
+                return View(model);
+            }
+
             // Report kaydını oluştur
             await _reportService.CreateReport(model);
             TempData["Success"] = "Rapor başarıyla oluşturuldu.";
 
             // Comment rapor edilmişse CommentController'a yönlendir
-            if (model.CommentId.HasValue && model.CommentId > 0)
+            if (model.CommentId.HasValue)
             {
                 return RedirectToAction("Index", "Comment");
             }
 
             // Problem rapor edilmişse ProblemController'a yönlendir
             return RedirectToAction("Index", "Problem");
-
-
-
         }
         // Rapor detaylarını gösterir
         public async Task<IActionResult> Details(int id)

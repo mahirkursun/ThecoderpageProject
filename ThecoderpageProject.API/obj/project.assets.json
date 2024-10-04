@@ -1782,6 +1782,7 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.8",
           "Microsoft.EntityFrameworkCore": "8.0.8",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8",
+          "ThecoderpageProject.Application": "1.0.0",
           "ThecoderpageProject.Domain": "1.0.0"
         },
         "compile": {

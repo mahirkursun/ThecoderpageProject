@@ -27,7 +27,7 @@ namespace ThecoderpageProject.MVC
             
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging().LogTo(Console.WriteLine, LogLevel.Information);
             });
 
             //Identity Configuration burada yapýlacak.

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using ThecoderpageProject.Application.Models.DTOs;
 using ThecoderpageProject.Application.Models.VMs;
 using ThecoderpageProject.Application.Services.AbstractServices;
+using ThecoderpageProject.Domain.Entities;
 
 namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
 {
@@ -21,7 +22,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         // GET: /Admin/Category/Index
         public async Task<IActionResult> Index()
         {
-            List<CategoryVM> categories = new List<CategoryVM>();
+            var categories = await _categoryService.GetCategories();// Tüm kategorileri al
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync($"{uri}/api/Category"))
@@ -34,7 +35,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
             }
             return View(categories);
 
-           
+
         }
 
 

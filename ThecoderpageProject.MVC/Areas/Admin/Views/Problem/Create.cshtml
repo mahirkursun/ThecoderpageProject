@@ -3,14 +3,19 @@
 @{
     ViewData["Title"] = "Create";
 }
-
+@if (TempData["Errors"] != null)
+{
+        <div class="alert alert-danger">
+        @TempData["Errors"]
+        </div>
+}
 <h1>Create</h1>
 
 <h4>Problem</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -40,14 +45,27 @@
                         <option value="@status">@status</option>
                     }
                 </select>
-                
+
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <input asp-for="CategoryId" class="form-control" />
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div>
+            <!--Tüm kategori listesini getir-->
+            @if (Model.Categories != null && Model.Categories.Any())
+            {
+                <div class="form-group">
+                    <label asp-for="CategoryId" class="control-label"></label>
+                    <select asp-for="CategoryId" class="form-control">
+                        @foreach (var category in Model.Categories)
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+            }
+            else
+            {
+                <p>Kategoriler yüklenemedi.</p>
+            }
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -59,6 +77,10 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

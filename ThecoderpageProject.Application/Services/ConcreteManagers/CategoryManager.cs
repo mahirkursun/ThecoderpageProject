@@ -67,10 +67,11 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             return _mapper.Map<UpdateCategoryDTO>(category);
         }
 
-        public async Task<IEnumerable<CategoryVM>> GetAll()
+        public async Task<IEnumerable<CategoryVM>> GetCategories()
         {
             var categories = await _categoryRepository.GetCategories();
             return _mapper.Map<IEnumerable<CategoryVM>>(categories);
+
         }
     }
 

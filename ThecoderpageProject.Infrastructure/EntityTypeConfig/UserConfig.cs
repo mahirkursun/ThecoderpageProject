@@ -31,7 +31,26 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
                 .HasConversion<string>()
                 .IsRequired();
 
-            
+            // Relationships
+            builder.HasMany<Problem>() // User -> Problems
+                .WithOne() // Bir Kullanıcı birden çok Problem oluşturabilir
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade); // Kullanıcı silindiğinde ilgili Problemler silinsin
+
+            builder.HasMany<Comment>() // User -> Comments
+                .WithOne() // Bir Kullanıcı birden çok Yorum yapabilir
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade); // Kullanıcı silindiğinde ilgili Yorumlar silinsin
+
+            builder.HasMany<Report>() // User -> Reports
+                .WithOne() // Bir Kullanıcı birden çok Rapor yazabilir
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.Cascade); // Kullanıcı silindiğinde ilgili Raporlar silinsin
+
+            builder.HasMany<Vote>() // User -> Votes
+                .WithOne() // Bir Kullanıcı birden çok Oylama yapabilir
+                .HasForeignKey(v => v.UserId)
+                .OnDelete(DeleteBehavior.Cascade); // Kullanıcı silindiğinde ilgili Oylamalar silinsin
         }
     }
 }
