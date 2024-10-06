@@ -27,8 +27,11 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
 
         public async Task Create(CreateProblemDTO model)
         {
+
+
             var problem = _mapper.Map<Problem>(model);
-            await _problemRepository.CreateProblem(problem); // Asenkron isimlendirme
+        
+            await _problemRepository.CreateProblem(problem);
         }
 
         public async Task Update(UpdateProblemDTO problemDTO)
@@ -76,5 +79,6 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             return _mapper.Map<IEnumerable<ProblemVM>>(problems);
         }
 
+        
     }
 }

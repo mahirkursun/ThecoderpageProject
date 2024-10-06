@@ -10,12 +10,8 @@ using ThecoderpageProject.Domain.Entities;
 
 namespace ThecoderpageProject.Infrastructure.Context
 {
-    public class AppDbContext : IdentityDbContext
+    public class AppDbContext : IdentityDbContext<AppUser>
     {
-
-        public AppDbContext()
-        { }
-
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }
 
@@ -24,7 +20,6 @@ namespace ThecoderpageProject.Infrastructure.Context
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Problem> Problems { get; set; }
-        public new DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -33,6 +28,12 @@ namespace ThecoderpageProject.Infrastructure.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // AppUser'daki Role özelliğini string olarak saklıyoruz
+            builder.Entity<AppUser>()
+                .Property(u => u.Role)
+                .HasConversion<string>();
+
+            // IdentityRole verilerini ekliyoruz
             builder.Entity<IdentityRole>().HasData(
                 new IdentityRole
                 {
@@ -48,11 +49,11 @@ namespace ThecoderpageProject.Infrastructure.Context
                     NormalizedName = "USER",
                     ConcurrencyStamp = Guid.NewGuid().ToString()
                 }
-                );
+            );
 
-            
+            // Diğer model yapılandırmaları burada yapılabilir
 
-            //En altta kalsın.
+            // En altta kalsın
             base.OnModelCreating(builder);
         }
 

@@ -23,9 +23,12 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
 
         public async Task<Problem> CreateProblem(Problem problem)
         {
-            _context.Problems.Add(problem);
+            
+            await Problems.AddAsync(problem);
             await _context.SaveChangesAsync();
             return problem;
+
+
         }
 
         public async Task<Problem> UpdateProblem(Problem problem)
@@ -71,6 +74,6 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
         }
 
 
-        
+
     }
 }

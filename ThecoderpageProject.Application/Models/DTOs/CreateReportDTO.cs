@@ -15,7 +15,7 @@ namespace ThecoderpageProject.Application.Models.DTOs
         public ReportReason ReportReason { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int? ProblemId { get; set; }
         public int? CommentId { get; set; }
     }

@@ -13,14 +13,14 @@ namespace ThecoderpageProject.Domain.Entities
         public VoteType VoteType { get; set; } 
         public DateTime VotedAt { get; set; }
  
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         public int ProblemId { get; set; }
 
         // Navigation property
 
         public virtual Problem Problem { get; set; }
-        public virtual User User { get; set; }
+        public virtual AppUser User { get; set; }
 
 
     }

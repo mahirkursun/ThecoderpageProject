@@ -39,7 +39,7 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
                 .HasForeignKey(r => r.CommentId)
                 .OnDelete(DeleteBehavior.Cascade); // Yorum silindiğinde ilgili Raporlar silinsin
 
-            builder.HasOne<User>() // Report -> User
+            builder.HasOne<AppUser>() // Report -> User
                 .WithMany() // Bir Kullanıcı birden çok Rapor yazabilir
                 .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.Cascade); // Kullanıcı silindiğinde ilgili Raporlar silinsin

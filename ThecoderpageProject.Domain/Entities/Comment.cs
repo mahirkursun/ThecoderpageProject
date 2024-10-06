@@ -12,14 +12,15 @@ namespace ThecoderpageProject.Domain.Entities
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
 
+        // Foreign key to AppUser
+        public string UserId { get; set; }
 
-        public int UserId { get; set; }
+        // Foreign key to Problem
         public int ProblemId { get; set; }
 
-        // Navigation property
-
+        // Navigation properties
         public virtual Problem Problem { get; set; }
-        public virtual User User { get; set; }
+        public virtual AppUser User { get; set; }
 
 
     }

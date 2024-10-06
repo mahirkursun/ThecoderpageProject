@@ -30,10 +30,10 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
                 .HasForeignKey(v => v.ProblemId)
                 .OnDelete(DeleteBehavior.Cascade); // Problem silindiğinde ilgili Oylamalar silinsin
 
-            builder.HasOne<User>() // Vote -> User
+            builder.HasOne<AppUser>() // Vote -> User
                 .WithMany() // Bir Kullanıcı birden çok Oylama yapabilir
                 .HasForeignKey(v => v.UserId)
-                .OnDelete(DeleteBehavior.Cascade); // Kullanıcı silindiğinde ilgili Oylamalar silinsin
+                .OnDelete(DeleteBehavior.Restrict); // Kullanıcı silindiğinde ilgili Oylamalar silinsin
         }
     }
 }

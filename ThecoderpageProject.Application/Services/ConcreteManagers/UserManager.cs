@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,10 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
 {
     public class UserManager : IUserService
     {
-        private readonly IUserRepository<User> _userRepository;
+        private readonly IUserRepository<AppUser> _userRepository;
         private readonly IMapper _mapper; 
 
-        public UserManager(IUserRepository<User> userRepository, IMapper mapper)
+        public UserManager(IUserRepository<AppUser> userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mapper = mapper;
@@ -25,7 +26,7 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
 
         public async Task Create(CreateUserDTO user)
         {
-            var newUser = _mapper.Map<User>(user);
+            var newUser = _mapper.Map<AppUser>(user);
 
             // Ekstra loglama
             Console.WriteLine($"Kullanıcı ekleniyor: {newUser.FirstName} {newUser.LastName}");
@@ -42,19 +43,21 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             {
                 user.FirstName = userDTO.FirstName;
                 user.LastName = userDTO.LastName;
-                user.Role = userDTO.Role;
-                user.Username = userDTO.UserName;
+                user.Role = userDTO.Role; // Enum olarak rolü atıyoruz
+                user.UserName = userDTO.UserName;
                 user.Email = userDTO.Email;
+
                 // Şifre güncellemesi yapılacaksa, burada kontrol edilebilir:
-                if (userDTO.Password != null) { user.Password = userDTO.Password; }
+                if (userDTO.Password != null)
+                {
+                    user.PasswordHash = new PasswordHasher<AppUser>().HashPassword(user, userDTO.Password);
+                }
 
-
-
-                await _userRepository.UpdateUser(user); // Kullanıcıyı güncelle
+                await _userRepository.UpdateUser(user);
             }
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(string id)
         {
             var user = await _userRepository.GetUserById(id); // Kullanıcıyı ID ile bul
             if (user != null)
@@ -73,7 +76,7 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             return _mapper.Map<IEnumerable<UserVM>>(users); // VM'e dönüştür
         }
 
-        public async Task<UpdateUserDTO> GetUserById(int id)
+        public async Task<UpdateUserDTO> GetUserById(string id)
         {
             var user = await _userRepository.GetUserById(id);
             if (user == null)

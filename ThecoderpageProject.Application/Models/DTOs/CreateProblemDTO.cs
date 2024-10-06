@@ -20,9 +20,8 @@ namespace ThecoderpageProject.Application.Models.DTOs
         public string Description { get; set; }
         public ProblemStatus Status { get; set; }
 
-
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         [Required(ErrorMessage ="Bir kategori seçilmesi zorunludur.")]
         public int CategoryId { get; set; }

@@ -28,7 +28,7 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             await _voteRepository.AddVote(vote);
         }
 
-        public async Task<Vote> GetVoteByUserIdAndProblemId(int userId, int problemId)
+        public async Task<Vote> GetVoteByUserIdAndProblemId(string userId, int problemId)
         {
             return await _voteRepository.GetVoteByUserIdAndProblemId(userId, problemId);
         }

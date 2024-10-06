@@ -11,7 +11,7 @@ namespace ThecoderpageProject.Application.Services.AbstractServices
 {
     public interface IVoteService
     {
-        Task<Vote> GetVoteByUserIdAndProblemId(int userId, int problemId);
+        Task<Vote> GetVoteByUserIdAndProblemId(string userId, int problemId);
         Task AddVote(Vote vote);
         Task UpdateVote(Vote vote);
         Task RemoveVote(int voteId);

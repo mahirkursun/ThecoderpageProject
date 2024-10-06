@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Security.Claims;
 using ThecoderpageProject.Application.Models.DTOs;
 using ThecoderpageProject.Application.Models.VMs;
 using ThecoderpageProject.Application.Services.AbstractServices;
@@ -13,12 +14,14 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         private readonly IProblemService _problemService;
         private readonly IVoteService _voteService;
         private readonly ICategoryService _categoryService;
+        private readonly IUserService _userService;
 
-        public ProblemController(IProblemService problemService, IVoteService voteService,ICategoryService categoryService) // Update constructor
+        public ProblemController(IProblemService problemService, IVoteService voteService,ICategoryService categoryService, IUserService userService) // Update constructor
         {
             _problemService = problemService;
             _voteService = voteService;
             _categoryService = categoryService;
+            _userService = userService;
 
         }
 
@@ -31,7 +34,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
                                                            // Kullanıcının ID'sini al
             /*ÖNEMLİ */
             /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-            var userId = 1; // Örnek olarak 1 numaralı kullanıcıyı al
+            var userId = "1"; // Örnek olarak 1 numaralı kullanıcıyı al
 
             foreach (var problem in problems)
             {
@@ -64,7 +67,8 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateProblemDTO problemDTO)
         {
-           
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            problemDTO.UserId = userId;
 
             await _problemService.Create(problemDTO);
             TempData["Success"] = $"{problemDTO.Title} başarıyla eklendi";

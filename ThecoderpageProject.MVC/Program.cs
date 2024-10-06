@@ -1,7 +1,9 @@
 
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using ThecoderpageProject.Application.AutoMapper;
 using ThecoderpageProject.Application.IoC;
 using ThecoderpageProject.Application.Services.AbstractServices;
@@ -24,20 +26,32 @@ namespace ThecoderpageProject.MVC
             builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 
-            
+
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging().LogTo(Console.WriteLine, LogLevel.Information);
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
             //Identity Configuration burada yapýlacak.
+            // Register Identity services
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 6;
+                options.Password.RequireDigit = true;
+            })
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+
+
+
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
             //Autofac için.
             builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
             {
                 builder.RegisterModule(new DependencyResolver());
-               
+
             }); //IoC klasöründeki DependencyResolver sýnýfý burada configurasyon olarak algýlasýn istediðimiz için.
 
             //ConfigureServices:
@@ -49,13 +63,13 @@ namespace ThecoderpageProject.MVC
             builder.Services.AddScoped<IReportService, ReportManager>();
             builder.Services.AddScoped<IVoteService, VoteManager>();
 
-            builder.Services.AddScoped<IUserRepository<User>, UserRepository>();
+            builder.Services.AddScoped<IUserRepository<AppUser>, UserRepository>();
             builder.Services.AddScoped<IProblemRepository<Problem>, ProblemRepository>();
             builder.Services.AddScoped<ICommentRepository<Comment>, CommentRepository>();
             builder.Services.AddScoped<ICategoryRepository<Category>, CategoryRepository>();
             builder.Services.AddScoped<IReportRepository<Report>, ReportRepository>();
             builder.Services.AddScoped<IVoteRepository<Vote>, VoteRepository>();
-          
+
 
 
 

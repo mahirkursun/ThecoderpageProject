@@ -14,18 +14,16 @@ namespace ThecoderpageProject.Domain.Entities
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
-        public int UserId { get; set; }
+
+        // Foreign key to AppUser
+        public string UserId { get; set; }
+
         public ProblemStatus Status { get; set; }
         public int CategoryId { get; set; }
 
-
-
-        // Navigation property
-
+        // Navigation properties
         public virtual ICollection<Comment> Comments { get; set; }
-
-
-        public virtual User User { get; set; }
+        public virtual AppUser User { get; set; } // Referencing AppUser
         public virtual Category Category { get; set; }
     }
 }

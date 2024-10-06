@@ -9,9 +9,9 @@ using ThecoderpageProject.Domain.Entities;
 
 namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
 {
-    public class UserConfig : IEntityTypeConfiguration<User>
+    public class UserConfig : IEntityTypeConfiguration<AppUser>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<AppUser> builder)
         {
             builder.ToTable("Users");
 
@@ -19,7 +19,7 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
             builder.HasKey(u => u.Id);
 
             // Properties
-            builder.Property(u => u.Username)
+            builder.Property(u => u.UserName)
                 .IsRequired()
                 .HasMaxLength(50);
 
@@ -40,7 +40,7 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
             builder.HasMany<Comment>() // User -> Comments
                 .WithOne() // Bir Kullanıcı birden çok Yorum yapabilir
                 .HasForeignKey(c => c.UserId)
-                .OnDelete(DeleteBehavior.Cascade); // Kullanıcı silindiğinde ilgili Yorumlar silinsin
+                .OnDelete(DeleteBehavior.Restrict); // Kullanıcı silindiğinde ilgili Yorumlar silinsin
 
             builder.HasMany<Report>() // User -> Reports
                 .WithOne() // Bir Kullanıcı birden çok Rapor yazabilir
@@ -50,7 +50,7 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
             builder.HasMany<Vote>() // User -> Votes
                 .WithOne() // Bir Kullanıcı birden çok Oylama yapabilir
                 .HasForeignKey(v => v.UserId)
-                .OnDelete(DeleteBehavior.Cascade); // Kullanıcı silindiğinde ilgili Oylamalar silinsin
+                .OnDelete(DeleteBehavior.Restrict); // Kullanıcı silindiğinde ilgili Oylamalar silinsin
         }
     }
 }

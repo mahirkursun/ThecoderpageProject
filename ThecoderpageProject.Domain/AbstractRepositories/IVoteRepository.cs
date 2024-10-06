@@ -10,7 +10,7 @@ namespace ThecoderpageProject.Domain.AbstractRepositories
     public interface IVoteRepository<T> where T : Vote
     {
         Task AddVote(T vote);
-        Task<T> GetVoteByUserIdAndProblemId(int userId, int problemId);
+        Task<T> GetVoteByUserIdAndProblemId(string userId, int problemId);
         Task RemoveVote(int voteId);
         Task UpdateVote(T vote);
     }

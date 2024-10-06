@@ -17,13 +17,13 @@ namespace ThecoderpageProject.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<AppUser>> GetUser(string id)
         {
             var user = await _context.Users.FindAsync(id);
 
@@ -36,7 +36,7 @@ namespace ThecoderpageProject.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<AppUser>> PostUser(AppUser user)
         {
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -46,7 +46,7 @@ namespace ThecoderpageProject.API.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutUser(string id, AppUser user)
         {
             if (id != user.Id)
             {
@@ -76,7 +76,7 @@ namespace ThecoderpageProject.API.Controllers
         
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteUser(string id)
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null)
@@ -90,7 +90,7 @@ namespace ThecoderpageProject.API.Controllers
             return NoContent();
         }
 
-        private bool UserExists(int id)
+        private bool UserExists(string id)
         {
             return _context.Users.Any(e => e.Id == id);
         }

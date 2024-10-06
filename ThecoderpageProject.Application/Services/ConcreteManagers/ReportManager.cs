@@ -31,7 +31,7 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
                 CommentId = model.CommentId,
                 ReportReason = model.ReportReason,
                 ReportedAt = DateTime.UtcNow,
-                UserId = 1
+                UserId = "1"
             };
 
             await _reportRepository.CreateReport(report);

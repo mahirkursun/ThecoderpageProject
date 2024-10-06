@@ -13,7 +13,7 @@ namespace ThecoderpageProject.Application.Models.VMs
         public ReportReason ReportReason { get; set; }
         public DateTime ReportedAt { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int? ProblemId { get; set; }
         public int? CommentId { get; set; }
     }

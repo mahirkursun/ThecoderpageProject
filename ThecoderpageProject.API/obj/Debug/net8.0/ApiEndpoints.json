@@ -445,7 +445,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ThecoderpageProject.Domain.Entities.User, ThecoderpageProject.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[ThecoderpageProject.Domain.Entities.AppUser, ThecoderpageProject.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -465,13 +465,13 @@
     "Parameters": [
       {
         "Name": "user",
-        "Type": "ThecoderpageProject.Domain.Entities.User",
+        "Type": "ThecoderpageProject.Domain.Entities.AppUser",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ThecoderpageProject.Domain.Entities.User",
+        "Type": "ThecoderpageProject.Domain.Entities.AppUser",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -491,13 +491,13 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.Int32",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ThecoderpageProject.Domain.Entities.User",
+        "Type": "ThecoderpageProject.Domain.Entities.AppUser",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -517,12 +517,12 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.Int32",
+        "Type": "System.String",
         "IsRequired": true
       },
       {
         "Name": "user",
-        "Type": "ThecoderpageProject.Domain.Entities.User",
+        "Type": "ThecoderpageProject.Domain.Entities.AppUser",
         "IsRequired": true
       }
     ],
@@ -538,7 +538,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.Int32",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -652,26 +652,5 @@
       }
     ],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ThecoderpageProject.API.Controllers.WeatherForecastController",
-    "Method": "Get",
-    "RelativePath": "WeatherForecast",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[ThecoderpageProject.API.WeatherForecast, ThecoderpageProject.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ],
-    "EndpointName": "GetWeatherForecast"
   }
 ]

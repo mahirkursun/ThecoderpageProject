@@ -7,12 +7,12 @@ using ThecoderpageProject.Domain.Entities;
 
 namespace ThecoderpageProject.Domain.AbstractRepositories
 {
-    public interface IUserRepository<T> where T : User
+    public interface IUserRepository<T> where T : AppUser
     {
         Task<T> CreateUser(T user);
-        Task<T> GetUserById(int id);
+        Task<T> GetUserById(string id);
         Task<IEnumerable<T>> GetUsers();
         Task<T> UpdateUser(T user);
-        Task<T> DeleteUser(int id);
+        Task<T> DeleteUser(string id);
     }
 }

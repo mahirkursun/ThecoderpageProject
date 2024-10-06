@@ -17,7 +17,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
 
         // **UpVote** işlemi
         [HttpPost]
-        public async Task<IActionResult> UpVote(int problemId, int userId)
+        public async Task<IActionResult> UpVote(int problemId, string userId)
         {
             var existingVote = await _voteService.GetVoteByUserIdAndProblemId(userId, problemId);
 
@@ -56,7 +56,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
 
         // **DownVote** işlemi
         [HttpPost]
-        public async Task<IActionResult> DownVote(int problemId, int userId)
+        public async Task<IActionResult> DownVote(int problemId, string userId)
         {
             var existingVote = await _voteService.GetVoteByUserIdAndProblemId(userId, problemId);
 
@@ -94,7 +94,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RemoveVote(int problemId, int userId)
+        public async Task<IActionResult> RemoveVote(int problemId, string userId)
         {
             var existingVote = await _voteService.GetVoteByUserIdAndProblemId(userId, problemId);
 

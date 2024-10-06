@@ -21,7 +21,6 @@ C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\obj\Debu
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.ThecoderpageProject.MVC.props
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.ThecoderpageProject.MVC.props
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\obj\Debug\net8.0\scopedcss\bundle\ThecoderpageProject.MVC.styles.css
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\obj\Debug\net8.0\scopedcss\projectbundle\ThecoderpageProject.MVC.bundle.scp.css
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\obj\Debug\net8.0\ThecoderpageProject.MVC.dll
@@ -574,3 +573,9 @@ C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\bin\Debu
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\obj\Debug\net8.0\scopedcss\Areas\Admin\Views\Shared\_AdminLayout.cshtml.rz.scp.css
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\obj\Debug\net8.0\scopedcss\Areas\User\Views\Shared\_UserLayout.cshtml.rz.scp.css
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\bin\Debug\net8.0\EntityFramework.SqlServer.dll
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\bin\Debug\net8.0\EntityFramework.dll
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\bin\Debug\net8.0\Microsoft.AspNet.Identity.Core.dll
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\bin\Debug\net8.0\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\obj\Debug\net8.0\scopedcss\Areas\Identity\Views\Shared\_IdentityLayout.cshtml.rz.scp.css
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.MVC\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css

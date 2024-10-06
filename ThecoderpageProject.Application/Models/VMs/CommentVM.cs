@@ -12,6 +12,6 @@ namespace ThecoderpageProject.Application.Models.VMs
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
         public int ProblemId { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
     }
 }

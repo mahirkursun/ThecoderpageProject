@@ -11,62 +11,43 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
+        private readonly string uri = "https://localhost:7244";
 
         public UserController(IUserService userService)
         {
             _userService = userService;
         }
 
-        string uri = "https://localhost:7244";
-
-        // Admin/User/Index // çalışmıyor: 404 not found hatası veriyor. Çünkü bu action'ın bir view'i yok.
+        // Admin/User/Index
         public async Task<IActionResult> Index()
         {
-            
             var users = await _userService.GetAll();
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync($"{uri}/api/User"))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    users = JsonConvert.DeserializeObject<List<UserVM>>(apiResponse);
-                }
-            }
             return View(users);
         }
 
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-
         // Admin/User/Create
+        public IActionResult Create() => View();
+
         [HttpPost]
         public async Task<IActionResult> Create(CreateUserDTO user)
         {
-            //kayıt işlemi
             if (!ModelState.IsValid)
             {
                 TempData["Error"] = "Girdiğiniz verileri kontrol edin";
-                return View(user); // Hatalı veri girildiyse formu tekrar göster
+                return View(user);
             }
 
             await _userService.Create(user);
             TempData["Success"] = $"{user.FirstName} {user.LastName} başarıyla eklendi";
             return RedirectToAction(nameof(Index));
-
         }
 
         // Admin/User/Update/5
         [HttpGet]
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update(string id)
         {
-            var user = await _userService.GetUserById(id); // Kullanıcıyı id ile al
-            if (user == null)
-            {
-                return NotFound();
-            }
+            var user = await _userService.GetUserById(id);
+            if (user == null) return NotFound();
 
             var userDTO = new UpdateUserDTO
             {
@@ -76,76 +57,32 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
                 Role = user.Role,
                 UserName = user.UserName,
                 Email = user.Email,
-                Password = user.Password
-                
+                // Password alanını isteğe bağlı hale getirebilirsiniz
             };
 
-            return View(userDTO); // Güncellenmiş kullanıcı bilgileri ile view'i döndür
+            return View(userDTO);
         }
 
-        // Admin/User/Update/5
         [HttpPost]
-        public async Task<IActionResult> Update(int id, UpdateUserDTO userDTO)
+        public async Task<IActionResult> Update(string id, UpdateUserDTO userDTO)
         {
             if (!ModelState.IsValid)
             {
                 TempData["Error"] = "Lütfen girdiğiniz verileri kontrol edin.";
-                return View(userDTO); // Hatalı veri varsa formu tekrar göster
+                return View(userDTO);
             }
 
-            await _userService.Update(userDTO); // Kullanıcıyı güncelle
+            await _userService.Update(userDTO);
             TempData["Success"] = $"{userDTO.FirstName} {userDTO.LastName} başarıyla güncellendi";
-            return RedirectToAction(nameof(Index)); // Güncelleme sonrası liste sayfasına dön
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var user = await _userService.GetUserById(id); // Kullanıcıyı id ile al
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            var userDTO = new UpdateUserDTO
-            {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Role = user.Role,
-                UserName = user.UserName,
-                Email = user.Email,
-                Password = user.Password
-
-            };
-
-            return View(userDTO); // Kullanıcıyı silmek için onay sayfasını döndür
+            return RedirectToAction(nameof(Index));
         }
 
         // Admin/User/Delete/5
-        [HttpPost]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var user = await _userService.GetUserById(id); // Kullanıcıyı id ile al
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            await _userService.Delete(id); // Kullanıcıyı sil
-            TempData["Success"] = $"{user.FirstName} {user.LastName} başarıyla silindi.";
-            return RedirectToAction(nameof(Index)); // Silme sonrası liste sayfasına dön
-        }
-
-        //Details
         [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Delete(string id)
         {
-            var user = await _userService.GetUserById(id); // Kullanıcıyı id ile al
-            if (user == null)
-            {
-                return NotFound();
-            }
+            var user = await _userService.GetUserById(id);
+            if (user == null) return NotFound();
 
             var userDTO = new UpdateUserDTO
             {
@@ -155,15 +92,42 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
                 Role = user.Role,
                 UserName = user.UserName,
                 Email = user.Email,
-                Password = user.Password
-
+                // Password alanını isteğe bağlı hale getirebilirsiniz
             };
 
-            return View(userDTO); // Kullanıcıyı silmek için onay sayfasını döndür
+            return View(userDTO);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var user = await _userService.GetUserById(id);
+            if (user == null) return NotFound();
 
+            await _userService.Delete(id);
+            TempData["Success"] = $"{user.FirstName} {user.LastName} başarıyla silindi.";
+            return RedirectToAction(nameof(Index));
+        }
 
+        // Admin/User/Details/5
+        [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            var user = await _userService.GetUserById(id);
+            if (user == null) return NotFound();
 
+            var userDTO = new UpdateUserDTO
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Role = user.Role,
+                UserName = user.UserName,
+                Email = user.Email,
+                // Password alanını isteğe bağlı hale getirebilirsiniz
+            };
+
+            return View(userDTO);
+        }
     }
 }

@@ -10,3 +10,4 @@ C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\obj\D
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\obj\Debug\net8.0\refint\ThecoderpageProject.Domain.dll
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\obj\Debug\net8.0\ThecoderpageProject.Domain.pdb
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\obj\Debug\net8.0\ref\ThecoderpageProject.Domain.dll
+C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.Domain\obj\Debug\net8.0\ThecoderpageProject.Domain.csproj.AssemblyReference.cache

@@ -32,7 +32,7 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
                 .HasConversion<string>();
 
             // Relationships
-            builder.HasOne<User>() // Problem -> User
+            builder.HasOne<AppUser>() // Problem -> User
                 .WithMany() // Bir Kullanıcı birden çok Problem oluşturabilir
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade); // Kullanıcı silindiğinde ilgili Problemler silinsin

@@ -25,7 +25,7 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Vote> GetVoteByUserIdAndProblemId(int userId, int problemId)
+        public async Task<Vote> GetVoteByUserIdAndProblemId(string userId, int problemId)
         {
             return await _context.Votes.FirstOrDefaultAsync(v => v.UserId == userId && v.ProblemId == problemId);
         }

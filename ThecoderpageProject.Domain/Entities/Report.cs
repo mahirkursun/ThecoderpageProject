@@ -13,7 +13,7 @@ namespace ThecoderpageProject.Domain.Entities
         public ReportReason ReportReason { get; set; }
         public DateTime ReportedAt { get; set; }= DateTime.Now;
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
 
         public int? ProblemId { get; set; }
@@ -22,7 +22,7 @@ namespace ThecoderpageProject.Domain.Entities
         // Navigation property
 
         public virtual Problem Problem { get; set; }
-        public virtual User User { get; set; }
+        public virtual AppUser User { get; set; }
         public virtual Comment Comment { get; set; }
 
 

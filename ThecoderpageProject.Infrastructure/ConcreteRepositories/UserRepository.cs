@@ -12,7 +12,7 @@ using static ThecoderpageProject.Infrastructure.ConcreteRepositories.UserReposit
 namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
 {
 
-    public class UserRepository : IUserRepository<User>
+    public class UserRepository : IUserRepository<AppUser>
     {
    
 
@@ -22,14 +22,14 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
         {
             _context = context;
         }
-        private  DbSet<User> Users =>_context.Users; // Change this line
-        public async Task<User> CreateUser(User user)
+        private  DbSet<AppUser> Users =>_context.Users; // Change this line
+        public async Task<AppUser> CreateUser(AppUser user)
         {
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return user;
         }
-        public async Task<User> DeleteUser(int id)
+        public async Task<AppUser> DeleteUser(string id)
         {
             var user = await Users.FirstOrDefaultAsync(u => u.Id == id);
             if (user != null)
@@ -40,7 +40,7 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
             return user;
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<AppUser> GetUserById(string id)
         {
             if (_context.Users == null) // Null kontrolü
             {
@@ -51,12 +51,12 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
             return user;
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<AppUser>> GetUsers()
         {
             return await Users.ToListAsync();
         }
 
-        public async Task<User> UpdateUser(User user)
+        public async Task<AppUser> UpdateUser(AppUser user)
         {
             _context.Users.Update(user);
             await _context.SaveChangesAsync();

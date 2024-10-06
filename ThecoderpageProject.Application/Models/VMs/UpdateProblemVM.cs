@@ -16,7 +16,7 @@ namespace ThecoderpageProject.Application.Models.VMs
         public ProblemStatus Status { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int CategoryId { get; set; }
 
         public VoteType VoteType { get; set; }
