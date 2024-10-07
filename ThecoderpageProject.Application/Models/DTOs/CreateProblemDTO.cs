@@ -26,7 +26,7 @@ namespace ThecoderpageProject.Application.Models.DTOs
         [Required(ErrorMessage ="Bir kategori seçilmesi zorunludur.")]
         public int CategoryId { get; set; }
 
-        public VoteType VoteType { get; set; }
+        public VoteType? UserVoteType { get; set; }
 
         public List<CategoryVM> Categories { get; set; }
 

@@ -25,22 +25,6 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
             return View(users);
         }
 
-        // Admin/User/Create
-        public IActionResult Create() => View();
-
-        [HttpPost]
-        public async Task<IActionResult> Create(CreateUserDTO user)
-        {
-            if (!ModelState.IsValid)
-            {
-                TempData["Error"] = "Girdiğiniz verileri kontrol edin";
-                return View(user);
-            }
-
-            await _userService.Create(user);
-            TempData["Success"] = $"{user.FirstName} {user.LastName} başarıyla eklendi";
-            return RedirectToAction(nameof(Index));
-        }
 
         // Admin/User/Update/5
         [HttpGet]

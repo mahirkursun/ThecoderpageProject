@@ -17,7 +17,7 @@ namespace ThecoderpageProject.Application.Models.DTOs
         public string UserId { get; set; }
         public int CategoryId { get; set; }
 
-        public VoteType VoteType { get; set; }
+        public VoteType? UserVoteTypeVoteType { get; set; }
 
 
     }

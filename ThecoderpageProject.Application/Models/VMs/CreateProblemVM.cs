@@ -20,6 +20,6 @@ namespace ThecoderpageProject.Application.Models.VMs
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        public VoteType VoteType { get; set; }
+        public VoteType? UserVoteType { get; set; }
     }
 }

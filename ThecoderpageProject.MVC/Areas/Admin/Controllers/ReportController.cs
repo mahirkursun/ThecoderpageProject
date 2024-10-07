@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Org.BouncyCastle.Asn1.X509.Qualified;
 using System.Data;
+using System.Security.Claims;
 using ThecoderpageProject.Application.Models.DTOs;
 using ThecoderpageProject.Application.Services.AbstractServices;
 
@@ -22,6 +23,8 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var reports = await _reportService.GetAllReports();
+
+
             return View(reports);
         }
 
@@ -39,38 +42,31 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateReportDTO model)
+        public async Task<IActionResult> Create(CreateReportDTO reportDTO)
         {
-            if (!ModelState.IsValid)
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            reportDTO.UserId = userId;
+
+            if (reportDTO.ProblemId > 0)
             {
-                TempData["Error"] = "Lütfen geçerli bir rapor nedeni seçin.";
-                return View(model);
+                reportDTO.CommentId = null; // Eğer Problem varsa Comment 0 olmalı
             }
-
-
-
-
-
-            if (model.ProblemId > 0)
+            else if (reportDTO.CommentId > 0)
             {
-                model.CommentId = null; // Eğer Problem varsa Comment 0 olmalı
-            }
-            else if (model.CommentId > 0)
-            {
-                model.ProblemId = null; // Eğer Comment varsa Problem 0 olmalı
+                reportDTO.ProblemId = null; // Eğer Comment varsa Problem 0 olmalı
             }
             else
             {
                 TempData["Error"] = "Lütfen ya bir Problem ya da bir Comment seçin.";
-                return View(model);
+                return View(reportDTO);
             }
 
             // Report kaydını oluştur
-            await _reportService.CreateReport(model);
+            await _reportService.CreateReport(reportDTO);
             TempData["Success"] = "Rapor başarıyla oluşturuldu.";
 
             // Comment rapor edilmişse CommentController'a yönlendir
-            if (model.CommentId.HasValue)
+            if (reportDTO.CommentId.HasValue)
             {
                 return RedirectToAction("Index", "Comment");
             }

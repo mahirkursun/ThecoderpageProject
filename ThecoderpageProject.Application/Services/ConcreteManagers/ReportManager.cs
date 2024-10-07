@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using ThecoderpageProject.Application.Models.DTOs;
@@ -31,7 +33,8 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
                 CommentId = model.CommentId,
                 ReportReason = model.ReportReason,
                 ReportedAt = DateTime.UtcNow,
-                UserId = "1"
+                UserId = model.UserId
+                
             };
 
             await _reportRepository.CreateReport(report);

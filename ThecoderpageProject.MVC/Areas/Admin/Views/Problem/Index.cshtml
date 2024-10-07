@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ProblemVM>
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<ProblemVM>
 
 @{
     ViewData["Title"] = "Index";
@@ -61,24 +62,19 @@
                     @Html.DisplayFor(modelItem => item.UserVoteType)
                 </td>
 
-                @*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*@
-                @*input value'su    @User.Identity.GetUserId() yerine şimdilik UserId=1 girildi. Daha sonra oturum açan kullanıcıya göre güncellenecek.*@
+
                 <td>
+                   
                     @if (item.UserVoteType == null)
                     {
                         // Kullanıcı oy vermemişse
                         <form asp-controller="Vote" asp-action="UpVote" method="post" style="display:inline;">
                             <input type="hidden" name="problemId" value="@item.Id" />
-
-                            <input type="hidden" name="userId" value="1" />
-
+                        
                             <button type="submit" class="btn btn-success">UpVote</button>
                         </form>
                         <form asp-controller="Vote" asp-action="DownVote" method="post" style="display:inline;">
-                            <input type="hidden" name="problemId" value="@item.Id" />
-
-                            <input type="hidden" name="userId" value="1" />
-
+                            <input type="hidden" name="problemId" value="@item.Id" />       
                             <button type="submit" class="btn btn-danger">DownVote</button>
                         </form>
                     }
@@ -88,8 +84,7 @@
                         <form asp-controller="Vote" asp-action="RemoveVote" method="post" style="display:inline;">
                             <input type="hidden" name="problemId" value="@item.Id" />
 
-                            <input type="hidden" name="userId" value="1" />
-
+                            
                             <button type="submit" class="btn btn-warning">Remove UpVote</button>
                         </form>
                     }
@@ -99,7 +94,7 @@
                         <form asp-controller="Vote" asp-action="RemoveVote" method="post" style="display:inline;">
                             <input type="hidden" name="problemId" value="@item.Id" />
 
-                            <input type="hidden" name="userId" value="1" />
+                         
 
                             <button type="submit" class="btn btn-warning">Remove DownVote</button>
                         </form>

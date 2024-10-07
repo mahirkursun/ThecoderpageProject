@@ -14,14 +14,14 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         private readonly IProblemService _problemService;
         private readonly IVoteService _voteService;
         private readonly ICategoryService _categoryService;
-        private readonly IUserService _userService;
+ 
 
-        public ProblemController(IProblemService problemService, IVoteService voteService,ICategoryService categoryService, IUserService userService) // Update constructor
+        public ProblemController(IProblemService problemService, IVoteService voteService,ICategoryService categoryService) // Update constructor
         {
             _problemService = problemService;
             _voteService = voteService;
             _categoryService = categoryService;
-            _userService = userService;
+       
 
         }
 
@@ -30,11 +30,11 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         // Admin/Problem/Index
         public async Task<IActionResult> Index()
         {
-            var problems = await _problemService.GetAll(); // Tüm problemleri al
-                                                           // Kullanıcının ID'sini al
+            var problems = await _problemService.GetAll(); 
+
             /*ÖNEMLİ */
             /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-            var userId = "1"; // Örnek olarak 1 numaralı kullanıcıyı al
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
 
             foreach (var problem in problems)
             {

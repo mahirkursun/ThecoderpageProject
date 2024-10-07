@@ -51,15 +51,15 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "09e56020-11a3-4ad8-88f7-392d8dcfd121",
-                            ConcurrencyStamp = "68f836d3-1666-4622-af81-6a2350f90898",
+                            Id = "1106311b-cf4a-4b87-980f-4acf8c5fe33c",
+                            ConcurrencyStamp = "ddd98498-b3d8-47a7-94dc-0b64882f6c55",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "4c3af862-8618-4daf-86a0-dce96ee1e28b",
-                            ConcurrencyStamp = "36805db3-774c-4cf6-9258-5d9f956d3bf3",
+                            Id = "e01e0103-55ab-4594-9583-a38fdee75c17",
+                            ConcurrencyStamp = "3c8a6b70-cfd9-4998-b910-0aa5b849df6f",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -324,6 +324,9 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("VoteType")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

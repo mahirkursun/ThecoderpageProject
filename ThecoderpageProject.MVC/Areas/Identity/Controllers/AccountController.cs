@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using ThecoderpageProject.Application.Models.VMs;
 using ThecoderpageProject.Domain.Entities;
 using ThecoderpageProject.Domain.Enums;
@@ -35,9 +37,13 @@ namespace ThecoderpageProject.MVC.Areas.Identity.Controllers
                 var user = await _userManager.FindByNameAsync(loginVM.UserName);
                 if (user != null)
                 {
-                    var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password,false,  false);
+                    var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
                     if (result.Succeeded)
                     {
+
+
+
+
                         // Kullanıcı girişi başarılıysa, yönlendirme yapabilirsiniz,
                         //Areas user role
                         if (user.Role == UserRole.Admin)
@@ -81,8 +87,7 @@ namespace ThecoderpageProject.MVC.Areas.Identity.Controllers
                     Email = registerVM.Email,
                     FirstName = registerVM.FirstName,
                     LastName = registerVM.LastName,
-                    Role = registerVM.Role,
-                    PasswordHash = registerVM.Password,
+                    Role = registerVM.Role
 
                 };
 

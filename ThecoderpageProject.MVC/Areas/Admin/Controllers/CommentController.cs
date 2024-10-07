@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Security.Claims;
 using ThecoderpageProject.Application.Models.DTOs;
 using ThecoderpageProject.Application.Models.VMs;
 using ThecoderpageProject.Application.Services.AbstractServices;
@@ -44,11 +45,10 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateCommentDTO commentDTO)
         {
-            if (!ModelState.IsValid)
-            {
-                TempData["Error"] = "Girdiğiniz verileri kontrol edin";
-                return View(commentDTO);
-            }
+            
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            commentDTO.UserId = userId;
+            commentDTO.ProblemId = 1;// Şimdilik 1 girildi
 
             await _commentService.Create(commentDTO);
             TempData["Success"] = $"{commentDTO.Content} başarıyla eklendi";

@@ -185,7 +185,8 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    VoteType = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -298,8 +299,8 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "09e56020-11a3-4ad8-88f7-392d8dcfd121", "68f836d3-1666-4622-af81-6a2350f90898", "Admin", "ADMIN" },
-                    { "4c3af862-8618-4daf-86a0-dce96ee1e28b", "36805db3-774c-4cf6-9258-5d9f956d3bf3", "User", "USER" }
+                    { "1106311b-cf4a-4b87-980f-4acf8c5fe33c", "ddd98498-b3d8-47a7-94dc-0b64882f6c55", "Admin", "ADMIN" },
+                    { "e01e0103-55ab-4594-9583-a38fdee75c17", "3c8a6b70-cfd9-4998-b910-0aa5b849df6f", "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -24,17 +24,7 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             _mapper = mapper;
         }
 
-        public async Task Create(CreateUserDTO user)
-        {
-            var newUser = _mapper.Map<AppUser>(user);
-
-            // Ekstra loglama
-            Console.WriteLine($"Kullanıcı ekleniyor: {newUser.FirstName} {newUser.LastName}");
-
-            await _userRepository.CreateUser(newUser);
-            Console.WriteLine("Kullanıcı eklendi.");
-
-        }
+       
 
         public async Task Update(UpdateUserDTO userDTO)
         {

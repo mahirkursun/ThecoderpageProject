@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Security.Claims;
 using ThecoderpageProject.Application.Models.DTOs;
 using ThecoderpageProject.Application.Models.VMs;
 using ThecoderpageProject.Application.Services.AbstractServices;
@@ -26,11 +27,11 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
         // User/Problem/Index
         public async Task<IActionResult> Index()
         {
-            var problems = await _problemService.GetAll(); // Tüm problemleri al
-                                                           // Kullanıcının ID'sini al
+            var problems = await _problemService.GetAll(); 
+
             /*ÖNEMLİ */
             /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-            var userId = "1"; // Örnek olarak 1 numaralı kullanıcıyı al
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
 
             foreach (var problem in problems)
             {
@@ -63,6 +64,8 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateProblemDTO problemDTO)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            problemDTO.UserId = userId;
 
             await _problemService.Create(problemDTO);
             TempData["Success"] = $"{problemDTO.Title} başarıyla eklendi";

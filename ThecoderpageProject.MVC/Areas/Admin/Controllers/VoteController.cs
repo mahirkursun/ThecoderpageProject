@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using ThecoderpageProject.Application.Services.AbstractServices;
 using ThecoderpageProject.Domain.Entities;
 using ThecoderpageProject.Domain.Enums;
@@ -9,17 +12,23 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
     public class VoteController : Controller
     {
         private readonly IVoteService _voteService;
+        private readonly UserManager<AppUser> _userManager;
 
-        public VoteController(IVoteService voteService)
+        public VoteController(IVoteService voteService, UserManager<AppUser> userManager)
         {
             _voteService = voteService;
+            _userManager = userManager;
         }
 
         // **UpVote** işlemi
         [HttpPost]
-        public async Task<IActionResult> UpVote(int problemId, string userId)
+        public async Task<IActionResult> UpVote(int problemId)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+         
+
             var existingVote = await _voteService.GetVoteByUserIdAndProblemId(userId, problemId);
+            
 
             if (existingVote != null)
             {
@@ -56,9 +65,12 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
 
         // **DownVote** işlemi
         [HttpPost]
-        public async Task<IActionResult> DownVote(int problemId, string userId)
+        public async Task<IActionResult> DownVote(int problemId)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var existingVote = await _voteService.GetVoteByUserIdAndProblemId(userId, problemId);
+            
 
             if (existingVote != null)
             {
@@ -94,8 +106,10 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RemoveVote(int problemId, string userId)
+        public async Task<IActionResult> RemoveVote(int problemId)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var existingVote = await _voteService.GetVoteByUserIdAndProblemId(userId, problemId);
 
             if (existingVote != null)
