@@ -41,18 +41,20 @@ namespace ThecoderpageProject.MVC.Areas.Identity.Controllers
                     if (result.Succeeded)
                     {
 
-
+                        //
 
 
                         // Kullanıcı girişi başarılıysa, yönlendirme yapabilirsiniz,
                         //Areas user role
                         if (user.Role == UserRole.Admin)
                         {
+                           
                             // Admin paneline yönlendir Problem listesine
                             return RedirectToAction("Index", "Home", new { area = "Admin/Problem" });
                         }
                         else
                         {
+                            
                             return RedirectToAction("Index", "Home", new { area = "User/Problem" });
                         }
 
@@ -116,7 +118,11 @@ namespace ThecoderpageProject.MVC.Areas.Identity.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home", new { area = "" });
+
+            // Identity/Account/Login
+            return RedirectToAction("Login", "Account");
+
+
         }
     }
 }
