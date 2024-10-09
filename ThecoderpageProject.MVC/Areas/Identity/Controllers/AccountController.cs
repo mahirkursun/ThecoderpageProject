@@ -118,9 +118,8 @@ namespace ThecoderpageProject.MVC.Areas.Identity.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-
-            // Identity/Account/Login
-            return RedirectToAction("Login", "Account");
+            // Kullanıcı çıkış yaptıktan sonra anasayfaya yönlendir. Linke gitme
+            return RedirectToAction("Index", "Home", new {area =""});
 
 
         }
