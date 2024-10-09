@@ -1,32 +1,33 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using ThecoderpageProject.Domain.Entities;
 using ThecoderpageProject.MVC.Models;
 
 namespace ThecoderpageProject.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<AppUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(UserManager<AppUser> userManager)
         {
-            _logger = logger;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
         {
-            return View();
-        }
+            var isAuthenticated = User.Identity.IsAuthenticated; // Kullanýcý giriþ yapmýþ mý?
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+            // Kullanýcý giriþ yapmamýþsa, kýsýtlamalarla anasayfaya yönlendir
+            if (!isAuthenticated)
+            {
+                ViewBag.Message = "Giriþ yapmadýnýz. Beðeni, yorum veya rapor oluþturamazsýnýz.";
+                return View(); // Giriþ yapmamýþ kullanýcý için anasayfa görünümü
+            }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            // Kullanýcý giriþ yapmýþsa, normal anasayfa görünümünü göster
+            return View(); // Giriþ yapmýþ kullanýcý için anasayfa görünümü
         }
     }
 }

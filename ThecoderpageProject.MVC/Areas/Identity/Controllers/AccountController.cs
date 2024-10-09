@@ -34,38 +34,38 @@ namespace ThecoderpageProject.MVC.Areas.Identity.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(loginVM.UserName);
-                if (user != null)
+
+                var result = await _signInManager.PasswordSignInAsync(loginVM.UserName, loginVM.Password, false, false);
+                if (result.Succeeded)
                 {
-                    var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
-                    if (result.Succeeded)
+
+                    var user = _userManager.FindByNameAsync(loginVM.UserName).Result;
+                    var roles = _userManager.GetRolesAsync(user).Result;
+
+
+                    // Kullanıcı girişi başarılıysa, yönlendirme yapabilirsiniz,
+                    //Areas user role
+                    if (user.Role == UserRole.Admin)
                     {
 
-                        //
-
-
-                        // Kullanıcı girişi başarılıysa, yönlendirme yapabilirsiniz,
-                        //Areas user role
-                        if (user.Role == UserRole.Admin)
-                        {
-                           
-                            // Admin paneline yönlendir Problem listesine
-                            return RedirectToAction("Index", "Home", new { area = "Admin/Problem" });
-                        }
-                        else
-                        {
-                            
-                            return RedirectToAction("Index", "Home", new { area = "User/Problem" });
-                        }
-
-
-
-
+                        // Admin paneline yönlendir Problem listesine
+                        return RedirectToAction("Index", "Problem", new { area = "Admin" });
                     }
+                    else
+                    {
+
+                        return RedirectToAction("Index", "Problem", new { area = "User" });
+                    }
+
+
+
+
                 }
+
                 ModelState.AddModelError(string.Empty, "Kullanıcı adı veya şifre yanlış.");
             }
-            return View(loginVM);
+            // Giriş başarısızsa veya kullanıcı rolü yoksa
+            return RedirectToAction("Index", "Home"); // Anasayfaya yönlendir
 
         }
 
