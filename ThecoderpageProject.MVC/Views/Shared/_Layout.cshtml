@@ -12,24 +12,26 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Thecoderpage</a>
+                <div class="navbar-header">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Thecoderpage</a>
+                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                    <!-- Sol tarafa yaslanan kısım -->
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="User" asp-controller="Problem" asp-action="Index">Problemler</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="User" asp-controller="Category" asp-action="Index">Kategoriler</a>
-                        </li>
-                        
+                        <!-- Burada başka menüler veya öğeler ekleyebilirsiniz -->
                     </ul>
-                    <ul class="navbar-nav">
+
+                    <!-- Ortalanmış arama kutusu -->
+                    <form class="d-flex mx-auto" style="width: 40%;">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </form>
+
+                    <!-- Sağa yaslanan oturum ve kullanıcı işlemleri -->
+                    <ul class="navbar-nav ms-auto">
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
@@ -51,6 +53,7 @@
                 </div>
             </div>
         </nav>
+
     </header>
     <div class="container mt-4">
         <main role="main" class="pb-3">

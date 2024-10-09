@@ -16,7 +16,8 @@ namespace ThecoderpageProject.Application.Services.AbstractServices
         Task<UpdateProblemDTO> GetProblemById(int id);
         Task Delete(int id);
 
-        Task<IEnumerable<ProblemVM>> GetAll(); 
+        Task<IEnumerable<ProblemVM>> GetAll();
+        Task<IEnumerable<ProblemVM>> GetProblemsByCategory(int categoryId);
 
     }
 }

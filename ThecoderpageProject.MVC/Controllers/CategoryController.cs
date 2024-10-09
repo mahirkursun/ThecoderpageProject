@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
 using ThecoderpageProject.Application.Models.VMs;
 using ThecoderpageProject.Application.Services.AbstractServices;
 
-namespace ThecoderpageProject.MVC.Areas.User.Controllers
+namespace ThecoderpageProject.MVC.Controllers
 {
-    [Area("User")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -17,10 +17,10 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
 
         string uri = "https://localhost:7244";
 
-        // GET: /Admin/Category/Index
+        // Tüm kategorileri getir
         public async Task<IActionResult> Categories()
         {
-            var categories = await _categoryService.GetCategories();// Tüm kategorileri al
+            var categories = await _categoryService.GetCategories();
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync($"{uri}/api/Category"))
@@ -32,8 +32,6 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
                 }
             }
             return PartialView("_CategoryPartialView", categories);
-
-
         }
     }
 }

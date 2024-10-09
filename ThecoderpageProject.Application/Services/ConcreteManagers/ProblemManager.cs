@@ -79,6 +79,12 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             return _mapper.Map<IEnumerable<ProblemVM>>(problems);
         }
 
-        
+        public Task<IEnumerable<ProblemVM>> GetProblemsByCategory(int categoryId)
+        {
+            var problems = _problemRepository.GetProblems().Result.Where(x => x.CategoryId == categoryId);
+            return Task.FromResult(_mapper.Map<IEnumerable<ProblemVM>>(problems));
+
+
+        }
     }
 }
