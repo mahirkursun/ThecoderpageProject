@@ -152,7 +152,3 @@ C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.API\bin\Debu
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.API\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.API\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.API\bin\Debug\net8.0\BouncyCastle.Crypto.dll
-C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.API\bin\Debug\net8.0\EntityFramework.SqlServer.dll
-C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.API\bin\Debug\net8.0\EntityFramework.dll
-C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.API\bin\Debug\net8.0\Microsoft.AspNet.Identity.Core.dll
-C:\Users\mahir\source\repos\ThecoderpageProject\ThecoderpageProject.API\bin\Debug\net8.0\Microsoft.AspNet.Identity.EntityFramework.dll

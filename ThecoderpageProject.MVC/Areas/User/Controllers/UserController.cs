@@ -9,7 +9,7 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-        private readonly string uri = "https://localhost:7244";
+     
 
         public UserController(IUserService userService)
         {

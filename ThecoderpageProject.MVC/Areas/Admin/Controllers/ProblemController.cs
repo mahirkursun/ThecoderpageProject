@@ -25,7 +25,6 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
 
         }
 
-        string uri = "https://localhost:7244";
 
         // Admin/Problem/Index
         public async Task<IActionResult> Index()

@@ -22,7 +22,6 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
 
         }
 
-        string uri = "https://localhost:7244";
 
         // User/Problem/Index
         public async Task<IActionResult> Index()
