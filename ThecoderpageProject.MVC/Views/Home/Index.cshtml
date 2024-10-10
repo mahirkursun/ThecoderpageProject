@@ -1,58 +1,54 @@
-﻿@{
+﻿@model HomeViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div id="category-list">
-    <!-- Problem listesi buraya yüklenecek -->
+<div class="row">
+    <!-- Kategoriler Listesi -->
+    <form method="get" action="/Home/Index" class="d-flex justify-content-center flex-wrap" style="width: 100%; margin: 0;">
+        <div class="d-inline-block" style="margin-right: 60px;">
+            <button type="submit" name="categoryId" value="all" class="btn d-flex align-items-center" style="border: none; padding: 0; text-transform: uppercase; max-width: 150px; background-color: transparent; margin-left: 30px;">
+                <img src="~/images/icons/@($"all.png")" width="50" height="50" class="mr-2" style="margin-right: 3px;" />
+                <span style="font-family: Segoe 'Segoe Print'; font-weight: bold; font-size: large;">All</span>
+            </button>
+        </div>
+        @foreach (var category in Model.Categories)
+        {
+            <div class="d-inline-block" style="margin-right: 60px;">
+                    <button type="submit" name="categoryId" value="@category.Id" class="btn d-flex align-items-center" style="border: none; padding: 0; text-transform: uppercase; max-width: 150px; background-color: transparent;">
+                    <img src="~/images/icons/@($"{category.Name}.png")" width="50" height="50" class="mr-2" style="margin-right: 3px;" />
+                    <span style="font-family: Segoe 'Segoe Print'; font-weight: bold; font-size: large;">@category.Name</span>
+                </button>
+            </div>
+        }
+    </form>
 </div>
-
-
-<div id="problem-list">
-    <!-- Problem listesi buraya yüklenecek -->
+<div class="d-flex justify-content-center mt-4">
+<!-- Problemler Listesi -->
+<table class="table mt-4" style="max-width: 70%;">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>CreatedAt</th>
+            <th>Status</th>
+            <th>UserId</th>
+            <th>CategoryId</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var problem in Model.Problems)
+        {
+                <tr>
+                    <td>@problem.Title</td>
+                    <td>@problem.Description</td>
+                    <td>@problem.CreatedAt.ToShortDateString()</td>
+                    <td>@problem.Status</td>
+                    <td>@problem.UserId</td>
+                    <td>@problem.CategoryId</td>
+                </tr>
+        }
+    </tbody>
+</table>
 </div>
-@section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // Problem listesi için AJAX çağrısı
-            $.ajax({
-                url: '@Url.Action("Problems", "Problem")',
-                type: 'GET',
-                success: function (data) {
-                    $('#problem-list').html(data);
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-            });
-
-            // Kategori listesi için AJAX çağrısı
-            $.ajax({
-                url: '@Url.Action("Categories", "Category")',
-                type: 'GET',
-                success: function (data) {
-                    $('#category-list').html(data);
-
-                    // Kategori butonlarına tıklandığında problem listesini güncelle
-                    $('.category-button').on('click', function () {
-                        var categoryId = $(this).data('category-id');
-                        $.ajax({
-                            url: '@Url.Action("ProblemsByCategory", "Problem")',
-                            type: 'GET',
-                            data: { categoryId: categoryId },
-                            success: function (data) {
-                                $('#problem-list').html(data); // Kategorilere ait problemleri listeler
-                            },
-                            error: function (xhr, status, error) {
-                                console.log(error);
-                            }
-                        });
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-            });
-        });
-    </script>
-}

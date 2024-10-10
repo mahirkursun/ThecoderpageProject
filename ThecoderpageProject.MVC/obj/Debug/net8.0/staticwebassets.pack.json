@@ -13,6 +13,66 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.MVC\\wwwroot\\images\\Banner.png",
+      "PackagePath": "staticwebassets\\images\\Banner.png"
+    },
+    {
+      "Id": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.MVC\\wwwroot\\images\\avatar.png",
+      "PackagePath": "staticwebassets\\images\\avatar.png"
+    },
+    {
+      "Id": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.MVC\\wwwroot\\images\\background.JPG",
+      "PackagePath": "staticwebassets\\images\\background.JPG"
+    },
+    {
+      "Id": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.MVC\\wwwroot\\images\\icons\\Angular.png",
+      "PackagePath": "staticwebassets\\images\\icons\\Angular.png"
+    },
+    {
+      "Id": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.MVC\\wwwroot\\images\\icons\\C++.png",
+      "PackagePath": "staticwebassets\\images\\icons\\C++.png"
+    },
+    {
+      "Id": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.MVC\\wwwroot\\images\\icons\\CSS.png",
+      "PackagePath": "staticwebassets\\images\\icons\\CSS.png"
+    },
+    {
+      "Id": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.MVC\\wwwroot\\images\\icons\\Csharp.png",
+      "PackagePath": "staticwebassets\\images\\icons\\Csharp.png"
+    },
+    {
+      "Id": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.MVC\\wwwroot\\images\\icons\\HTML.png",
+      "PackagePath": "staticwebassets\\images\\icons\\HTML.png"
+    },
+    {
+      "Id": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.MVC\\wwwroot\\images\\icons\\Java.png",
+      "PackagePath": "staticwebassets\\images\\icons\\Java.png"
+    },
+    {
+      "Id": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.MVC\\wwwroot\\images\\icons\\Javascript.png",
+      "PackagePath": "staticwebassets\\images\\icons\\Javascript.png"
+    },
+    {
+      "Id": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.MVC\\wwwroot\\images\\icons\\NET.png",
+      "PackagePath": "staticwebassets\\images\\icons\\NET.png"
+    },
+    {
+      "Id": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.MVC\\wwwroot\\images\\icons\\Python.png",
+      "PackagePath": "staticwebassets\\images\\icons\\Python.png"
+    },
+    {
+      "Id": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.MVC\\wwwroot\\images\\icons\\React.png",
+      "PackagePath": "staticwebassets\\images\\icons\\React.png"
+    },
+    {
+      "Id": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.MVC\\wwwroot\\images\\icons\\all.png",
+      "PackagePath": "staticwebassets\\images\\icons\\all.png"
+    },
+    {
+      "Id": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.MVC\\wwwroot\\images\\logo.png",
+      "PackagePath": "staticwebassets\\images\\logo.png"
+    },
+    {
       "Id": "C:\\Users\\mahir\\source\\repos\\ThecoderpageProject\\ThecoderpageProject.MVC\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

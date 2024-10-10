@@ -18,7 +18,7 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
         string uri = "https://localhost:7244";
 
         // GET: /Admin/Category/Index
-        public async Task<IActionResult> Categories()
+        public async Task<IActionResult> Index()
         {
             var categories = await _categoryService.GetCategories();// Tüm kategorileri al
             using (var httpClient = new HttpClient())
@@ -31,7 +31,7 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
 
                 }
             }
-            return PartialView("_CategoryPartialView", categories);
+            return View(categories);
 
 
         }

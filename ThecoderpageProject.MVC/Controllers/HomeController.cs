@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using ThecoderpageProject.Application.Services.AbstractServices;
 using ThecoderpageProject.Domain.Entities;
 using ThecoderpageProject.MVC.Models;
 
@@ -8,26 +9,32 @@ namespace ThecoderpageProject.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly UserManager<AppUser> _userManager;
+        private readonly ICategoryService _categoryService;
+        private readonly IProblemService _problemService;
 
-        public HomeController(UserManager<AppUser> userManager)
+        public HomeController(ICategoryService categoryService, IProblemService problemService)
         {
-            _userManager = userManager;
+            _categoryService = categoryService;
+            _problemService = problemService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? categoryId)
         {
-            var isAuthenticated = User.Identity.IsAuthenticated; // Kullanýcý giriþ yapmýþ mý?
+            
 
-            // Kullanýcý giriþ yapmamýþsa, kýsýtlamalarla anasayfaya yönlendir
-            if (!isAuthenticated)
+
+            var categories = await _categoryService.GetCategories();
+            var problems = categoryId.HasValue
+                ? await _problemService.GetProblemsByCategory(categoryId.Value)
+                : await _problemService.GetAll();
+
+            var model = new HomeViewModel
             {
-                ViewBag.Message = "Giriþ yapmadýnýz. Beðeni, yorum veya rapor oluþturamazsýnýz.";
-                return View(); // Giriþ yapmamýþ kullanýcý için anasayfa görünümü
-            }
+                Categories = categories,
+                Problems = problems
+            };
 
-            // Kullanýcý giriþ yapmýþsa, normal anasayfa görünümünü göster
-            return View(); // Giriþ yapmýþ kullanýcý için anasayfa görünümü
+            return View(model);
         }
     }
 }

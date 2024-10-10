@@ -11,10 +11,20 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="User" asp-controller="Problem" asp-action="Index">Thecoderpage</a>
+                
+                <div class="navbar-header">
+
+                    <a class="navbar-brand" asp-area="User" asp-controller="Problem" asp-action="Index" style="font-family: Segoe 'Segoe Print'; font-weight: bold; font-size: x-large;">
+
+                        <img src="~/images/logo.png" style="height: 30px; width: 30px; margin-right: 10px;" />
+                        Thecoderpage
+                    </a>
+                </div>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#userNavbar" aria-controls="userNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse" id="userNavbar">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
@@ -31,25 +41,40 @@
                         </li>
                     </ul>
                 </div>
-                <div>
-                    <ul class="navbar-nav">
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+
+                    <!--arama kutusu -->
+                    <form class="d-flex mx-auto" style="width: 40%;">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </form>
+
+                    <ul class="navbar-nav ms-auto">
                         @if (User.Identity.IsAuthenticated)
                         {
-
-                            <li class="nav-item">
-                                <form asp-area="Identity" asp-controller="Account" asp-action="Logout" method="post" style="display:inline;">
-                                    <button type="submit" class="nav-link btn btn-link" style="padding: 0; border: none; background: none;">Çıkış Yap</button>
-                                </form>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="~/images/avatar.png" asp-append-version="true" style="height: 30px; width: 30px; margin-right: 10px;" />
+                                    @User.Identity.Name
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#">Profil</a></li>
+                                    <li><a class="dropdown-item" href="#">Ayarlar</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li>
+                                        <form asp-area="Identity" asp-controller="Account" asp-action="Logout" method="post" style="display:inline;">
+                                            <button type="submit" class="dropdown-item">Çıkış Yap</button>
+                                        </form>
+                                    </li>
+                                </ul>
                             </li>
-
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Login">Giriş Yap</a>
+                                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Login" style="font-family: Segoe 'Segoe Print'; font-weight: bold; font-size: large;">Giriş Yap</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Register">Kayıt Ol</a>
+                                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Register" style="font-family: Segoe 'Segoe Print'; font-weight: bold; font-size: large;">Kayıt Ol</a>
                             </li>
                         }
                     </ul>
