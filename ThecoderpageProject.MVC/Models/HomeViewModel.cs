@@ -6,5 +6,9 @@ namespace ThecoderpageProject.MVC.Models
     {
         public IEnumerable<CategoryVM> Categories { get; set; }
         public IEnumerable<ProblemVM> Problems { get; set; }
+
+        public IEnumerable<CommentVM> Comments { get; set; }
+        public IEnumerable<UserVM> Users { get; set; }
+
     }
 }

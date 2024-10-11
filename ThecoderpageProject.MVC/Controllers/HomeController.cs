@@ -11,11 +11,15 @@ namespace ThecoderpageProject.MVC.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly IProblemService _problemService;
+        private readonly ICommentService _commentService;
+        private readonly IUserService _userService;
 
-        public HomeController(ICategoryService categoryService, IProblemService problemService)
+        public HomeController(ICategoryService categoryService, IProblemService problemService, ICommentService commentService, IUserService userService)
         {
             _categoryService = categoryService;
             _problemService = problemService;
+            _commentService = commentService;
+            _userService = userService;
         }
 
         public async Task<IActionResult> Index(int? categoryId)
@@ -28,10 +32,15 @@ namespace ThecoderpageProject.MVC.Controllers
                 ? await _problemService.GetProblemsByCategory(categoryId.Value)
                 : await _problemService.GetAll();
 
+            var comments = await _commentService.GetAll();
+            var users = await _userService.GetAll();
+
             var model = new HomeViewModel
             {
                 Categories = categories,
-                Problems = problems
+                Problems = problems,
+                Comments = comments,
+                Users = users
             };
 
             return View(model);
