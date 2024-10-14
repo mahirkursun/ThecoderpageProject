@@ -1,54 +1,57 @@
 ﻿@model UpdateUserDTO
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "User Details";
 }
 
-<h1>Details</h1>
+<h1 class="text-center mb-4">User Details</h1>
 
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Role)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Role)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-    </dl>
+<div class="card mb-4 shadow-sm" style="width:70%; margin-left:auto; margin-right:auto">
+    <div class="card-header">
+        <h5 class="card-title">User Information</h5>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Role)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Role)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Password)
+            </dd>
+        </dl>
+    </div>
 </div>
-<div>
 
-    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Back to List</a>
+<div class="text-center">
+    <a class="btn btn-secondary" asp-area="" asp-controller="Home" asp-action="Index">Back to List</a>
 </div>

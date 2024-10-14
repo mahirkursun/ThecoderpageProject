@@ -126,6 +126,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/mahir/source/repos/ThecoderpageProject/ThecoderpageProject.MVC/Areas/Identity/Views/Account/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/mahir/source/repos/ThecoderpageProject/ThecoderpageProject.MVC/Areas/Identity/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -148,10 +152,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/mahir/source/repos/ThecoderpageProject/ThecoderpageProject.MVC/Areas/Identity/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/mahir/source/repos/ThecoderpageProject/ThecoderpageProject.MVC/Areas/User/Views/Category/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xDYXRlZ29yeVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/mahir/source/repos/ThecoderpageProject/ThecoderpageProject.MVC/Areas/User/Views/Comment/Create.cshtml]
@@ -208,6 +208,26 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/mahir/source/repos/ThecoderpageProject/ThecoderpageProject.MVC/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mahir/source/repos/ThecoderpageProject/ThecoderpageProject.MVC/Views/Shared/Category/_Category_PV.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENhdGVnb3J5XF9DYXRlZ29yeV9QVi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mahir/source/repos/ThecoderpageProject/ThecoderpageProject.MVC/Views/Shared/Footer/_Footer_PV.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEZvb3RlclxfRm9vdGVyX1BWLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mahir/source/repos/ThecoderpageProject/ThecoderpageProject.MVC/Views/Shared/Identity/_Identity_PV.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXElkZW50aXR5XF9JZGVudGl0eV9QVi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mahir/source/repos/ThecoderpageProject/ThecoderpageProject.MVC/Views/Shared/Problem/_Problem_PV.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFByb2JsZW1cX1Byb2JsZW1fUFYuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mahir/source/repos/ThecoderpageProject/ThecoderpageProject.MVC/Views/Shared/Problem/_ShareProblem_PV.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFByb2JsZW1cX1NoYXJlUHJvYmxlbV9QVi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/mahir/source/repos/ThecoderpageProject/ThecoderpageProject.MVC/Views/Shared/_ValidationScriptsPartial.cshtml]

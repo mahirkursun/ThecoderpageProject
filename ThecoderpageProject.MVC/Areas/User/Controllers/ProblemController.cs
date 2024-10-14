@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Security.Claims;
 using ThecoderpageProject.Application.Models.DTOs;
@@ -8,17 +9,22 @@ using ThecoderpageProject.Application.Services.AbstractServices;
 namespace ThecoderpageProject.MVC.Areas.User.Controllers
 {
     [Area("User")]
+    [Authorize]
     public class ProblemController : Controller
     {
         private readonly IProblemService _problemService;
         private readonly IVoteService _voteService;
         private readonly ICategoryService _categoryService;
+        private readonly ICommentService _commentService;
+        private readonly IUserService _userService;
 
-        public ProblemController(IProblemService problemService, IVoteService voteService, ICategoryService categoryService) // Update constructor
+        public ProblemController(IProblemService problemService, IVoteService voteService, ICategoryService categoryService, ICommentService commentService, IUserService userService) // Update constructor
         {
             _problemService = problemService;
             _voteService = voteService;
             _categoryService = categoryService;
+            _commentService = commentService;
+            _userService = userService;
 
         }
 
@@ -26,11 +32,10 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
         // User/Problem/Index
         public async Task<IActionResult> Index()
         {
-            var problems = await _problemService.GetAll(); 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            /*ÖNEMLİ */
-            /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            // Kullanıcının problemlerini alın
+            var problems = await _problemService.GetProblemsByUserId(userId);
 
             foreach (var problem in problems)
             {
@@ -41,6 +46,7 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
                     problem.UserVoteType = userVote.VoteType; // Kullanıcının verdiği oy tipini sakla (upvote veya downvote)
                 }
             }
+
             return View(problems);
         }
 
@@ -145,7 +151,7 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string  userId)
         {
             var problem = await _problemService.GetProblemById(id);
             if (problem == null)
@@ -161,7 +167,9 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
                 Status = problem.Status,
                 CreatedAt = problem.CreatedAt,
                 CategoryId = problem.CategoryId,
-                UserId = problem.UserId
+                UserId = problem.UserId,
+                Users = (await _userService.GetAll()).ToList(),
+                Comments = (await _commentService.GetCommentsByProblemId(id)).ToList(),
             };
             return View(problemDTO);
         }

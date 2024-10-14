@@ -1,124 +1,25 @@
-﻿
-@model IEnumerable<ProblemVM>
+﻿@model IEnumerable<ProblemVM>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "My Problems";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserVoteType)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryId)
-            </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserVoteType)
-                </td>
-                <td>
+<h1 class="text-center">My Problems</h1>
 
-                    @if (item.UserVoteType == null)
-                    {
-                        // Kullanıcı oy vermemişse
-                        <form asp-controller="Vote" asp-action="UpVote" method="post" style="display:inline;">
-                            <input type="hidden" name="problemId" value="@item.Id" />
-
-                            <button type="submit" class="btn btn-success">UpVote</button>
-                        </form>
-                        <form asp-controller="Vote" asp-action="DownVote" method="post" style="display:inline;">
-                            <input type="hidden" name="problemId" value="@item.Id" />
-                            <button type="submit" class="btn btn-danger">DownVote</button>
-                        </form>
-                    }
-                    else if (item.UserVoteType == VoteType.UpVote)
-                    {
-                        // Kullanıcı UpVote vermişse, oyunu geri çekme butonu
-                        <form asp-controller="Vote" asp-action="RemoveVote" method="post" style="display:inline;">
-                            <input type="hidden" name="problemId" value="@item.Id" />
-
-
-                            <button type="submit" class="btn btn-warning">Remove UpVote</button>
-                        </form>
-                    }
-                    else if (item.UserVoteType == VoteType.DownVote)
-                    {
-                        // Kullanıcı DownVote vermişse, oyunu geri çekme butonu
-                        <form asp-controller="Vote" asp-action="RemoveVote" method="post" style="display:inline;">
-                            <input type="hidden" name="problemId" value="@item.Id" />
-
-
-
-                            <button type="submit" class="btn btn-warning">Remove DownVote</button>
-                        </form>
-                    }
-                </td>
-                <!-- Dropdown Menü Başlangıcı -->
-                <td>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Actions
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <!-- Report Seçeneği -->
-                            <li>
-                                <a class="dropdown-item" asp-controller="Report" asp-action="Create" asp-route-problemId="@item.Id">Report</a>
-                            </li>
-                            <li><a class="dropdown-item" asp-action="Update" asp-route-id="@item.Id">Update</a></li>
-                            <li><a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id">Details</a></li>
-                            <li><a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id">Delete</a></li>
-
-                        </ul>
+<div class="container mt-4">
+    <div class="row">
+        @foreach (var problem in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@problem.Title</h5>
+                        <p class="card-text">@problem.Description</p>
+                        <a href="@Url.Action("Details", "Problem", new { id = problem.Id })" class="btn btn-primary">View Details</a>
                     </div>
-                </td>
-
-
-                <!-- Dropdown Menü Sonu -->
-        </tr>
-}
-    </tbody>
-</table>
+                </div>
+            </div>
+        }
+    </div>
+</div>

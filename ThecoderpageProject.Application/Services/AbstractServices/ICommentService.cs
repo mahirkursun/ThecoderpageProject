@@ -16,5 +16,7 @@ namespace ThecoderpageProject.Application.Services.AbstractServices
         Task Delete(int id);
 
         Task<IEnumerable<CommentVM>> GetAll();
+
+        Task<IEnumerable<CommentVM>> GetCommentsByProblemId(int problemId); //Problem'e göre Comment getir
     }
 }

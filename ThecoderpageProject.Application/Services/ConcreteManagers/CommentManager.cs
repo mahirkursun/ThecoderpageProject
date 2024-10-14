@@ -70,8 +70,15 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             return _mapper.Map<IEnumerable<CommentVM>>(comments);
         }
 
+        public Task<IEnumerable<CommentVM>> GetCommentsByProblemId(int problemId)
+        {
+            var comments = _commentRepository.GetComments().Result
+           .Where(p => p.ProblemId == problemId);
+
+            return Task.FromResult(_mapper.Map<IEnumerable<CommentVM>>(comments));
 
 
 
+        }
     }
 }

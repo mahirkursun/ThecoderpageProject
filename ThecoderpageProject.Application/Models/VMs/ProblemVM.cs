@@ -20,5 +20,11 @@ namespace ThecoderpageProject.Application.Models.VMs
 
         // Kullanıcıya ait **UpVote** ve **DownVote** sayıları
         public VoteType? UserVoteType { get; set; }
+
+        public List<UserVM> Users { get; set; }
+        public List<CommentVM> Comments { get; set; }
+
+
+
     }
 }

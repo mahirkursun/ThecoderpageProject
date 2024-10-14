@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,6 +86,14 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             return Task.FromResult(_mapper.Map<IEnumerable<ProblemVM>>(problems));
 
 
+        }
+
+        public Task<IEnumerable<ProblemVM>> GetProblemsByUserId(string userId)
+        {
+            var problems =  _problemRepository.GetProblems().Result
+           .Where(p => p.UserId == userId);
+
+            return Task.FromResult(_mapper.Map<IEnumerable<ProblemVM>>(problems));
         }
     }
 }

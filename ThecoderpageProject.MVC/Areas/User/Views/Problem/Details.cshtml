@@ -4,51 +4,47 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="card mb-3 shadow-sm" style="width:70%; margin-left:auto; margin-right:auto">
+    <div class="card-header d-flex justify-content-between">
+        <h5 class="card-title">@Model.Title</h5>
+        <div class="badge @(Model.Status == ProblemStatus.Resolved ? "bg-success" : "bg-danger")">
+            @Model.Status.ToString()
+        </div>
 
-<div>
-    <h4>Problem</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CategoryId)
-        </dd>
-    </dl>
+    </div>
+    <div class="card-body">
+        <p class="card-text">@Model.Description</p>
+        <div class="d-flex justify-content-between">
+            <small class="text-muted">Kullanıcı: @Model.Users.FirstOrDefault(u => u.Id == Model.UserId).UserName</small>
+            <small class="text-muted">Tarih: @Model.CreatedAt.ToShortDateString()</small>
+        </div>
+    </div>
+    <!--Yorum Ekleme-->
+    <div class="card-footer">
+        <form asp-controller="Comment" asp-action="Create" method="post" style="display:inline;">
+            <input type="hidden" name="ProblemId" value="@Model.Id" />
+            <input type="text" name="Content" placeholder="Yorumunuzu yazın..." class="form-control" required />
+            <button type="submit" class="btn btn-primary mt-2">Yorum Ekle</button>
+        </form>
+    </div>
+    <!-- Yorumlar -->
+    <div class="card-footer">
+
+        <ul class="list-group mt-2">
+            @foreach (var comment in Model.Comments.Where(c => c.ProblemId == Model.Id).OrderByDescending(c => c.CreatedAt))
+            {
+                <li class="list-group-item">
+                    @comment.Content
+                    <span class="text-muted">(@comment.CreatedAt.ToShortDateString())</span>
+                    - Kullanıcı: @Model.Users.FirstOrDefault(u => u.Id == comment.UserId).UserName
+                </li>
+            }
+        </ul>
+    </div>
+    
+    
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>

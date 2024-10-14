@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using ThecoderpageProject.Application.Models.DTOs;
 using ThecoderpageProject.Application.Services.AbstractServices;
@@ -6,6 +7,7 @@ using ThecoderpageProject.Application.Services.AbstractServices;
 namespace ThecoderpageProject.MVC.Areas.User.Controllers
 {
     [Area("User")]
+    [Authorize]
     public class ReportController : Controller
     {
         private readonly IReportService _reportService;

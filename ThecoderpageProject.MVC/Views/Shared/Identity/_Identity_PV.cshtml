@@ -1,0 +1,50 @@
+﻿@{
+    var currentUrl = Context.Request.Path.ToString().ToLower();
+}
+
+<ul class="navbar-nav ms-auto">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="~/images/avatar.png" asp-append-version="true" style="height: 30px; width: 30px; margin-right: 10px;" />
+                @User.Identity.Name
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" asp-area="User" asp-controller="User" asp-action="Details">Profil</a></li>
+                <li><a class="dropdown-item" asp-area="User" asp-controller="Problem" asp-action="Index">Problemlerim</a></li>
+                <li><a class="dropdown-item" href="#">Ayarlar</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                    <form asp-area="Identity" asp-controller="Account" asp-action="Logout" method="post" style="display:inline;">
+                        <button type="submit" class="dropdown-item">Çıkış Yap</button>
+                    </form>
+                </li>
+            </ul>
+        </li>
+    }
+    else
+    {
+        @if (currentUrl == "/identity/account/register")
+        {
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Login" style="font-family: Segoe 'Segoe Print'; font-weight: bold; font-size: large;">Giriş Yap</a>
+            </li>
+        }
+        else if (currentUrl == "/identity/account/login")
+        {
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Register" style="font-family: Segoe 'Segoe Print'; font-weight: bold; font-size: large;">Kayıt Ol</a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Login" style="font-family: Segoe 'Segoe Print'; font-weight: bold; font-size: large;">Giriş Yap</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Register" style="font-family: Segoe 'Segoe Print'; font-weight: bold; font-size: large;">Kayıt Ol</a>
+            </li>
+        }
+    }
+</ul>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using ThecoderpageProject.Application.Models.VMs;
 using ThecoderpageProject.Application.Services.AbstractServices;
@@ -6,6 +7,7 @@ using ThecoderpageProject.Application.Services.AbstractServices;
 namespace ThecoderpageProject.MVC.Areas.User.Controllers
 {
     [Area("User")]
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Security.Claims;
 using ThecoderpageProject.Application.Models.DTOs;
@@ -9,6 +10,7 @@ using ThecoderpageProject.Domain.Entities;
 namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class ProblemController : Controller
     {
         private readonly IProblemService _problemService;

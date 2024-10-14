@@ -70,7 +70,22 @@ namespace ThecoderpageProject.MVC
             builder.Services.AddScoped<IReportRepository<Report>, ReportRepository>();
             builder.Services.AddScoped<IVoteRepository<Vote>, VoteRepository>();
 
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
 
+                options.LoginPath = "/Identity/Account/Login";
+                options.LogoutPath = "/Identity/Account/Logout";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.SlidingExpiration = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.Cookie = new CookieBuilder
+                {
+                    HttpOnly = true,
+                    Name = ".Thecoderpage.Security.Cookie",
+                    SameSite = SameSiteMode.Strict
+                };
+            });
 
 
             var app = builder.Build();

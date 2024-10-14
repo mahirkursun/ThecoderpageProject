@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using ThecoderpageProject.Application.Services.AbstractServices;
@@ -8,6 +9,7 @@ using ThecoderpageProject.Domain.Enums;
 namespace ThecoderpageProject.MVC.Areas.User.Controllers
 {
     [Area("User")]
+    [Authorize]
     public class VoteController : Controller
     {
         private readonly IVoteService _voteService;

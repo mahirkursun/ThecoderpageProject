@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ThecoderpageProject.Application.Models.VMs;
 using ThecoderpageProject.Domain.Enums;
 
 namespace ThecoderpageProject.Application.Models.DTOs
@@ -19,6 +20,8 @@ namespace ThecoderpageProject.Application.Models.DTOs
 
         public VoteType? UserVoteTypeVoteType { get; set; }
 
+        public IEnumerable<CommentVM> Comments { get; set; } = new List<CommentVM>();
+        public IEnumerable<UserVM> Users { get; set; } = new List<UserVM>();
 
     }
 }

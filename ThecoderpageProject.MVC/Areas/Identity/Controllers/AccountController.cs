@@ -54,7 +54,7 @@ namespace ThecoderpageProject.MVC.Areas.Identity.Controllers
                     else
                     {
 
-                        return RedirectToAction("Index", "Problem", new { area = "User" });
+                        return RedirectToAction("Index", "Home", new { area = "" });
                     }
 
 
@@ -65,9 +65,10 @@ namespace ThecoderpageProject.MVC.Areas.Identity.Controllers
                 ModelState.AddModelError(string.Empty, "Kullanıcı adı veya şifre yanlış.");
             }
             // Giriş başarısızsa veya kullanıcı rolü yoksa
-            return RedirectToAction("Index", "Home"); // Anasayfaya yönlendir
+            return View(loginVM); // Anasayfaya yönlendir
 
         }
+
 
         // GET: Identity/Account/Register
         [HttpGet]
@@ -111,6 +112,18 @@ namespace ThecoderpageProject.MVC.Areas.Identity.Controllers
             // Eğer model geçerli değilse veya hata varsa, formu tekrar göster
             return View(registerVM);
         }
+
+        public IActionResult AccessDenied()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _userManager.FindByIdAsync(userId).Result;
+            var roles = _userManager.GetRolesAsync(user).Result;
+
+            // Kullanıcının rolleri hakkında bilgi almak için
+            ViewBag.UserRoles = roles;
+            return View();
+        }
+
 
         // GET: Identity/Account/Logout
         [HttpPost]

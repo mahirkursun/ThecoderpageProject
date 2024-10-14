@@ -1,79 +1,26 @@
-﻿
-@model HomeViewModel
+﻿@model HomeViewModel
+
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
+@*  Kategoriler Listesi *@
 <div class="row">
-    <!-- Kategoriler Listesi -->
-    <form method="get" action="/Home/Index" class="d-flex justify-content-center flex-wrap" style="width: 100%; margin: 0;">
-        <div class="d-inline-block" style="margin-right: 60px;">
-            <button type="submit" name="categoryId" value="all" class="btn d-flex align-items-center" style="border: none; padding: 0; text-transform: uppercase; max-width: 150px; background-color: transparent; margin-left: 20px;">
-                <img src="~/images/icons/@($"all.png")" width="40" height="40" class="mr-2" style="margin-right: 3px;" />
-                <span style="font-family: Segoe 'Segoe Print'; font-weight: bold; font-size: large;">All</span>
-            </button>
-        </div>
-        @foreach (var category in Model.Categories)
-        {
-            <div class="d-inline-block" style="margin-right: 50px;">
-                    <button type="submit" name="categoryId" value="@category.Id" class="btn d-flex align-items-center" style="border: none; padding: 0; text-transform: uppercase; max-width: 150px; background-color: transparent;">
-                    <img src="~/images/icons/@($"{category.Name}.png")" width="40" height="40" class="mr-2" style="margin-right: 3px;" />
-                    <span style="font-family: Segoe 'Segoe Print'; font-weight: bold; font-size: large;">@category.Name</span>
-                </button>
-            </div>
-        }
-    </form>
+    @Html.Partial("Category/_Category_PV")
 </div>
 
 
-<div class="container mt-4 card-header d-flex justify-content-center" style="border-radius: 5px; max-width: 69%">
-    <div class="d-flex align-items-center justify-content-around px-4 py-3" style="width: 100%;">
-        <p class="mb-0" style=" font-family: Segoe 'Segoe Print'; font-weight:600; font-size: 20px;" >Kod yazarken karşılaştığınız sorunları paylaşın, çözümleri birlikte bulalım.</p>
-        
-        <button class="btn btn-secondary btn-lg">Problem Paylaş</button>
-    </div>
+@* Problem Paylaş *@
+<div>
+    @Html.Partial("Problem/_ShareProblem_PV")
 </div>
 
 
 
-
+@*ProblemList ant Comment*@
 <div class="container mt-4">
-    @foreach (var problem in Model.Problems)
-    {
-        <div class="card mb-3 shadow-sm">
-            <div class="card-header d-flex justify-content-between">
-                <h5 class="card-title">@problem.Title</h5>
-                    <div class="badge @(problem.Status == ProblemStatus.Resolved ? "bg-success" : "bg-danger")">
-                        @problem.Status.ToString()
-                    </div>
 
-            </div>
-            <div class="card-body">
-                <p class="card-text">@problem.Description</p>
-                <div class="d-flex justify-content-between">
-                    <small class="text-muted">Kullanıcı: @Model.Users.FirstOrDefault(u => u.Id == problem.UserId).UserName</small>
-                    <small class="text-muted">Tarih: @problem.CreatedAt.ToShortDateString()</small>
-                </div>
-            </div>
+    @Html.Partial("Problem/_Problem_PV", Model)
 
-            <!-- Yorumlar -->
-            <div class="card-footer">
-                
-                <ul class="list-group mt-2">
-                    @foreach (var comment in Model.Comments.Where(c => c.ProblemId == problem.Id))
-                    {
-                        @*Kullanı Id'sine göre kullanıcı adını getirme:
-                            @Model.Users.FirstOrDefault(u => u.Id == comment.UserId).UserName
-                        *@
-                        <li class="list-group-item">
-                            @comment.Content 
-                            <span class="text-muted">(@comment.CreatedAt.ToShortDateString())</span> 
-                            - Kullanıcı: @Model.Users.FirstOrDefault(u => u.Id == comment.UserId).UserName 
-                        </li>
-                    }
-                </ul>
-            </div>
-        </div>
-    }
 </div>

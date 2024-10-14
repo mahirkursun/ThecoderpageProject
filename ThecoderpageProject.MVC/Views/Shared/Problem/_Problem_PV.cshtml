@@ -1,0 +1,44 @@
+﻿@model HomeViewModel
+
+@if(Model.Problems.Count() == 0)
+{
+    <div class="alert alert-warning" role="alert">
+        Bu kategoriye ait problem bulunamadı.
+    </div>
+}
+
+@foreach (var problem in Model.Problems.OrderByDescending(p => p.CreatedAt))
+{
+    <div class="card mb-3 shadow-sm">
+        <div class="card-header d-flex justify-content-between">
+            <h5 class="card-title">@problem.Title</h5>
+            <div class="badge @(problem.Status == ProblemStatus.Resolved ? "bg-success" : "bg-danger")">
+                @problem.Status.ToString()
+            </div>
+
+        </div>
+        <div class="card-body">
+            <p class="card-text">@problem.Description</p>
+            <div class="d-flex justify-content-between">
+                <small class="text-muted">Kullanıcı: @Model.Users.FirstOrDefault(u => u.Id == problem.UserId).UserName</small>
+                <small class="text-muted">Tarih: @problem.CreatedAt.ToShortDateString()</small>
+            </div>
+            <a asp-area="User"  asp-controller="Problem" asp-action="Details" asp-route-id="@problem.Id">Problem Detail</a>
+        </div>
+        
+        <!-- Yorumlar -->
+        <div class="card-footer">
+
+            <ul class="list-group mt-2">
+                @foreach (var comment in Model.Comments.Where(c => c.ProblemId == problem.Id).OrderByDescending(c => c.CreatedAt))
+                {
+                    <li class="list-group-item">
+                        @comment.Content
+                        <span class="text-muted">(@comment.CreatedAt.ToShortDateString())</span>
+                        - Kullanıcı: @Model.Users.FirstOrDefault(u => u.Id == comment.UserId).UserName
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}

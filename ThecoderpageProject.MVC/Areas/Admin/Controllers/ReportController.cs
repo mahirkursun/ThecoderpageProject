@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Org.BouncyCastle.Asn1.X509.Qualified;
@@ -10,6 +11,7 @@ using ThecoderpageProject.Application.Services.AbstractServices;
 namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class ReportController : Controller
     {
         private readonly IReportService _reportService;

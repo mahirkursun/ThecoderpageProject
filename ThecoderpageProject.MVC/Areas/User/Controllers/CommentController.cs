@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Security.Claims;
 using ThecoderpageProject.Application.Models.DTOs;
@@ -8,6 +9,7 @@ using ThecoderpageProject.Application.Services.AbstractServices;
 namespace ThecoderpageProject.MVC.Areas.User.Controllers
 {
     [Area("User")]
+    [Authorize]
     public class CommentController : Controller
     {
         private readonly ICommentService _commentService;
@@ -43,12 +45,12 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateCommentDTO commentDTO)
+        public async Task<IActionResult> Create(CreateCommentDTO commentDTO, int problemId)
         {
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             commentDTO.UserId = userId;
-            commentDTO.ProblemId = 1;// Şimdilik 1 girildi
+            commentDTO.ProblemId = problemId;// Şimdilik 1 girildi
 
             await _commentService.Create(commentDTO);
             TempData["Success"] = $"{commentDTO.Content} başarıyla eklendi";
