@@ -54,11 +54,14 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
 
             await _commentService.Create(commentDTO);
             TempData["Success"] = $"{commentDTO.Content} başarıyla eklendi";
-            return RedirectToAction(nameof(Index));
+       
+            return RedirectToAction("Details", "Problem", new { id = problemId });
+
+
 
         }
 
-        
+
 
         [HttpGet]
         public async Task<IActionResult> Delete(int id)

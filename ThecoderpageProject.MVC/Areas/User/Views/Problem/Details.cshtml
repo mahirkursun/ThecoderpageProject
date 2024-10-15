@@ -4,47 +4,61 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="card mb-3 shadow-sm" style="width:70%; margin-left:auto; margin-right:auto">
-    <div class="card-header d-flex justify-content-between">
-        <h5 class="card-title">@Model.Title</h5>
-        <div class="badge @(Model.Status == ProblemStatus.Resolved ? "bg-success" : "bg-danger")">
-            @Model.Status.ToString()
-        </div>
+<div class="card mb-3 shadow-sm" style="width: 70%; margin-left: auto; margin-right: auto; border-radius:10px;">
+    <!-- Başlık, Avatar ve Durum -->
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+            <img src="/images/avatar.png" alt="Problem Owner Avatar" class="rounded-circle" width="40" height="40" style="margin-right:10px;">
 
+            <h6 class="mb-0">@Model.Users.FirstOrDefault(u => u.Id == Model.UserId)?.UserName</h6>
+        </div>
+        <span class="badge @(Model.Status == ProblemStatus.Resolved ? "bg-success" : "bg-danger")">
+            @(Model.Status == ProblemStatus.Resolved ? "Çözüm bulundu" : "Çözüm aranıyor")
+        </span>
     </div>
+
+    <!-- Açıklama ve Kullanıcı Bilgileri -->
     <div class="card-body">
-        <p class="card-text">@Model.Description</p>
         <div class="d-flex justify-content-between">
-            <small class="text-muted">Kullanıcı: @Model.Users.FirstOrDefault(u => u.Id == Model.UserId).UserName</small>
+            <h5 class="card-title">@Model.Title</h5>
             <small class="text-muted">Tarih: @Model.CreatedAt.ToShortDateString()</small>
         </div>
+        <p class="card-text">@Model.Description</p>
+
     </div>
-    <!--Yorum Ekleme-->
+
+    <!-- Yorum Ekleme -->
     <div class="card-footer">
-        <form asp-controller="Comment" asp-action="Create" method="post" style="display:inline;">
+        <form asp-controller="Comment" asp-action="Create" method="post" class="d-flex">
             <input type="hidden" name="ProblemId" value="@Model.Id" />
-            <input type="text" name="Content" placeholder="Yorumunuzu yazın..." class="form-control" required />
-            <button type="submit" class="btn btn-primary mt-2">Yorum Ekle</button>
+            <input type="text" name="Content" placeholder="Yorumunuzu yazın..." class="form-control me-2" required />
+            <button type="submit" class="btn btn-primary">Yorum Ekle</button>
         </form>
     </div>
+
     <!-- Yorumlar -->
     <div class="card-footer">
-
         <ul class="list-group mt-2">
             @foreach (var comment in Model.Comments.Where(c => c.ProblemId == Model.Id).OrderByDescending(c => c.CreatedAt))
             {
-                <li class="list-group-item">
-                    @comment.Content
-                    <span class="text-muted">(@comment.CreatedAt.ToShortDateString())</span>
-                    - Kullanıcı: @Model.Users.FirstOrDefault(u => u.Id == comment.UserId).UserName
+                <li class="list-group-item" style="margin-bottom:5px; border-radius:10px;">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <img src="/images/avatar.png" alt="Comment User Avatar" class="rounded-circle" width="30" height="30">
+                            <div class="ms-2">
+                                <span class="fw-bold">@Model.Users.FirstOrDefault(u => u.Id == comment.UserId)?.UserName:</span>
+                                <span>@comment.Content</span>
+                            </div>
+                        </div>
+                        <small class="text-muted ms-auto">@comment.CreatedAt.ToShortDateString()</small>
+                    </div>
                 </li>
             }
         </ul>
     </div>
-    
-    
 </div>
 
-<div class="text-center">
-    <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back to List</a>
+<!-- Geri Dön Linki -->
+<div class="text-center mt-3">
+    <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary">Listeye Geri Dön</a>
 </div>

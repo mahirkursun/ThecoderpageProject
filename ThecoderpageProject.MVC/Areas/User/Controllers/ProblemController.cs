@@ -74,7 +74,8 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
 
             await _problemService.Create(problemDTO);
             TempData["Success"] = $"{problemDTO.Title} başarıyla eklendi";
-            return RedirectToAction(nameof(Index));
+
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         // User/Problem/Update/5
