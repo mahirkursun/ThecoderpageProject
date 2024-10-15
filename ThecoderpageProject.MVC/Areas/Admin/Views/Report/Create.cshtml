@@ -15,10 +15,6 @@
                 <input type="hidden" asp-for="ProblemId" />
             }
 
-            @if (Model.CommentId.HasValue)
-            {
-                <input type="hidden" asp-for="CommentId" />
-            }
 
             <div class="form-group">
                 <label asp-for="ReportReason">Reason for reporting</label>

@@ -21,9 +21,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.ProblemId)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CommentId)
-            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -42,9 +40,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ProblemId)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CommentId)
-            </td>
+            
             <td>
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>

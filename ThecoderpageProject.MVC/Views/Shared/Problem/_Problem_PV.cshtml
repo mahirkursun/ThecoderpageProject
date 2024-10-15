@@ -18,9 +18,40 @@
 
                 </div>
             </div>
-            <span class="badge @(problem.Status == ProblemStatus.Resolved ? "bg-success" : "bg-danger")">
-                @(problem.Status == ProblemStatus.Resolved ? "Çözüm bulundu" : "Çözüm aranıyor")
-            </span>
+            <div class="d-flex">
+                <span class="badge @(problem.Status == ProblemStatus.Resolved ? "bg-success" : "bg-danger") align-content-center">
+                    @(problem.Status == ProblemStatus.Resolved ? "Çözüm bulundu" : "Çözüm aranıyor")
+                </span>
+
+               
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form asp-action="Create" asp-controller="Report" asp-area="User" method="post">
+                        <input type="hidden" name="ProblemId" value="@problem.Id" /> <!-- ProblemId burada gizli input olarak gönderiliyor -->
+
+
+
+                        <div class="form-group">
+
+                            <select asp-for="@Model.CreateReportDTO.ReportReason" class="form-control">
+                                @foreach (var reason in Enum.GetValues(typeof(ReportReason)))
+                                {
+                                    <option value="@reason.ToString()">@reason</option>
+                                }
+                            </select>
+
+                            <span asp-validation-for="@Model.CreateReportDTO.ReportReason" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit Report</button>
+                    </form>
+                }
+
+                
+            </div>
+            
+
+
         </div>
         <div class="card-body">
             <div class="d-flex justify-content-between">
@@ -33,7 +64,9 @@
                     problem.Description.Substring(0, 300) + "..." :
                     problem.Description)
             </p>
-            <a href="@Url.Action("Details", "Problem", new { area = "User", id = problem.Id })" class="btn btn-link">Detayı görmek için tıklayınız.</a>
+            <a href="@Url.Action("Details", "Problem", new { area = "User", id = problem.Id })" class="btn btn-outline-primary">
+                <i class="bi bi-eye"></i> Detayı Görmek İçin Tıklayınız
+            </a>
         </div>
 
         <!-- Yorumlar -->
@@ -62,3 +95,5 @@
         </div>
     </div>
 }
+
+

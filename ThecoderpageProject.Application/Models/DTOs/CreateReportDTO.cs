@@ -17,6 +17,5 @@ namespace ThecoderpageProject.Application.Models.DTOs
 
         public string UserId { get; set; }
         public int? ProblemId { get; set; }
-        public int? CommentId { get; set; }
     }
 }

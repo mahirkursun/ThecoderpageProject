@@ -29,9 +29,8 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             var report = new Report
             {
                 ProblemId = model.ProblemId,
-                CommentId = model.CommentId,
                 ReportReason = model.ReportReason,
-                ReportedAt = DateTime.UtcNow,
+                ReportedAt = DateTime.Now,
                 UserId = model.UserId
                 
             };

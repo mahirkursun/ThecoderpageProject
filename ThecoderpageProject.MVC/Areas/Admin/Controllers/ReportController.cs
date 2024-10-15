@@ -31,13 +31,13 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create(int problemId, int commentId)
+        public IActionResult Create(int problemId)
         {
 
             var model = new CreateReportDTO
             {
-                ProblemId = problemId,
-                CommentId = commentId
+                ProblemId = problemId
+             
             };
 
             return View(model);
@@ -49,29 +49,14 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             reportDTO.UserId = userId;
 
-            if (reportDTO.ProblemId > 0)
-            {
-                reportDTO.CommentId = null; // Eğer Problem varsa Comment 0 olmalı
-            }
-            else if (reportDTO.CommentId > 0)
-            {
-                reportDTO.ProblemId = null; // Eğer Comment varsa Problem 0 olmalı
-            }
-            else
-            {
-                TempData["Error"] = "Lütfen ya bir Problem ya da bir Comment seçin.";
-                return View(reportDTO);
-            }
+        
+            
 
             // Report kaydını oluştur
             await _reportService.CreateReport(reportDTO);
             TempData["Success"] = "Rapor başarıyla oluşturuldu.";
 
-            // Comment rapor edilmişse CommentController'a yönlendir
-            if (reportDTO.CommentId.HasValue)
-            {
-                return RedirectToAction("Index", "Comment");
-            }
+            
 
             // Problem rapor edilmişse ProblemController'a yönlendir
             return RedirectToAction("Index", "Problem");
@@ -99,7 +84,6 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
             {
                 Id = report.Id,
                 ProblemId = report.ProblemId,
-                CommentId = report.CommentId,
                 ReportReason = report.ReportReason,
                 UserId = report.UserId,
                 ReportedAt = report.ReportedAt

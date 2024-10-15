@@ -234,6 +234,33 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Reports",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ReportReason = table.Column<int>(type: "int", nullable: false),
+                    ReportedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProblemId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reports", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reports_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Reports_Problems_ProblemId",
+                        column: x => x.ProblemId,
+                        principalTable: "Problems",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Votes",
                 columns: table => new
                 {
@@ -261,46 +288,13 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Reports",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ReportReason = table.Column<int>(type: "int", nullable: false),
-                    ReportedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProblemId = table.Column<int>(type: "int", nullable: true),
-                    CommentId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reports", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Reports_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Reports_Comments_CommentId",
-                        column: x => x.CommentId,
-                        principalTable: "Comments",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Reports_Problems_ProblemId",
-                        column: x => x.ProblemId,
-                        principalTable: "Problems",
-                        principalColumn: "Id");
-                });
-
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1106311b-cf4a-4b87-980f-4acf8c5fe33c", "ddd98498-b3d8-47a7-94dc-0b64882f6c55", "Admin", "ADMIN" },
-                    { "e01e0103-55ab-4594-9583-a38fdee75c17", "3c8a6b70-cfd9-4998-b910-0aa5b849df6f", "User", "USER" }
+                    { "9f6ce9d8-fd6a-41c2-a7b5-db1e844e67ed", "fdfefb3c-d8f3-4032-9a77-6cf2256324ac", "Admin", "ADMIN" },
+                    { "f61fec4c-a927-4e6c-95ca-0a8c3d3d9468", "5a66ca32-f78d-4254-8ed8-513fa93e0740", "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -363,11 +357,6 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reports_CommentId",
-                table: "Reports",
-                column: "CommentId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Reports_ProblemId",
                 table: "Reports",
                 column: "ProblemId");
@@ -407,6 +396,9 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
                 name: "Reports");
 
             migrationBuilder.DropTable(
@@ -414,9 +406,6 @@ namespace ThecoderpageProject.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "Problems");

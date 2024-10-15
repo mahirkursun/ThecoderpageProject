@@ -42,3 +42,28 @@ body {
 .dropdown-menu{
     z-index:1000;
 }
+
+.banner {
+    margin-top: 0;
+    transition: margin-top 0.3s ease; 
+}
+
+@media (max-width: 1680px) {
+    .banner {
+        margin-top: 165px; 
+    }
+}
+
+@media (max-width: 895px) {
+    .banner {
+        margin-top: 205px;
+    }
+}
+
+@media (max-width: 620px) {
+    .banner {
+        margin-top: 100px;
+        visibility: hidden;
+        height: 130px; 
+    }
+}

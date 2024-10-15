@@ -12,7 +12,7 @@ using ThecoderpageProject.Infrastructure.Context;
 namespace ThecoderpageProject.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241007103615_Initial")]
+    [Migration("20241015125752_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -54,15 +54,15 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1106311b-cf4a-4b87-980f-4acf8c5fe33c",
-                            ConcurrencyStamp = "ddd98498-b3d8-47a7-94dc-0b64882f6c55",
+                            Id = "9f6ce9d8-fd6a-41c2-a7b5-db1e844e67ed",
+                            ConcurrencyStamp = "fdfefb3c-d8f3-4032-9a77-6cf2256324ac",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "e01e0103-55ab-4594-9583-a38fdee75c17",
-                            ConcurrencyStamp = "3c8a6b70-cfd9-4998-b910-0aa5b849df6f",
+                            Id = "f61fec4c-a927-4e6c-95ca-0a8c3d3d9468",
+                            ConcurrencyStamp = "5a66ca32-f78d-4254-8ed8-513fa93e0740",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -348,9 +348,6 @@ namespace ThecoderpageProject.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CommentId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ProblemId")
                         .HasColumnType("int");
 
@@ -365,8 +362,6 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
 
                     b.HasIndex("ProblemId");
 
@@ -496,10 +491,6 @@ namespace ThecoderpageProject.Infrastructure.Migrations
 
             modelBuilder.Entity("ThecoderpageProject.Domain.Entities.Report", b =>
                 {
-                    b.HasOne("ThecoderpageProject.Domain.Entities.Comment", "Comment")
-                        .WithMany()
-                        .HasForeignKey("CommentId");
-
                     b.HasOne("ThecoderpageProject.Domain.Entities.Problem", "Problem")
                         .WithMany()
                         .HasForeignKey("ProblemId");
@@ -509,8 +500,6 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Comment");
 
                     b.Navigation("Problem");
 

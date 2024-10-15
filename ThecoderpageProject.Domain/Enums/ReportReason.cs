@@ -8,9 +8,9 @@ namespace ThecoderpageProject.Domain.Enums
 {
     public enum ReportReason
     {
-        Spam = 1,
-        Inappropriate = 2,
-        Abusive = 3,
-        Other = 4
+        Spam,
+        Inappropriate,
+        Abusive,
+        Other
     }
 }

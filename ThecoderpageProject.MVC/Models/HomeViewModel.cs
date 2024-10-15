@@ -1,4 +1,5 @@
-﻿using ThecoderpageProject.Application.Models.VMs;
+﻿using ThecoderpageProject.Application.Models.DTOs;
+using ThecoderpageProject.Application.Models.VMs;
 
 namespace ThecoderpageProject.MVC.Models
 {
@@ -11,7 +12,8 @@ namespace ThecoderpageProject.MVC.Models
         public IEnumerable<CommentVM> Comments { get; set; } = new List<CommentVM>();
         public IEnumerable<UserVM> Users { get; set; } = new List<UserVM>();
 
-
+        //CreateReportDTO çağrıldığında burada bir nesne oluşturulacak
+        public CreateReportDTO CreateReportDTO { get; set; } = new CreateReportDTO();
 
     }
 }

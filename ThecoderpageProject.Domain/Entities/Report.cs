@@ -17,13 +17,11 @@ namespace ThecoderpageProject.Domain.Entities
 
 
         public int? ProblemId { get; set; }
-        public int? CommentId { get; set; }
 
         // Navigation property
 
         public virtual Problem Problem { get; set; }
         public virtual AppUser User { get; set; }
-        public virtual Comment Comment { get; set; }
 
 
     }
