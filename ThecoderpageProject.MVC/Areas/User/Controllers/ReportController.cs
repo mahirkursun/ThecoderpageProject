@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using ThecoderpageProject.Application.Models.DTOs;
+using ThecoderpageProject.Application.Models.VMs;
 using ThecoderpageProject.Application.Services.AbstractServices;
+using ThecoderpageProject.Domain.Enums;
+using ThecoderpageProject.MVC.Models;
 
 namespace ThecoderpageProject.MVC.Areas.User.Controllers
 {
@@ -17,14 +20,26 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
             _reportService = reportService;
         }
 
-        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var reports = await _reportService.GetAllReports();
+            var model = new UpdateProblemDTO
+            {
+                
+                Reports = reports
+            };
+
+            return View(model);
+        }
+
+
+            [HttpGet]
         public IActionResult Create(int problemId)
         {
 
             var model = new CreateReportDTO
             {
                 ProblemId = problemId
-
             };
 
             return View(model);
@@ -33,22 +48,21 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateReportDTO reportDTO)
         {
-
-            Console.WriteLine($"ProblemId: {reportDTO.ProblemId}, UserId: {reportDTO.UserId}, ReportReason: {reportDTO.ReportReason}");
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             reportDTO.UserId = userId;
 
+            
+            var existingReport = await _reportService.GetReportByUserAndProblem(userId, reportDTO.ProblemId.Value);
+            if (existingReport != null)
+            {
+                TempData["Error"] = "Bu problemi daha önce rapor ettiniz.";
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
 
-
-
-            // Report kaydını oluştur
             await _reportService.CreateReport(reportDTO);
             TempData["Success"] = "Rapor başarıyla oluşturuldu.";
 
-
-
-            // Problem rapor edilmişse ProblemController'a yönlendir
-            return RedirectToAction("Index", "Home", new { area = "" });
+            return RedirectToAction("Index", "Home", new { area = "", id = reportDTO.ProblemId });
         }
 
 

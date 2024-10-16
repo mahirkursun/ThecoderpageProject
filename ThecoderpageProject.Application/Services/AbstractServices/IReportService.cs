@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,8 @@ namespace ThecoderpageProject.Application.Services.AbstractServices
         Task<Report> GetReportById(int id);
         Task CreateReport(CreateReportDTO model);
         Task DeleteReport(int id);
+        Task<Report> GetReportByUserAndProblem(string userId, int problemId);
+
+
     }
 }

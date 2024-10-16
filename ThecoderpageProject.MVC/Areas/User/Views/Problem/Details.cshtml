@@ -1,4 +1,5 @@
-﻿@model UpdateProblemDTO
+﻿
+@model UpdateProblemDTO
 
 @{
     ViewData["Title"] = "Details";
@@ -12,9 +13,43 @@
 
             <h6 class="mb-0">@Model.Users.FirstOrDefault(u => u.Id == Model.UserId)?.UserName</h6>
         </div>
-        <span class="badge @(Model.Status == ProblemStatus.Resolved ? "bg-success" : "bg-danger")">
+        <div class="d-flex justify-content-end align-items-center" style="position: relative;">
+            <span class="badge @(Model.Status == ProblemStatus.Resolved ? "bg-success" : "bg-danger") me-2 p-2">
             @(Model.Status == ProblemStatus.Resolved ? "Çözüm bulundu" : "Çözüm aranıyor")
         </span>
+        <!-- Rapor Etme -->
+  
+            @if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var existingReport = Model.Reports.FirstOrDefault(r => r.ProblemId == Model.Id && r.UserId == userId);
+
+                if (existingReport == null)
+                {
+                    <form asp-controller="Report" asp-action="Create" asp-area="User" method="post" id="reportForm-@Model.Id" class="ms-2">
+                        <input type="hidden" name="ProblemId" value="@Model.Id" />
+                        <div class="form-group">
+                            <select asp-for="ReportReason" class="form-select form-select-sm " onchange="document.getElementById('reportForm-@Model.Id').submit();">
+                                <option value="">Rapor</option>
+                                @foreach (var reason in Enum.GetValues(typeof(ReportReason)))
+                                {
+                                    <option value="@((int)reason)">@reason</option>
+                                }
+                            </select>
+                            <span asp-validation-for="ReportReason" class="text-danger"></span>
+                        </div>
+
+                    </form>
+                }
+                else
+                {
+                    <span class="badge bg-secondary ms-2 p-2">
+                        Rapor edildi.
+                    </span>
+                }
+            }
+     </div>
+
     </div>
 
     <!-- Açıklama ve Kullanıcı Bilgileri -->
@@ -56,6 +91,7 @@
             }
         </ul>
     </div>
+   
 </div>
 
 <!-- Geri Dön Linki -->

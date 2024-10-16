@@ -13,5 +13,7 @@ namespace ThecoderpageProject.Domain.AbstractRepositories
         Task<Report> GetReportById(int id);
         Task CreateReport(Report report);
         Task DeleteReport(int id);
+
+        Task<Report> GetReportByUserAndProblem(string userId, int problemId);
     }
 }

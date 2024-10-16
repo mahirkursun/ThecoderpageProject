@@ -1,4 +1,5 @@
-﻿@model HomeViewModel
+﻿
+@model HomeViewModel
 
 @if (Model.Problems.Count() == 0)
 {
@@ -18,38 +19,42 @@
 
                 </div>
             </div>
-            <div class="d-flex">
-                <span class="badge @(problem.Status == ProblemStatus.Resolved ? "bg-success" : "bg-danger") align-content-center">
+            <div class="d-flex justify-content-end align-items-center" style="position: relative; ">
+                <span class="badge @(problem.Status == ProblemStatus.Resolved ? "bg-success" : "bg-danger") me-2 p-2">
                     @(problem.Status == ProblemStatus.Resolved ? "Çözüm bulundu" : "Çözüm aranıyor")
                 </span>
 
-               
+                @*REPORT*@
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <form asp-action="Create" asp-controller="Report" asp-area="User" method="post">
-                        <input type="hidden" name="ProblemId" value="@problem.Id" /> <!-- ProblemId burada gizli input olarak gönderiliyor -->
+                    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    var existingReport = Model.Reports.FirstOrDefault(r => r.ProblemId == problem.Id && r.UserId == userId);
 
-
-
-                        <div class="form-group">
-
-                            <select asp-for="@Model.CreateReportDTO.ReportReason" class="form-control">
-                                @foreach (var reason in Enum.GetValues(typeof(ReportReason)))
-                                {
-                                    <option value="@reason.ToString()">@reason</option>
-                                }
-                            </select>
-
-                            <span asp-validation-for="@Model.CreateReportDTO.ReportReason" class="text-danger"></span>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Submit Report</button>
-                    </form>
+                    if (existingReport == null)
+                    {
+                        <form asp-action="Create" asp-controller="Report" asp-area="User" method="post" id="reportForm-@problem.Id" class="ms-2">
+                            <input type="hidden" name="ProblemId" value="@problem.Id" />
+                            <div class="form-group">
+                                <select asp-for="ReportReason" class="form-select form-select-sm " onchange="document.getElementById('reportForm-@problem.Id').submit();">
+                                    <option value="">Rapor</option>
+                                    @foreach (var reason in Enum.GetValues(typeof(ReportReason)))
+                                    {
+                                        <option value="@((int)reason)">@reason</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="ReportReason" class="text-danger"></span>
+                            </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary ms-2 p-2">
+                            Rapor Edildi
+                        </span>
+                    }
                 }
-
-                
             </div>
-            
+
 
 
         </div>

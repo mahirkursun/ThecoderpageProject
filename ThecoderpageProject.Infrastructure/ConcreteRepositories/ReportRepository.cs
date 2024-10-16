@@ -47,5 +47,10 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
         {
             return await _context.Reports.ToListAsync();
         }
+
+        public async Task<Report> GetReportByUserAndProblem(string userId, int problemId)
+        {
+            return await _context.Reports.FirstOrDefaultAsync(r => r.UserId == userId && r.ProblemId == problemId);
+        }
     }
 }

@@ -23,5 +23,8 @@ namespace ThecoderpageProject.Application.Models.DTOs
         public IEnumerable<CommentVM> Comments { get; set; } = new List<CommentVM>();
         public IEnumerable<UserVM> Users { get; set; } = new List<UserVM>();
 
+        public IEnumerable<ReportVM> Reports { get; set; } = new List<ReportVM>();
+        public ReportReason ReportReason { get; set; }
+
     }
 }

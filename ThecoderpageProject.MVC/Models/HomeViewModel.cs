@@ -1,5 +1,6 @@
 ﻿using ThecoderpageProject.Application.Models.DTOs;
 using ThecoderpageProject.Application.Models.VMs;
+using ThecoderpageProject.Domain.Enums;
 
 namespace ThecoderpageProject.MVC.Models
 {
@@ -12,8 +13,10 @@ namespace ThecoderpageProject.MVC.Models
         public IEnumerable<CommentVM> Comments { get; set; } = new List<CommentVM>();
         public IEnumerable<UserVM> Users { get; set; } = new List<UserVM>();
 
+        public IEnumerable<ReportVM> Reports { get; set; } = new List<ReportVM>();
+
         //CreateReportDTO çağrıldığında burada bir nesne oluşturulacak
-        public CreateReportDTO CreateReportDTO { get; set; } = new CreateReportDTO();
+        public ReportReason ReportReason { get; set; }
 
     }
 }

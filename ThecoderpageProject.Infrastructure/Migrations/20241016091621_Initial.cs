@@ -293,8 +293,8 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "9f6ce9d8-fd6a-41c2-a7b5-db1e844e67ed", "fdfefb3c-d8f3-4032-9a77-6cf2256324ac", "Admin", "ADMIN" },
-                    { "f61fec4c-a927-4e6c-95ca-0a8c3d3d9468", "5a66ca32-f78d-4254-8ed8-513fa93e0740", "User", "USER" }
+                    { "1fcc83ce-f316-4810-8f94-55f9408eb226", "28df024f-a2d1-4512-822d-e8301892dc21", "User", "USER" },
+                    { "9ebc6eab-741c-4ce9-9519-d45cebf5c646", "7ef6d1ba-f508-4897-8c3f-06bbf2dec8e4", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(

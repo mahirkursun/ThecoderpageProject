@@ -17,14 +17,16 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
         private readonly ICategoryService _categoryService;
         private readonly ICommentService _commentService;
         private readonly IUserService _userService;
+        private readonly IReportService _reportService;
 
-        public ProblemController(IProblemService problemService, IVoteService voteService, ICategoryService categoryService, ICommentService commentService, IUserService userService) // Update constructor
+        public ProblemController(IProblemService problemService, IVoteService voteService, ICategoryService categoryService, ICommentService commentService, IUserService userService, IReportService reportService) // Update constructor
         {
             _problemService = problemService;
             _voteService = voteService;
             _categoryService = categoryService;
             _commentService = commentService;
             _userService = userService;
+            _reportService = reportService;
 
         }
 
@@ -171,6 +173,7 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
                 UserId = problem.UserId,
                 Users = (await _userService.GetAll()).ToList(),
                 Comments = (await _commentService.GetCommentsByProblemId(id)).ToList(),
+                Reports = (await _reportService.GetAllReports()).ToList()
             };
             return View(problemDTO);
         }

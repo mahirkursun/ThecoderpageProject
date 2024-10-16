@@ -15,6 +15,5 @@ namespace ThecoderpageProject.Application.Models.VMs
 
         public string UserId { get; set; }
         public int? ProblemId { get; set; }
-        public int? CommentId { get; set; }
     }
 }
