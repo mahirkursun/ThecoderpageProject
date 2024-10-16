@@ -1,5 +1,4 @@
-﻿
-@model HomeViewModel
+﻿@model HomeViewModel
 
 @if (Model.Problems.Count() == 0)
 {
@@ -29,28 +28,31 @@
                 {
                     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     var existingReport = Model.Reports.FirstOrDefault(r => r.ProblemId == problem.Id && r.UserId == userId);
-
-                    if (existingReport == null)
+                    var isOwner = problem.UserId == userId;
+                    if (!isOwner)
                     {
-                        <form asp-action="Create" asp-controller="Report" asp-area="User" method="post" id="reportForm-@problem.Id" class="ms-2">
-                            <input type="hidden" name="ProblemId" value="@problem.Id" />
-                            <div class="form-group">
-                                <select asp-for="ReportReason" class="form-select form-select-sm " onchange="document.getElementById('reportForm-@problem.Id').submit();">
-                                    <option value="">Rapor</option>
-                                    @foreach (var reason in Enum.GetValues(typeof(ReportReason)))
-                                    {
-                                        <option value="@((int)reason)">@reason</option>
-                                    }
-                                </select>
-                                <span asp-validation-for="ReportReason" class="text-danger"></span>
-                            </div>
-                        </form>
-                    }
-                    else
-                    {
-                        <span class="badge bg-secondary ms-2 p-2">
-                            Rapor Edildi
-                        </span>
+                        if (existingReport == null)
+                        {
+                            <form asp-action="Create" asp-controller="Report" asp-area="User" method="post" id="reportForm-@problem.Id" class="ms-2">
+                                <input type="hidden" name="ProblemId" value="@problem.Id" />
+                                <div class="form-group">
+                                    <select asp-for="ReportReason" class="form-select form-select-sm " onchange="document.getElementById('reportForm-@problem.Id').submit();">
+                                        <option value="">Rapor</option>
+                                        @foreach (var reason in Enum.GetValues(typeof(ReportReason)))
+                                        {
+                                            <option value="@((int)reason)">@reason</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="ReportReason" class="text-danger"></span>
+                                </div>
+                            </form>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary ms-2 p-2">
+                                Rapor Edildi
+                            </span>
+                        }
                     }
                 }
             </div>

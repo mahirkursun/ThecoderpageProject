@@ -47,23 +47,43 @@ body {
     margin-top: 0;
     transition: margin-top 0.3s ease; 
 }
+.share-problem {
+    margin-top: 0;
+    transition: margin-top 0.3s ease;
+}
 
 @media (max-width: 1680px) {
     .banner {
         margin-top: 165px; 
+        margin-bottom:-50px;
+    }
+    .share-problem {
+        margin-top: 55px;
     }
 }
 
-@media (max-width: 895px) {
+@media (max-width: 930px) {
     .banner {
         margin-top: 205px;
+        
+    }
+    .share-problem {
+        margin-top: 95px;
     }
 }
-
-@media (max-width: 620px) {
+@media(max-width: 650px) {
     .banner {
         margin-top: 100px;
+        margin-bottom: -120px;
         visibility: hidden;
-        height: 130px; 
+        height: 130px;
+    }
+
+    
+}
+@media (min-width: 300px) and (max-width: 640px) {
+    
+    .share-problem {
+        margin-top: 150px;
     }
 }

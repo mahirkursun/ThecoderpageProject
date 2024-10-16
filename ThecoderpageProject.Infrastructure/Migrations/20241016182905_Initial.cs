@@ -293,8 +293,30 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1fcc83ce-f316-4810-8f94-55f9408eb226", "28df024f-a2d1-4512-822d-e8301892dc21", "User", "USER" },
-                    { "9ebc6eab-741c-4ce9-9519-d45cebf5c646", "7ef6d1ba-f508-4897-8c3f-06bbf2dec8e4", "Admin", "ADMIN" }
+                    { "442c1f69-7f31-41f4-ab11-579568332ec3", "d39551e9-2562-4ac8-aac7-9ddae425af83", "Admin", "ADMIN" },
+                    { "558a91c6-76d7-47f4-8a1d-0272dc97c30b", "8db034bc-4f16-41e8-b9b7-661c31854ef5", "User", "USER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "db601adf-51fe-4225-8c4b-8024f19d1248", 0, "513061f7-5460-48e8-a649-b047d90c51ca", "mahirkrsn@gmail.com", false, "Mahir", "Kurşun", false, null, "MAHIRKRSN@GMAIL.COM", "MAHIRKURSUN", "AQAAAAIAAYagAAAAEAjpF6/+bTSvYLgAati67wW9gJFVHOWRy9LxjAAB/xwcX9G0kkOpdsmyNsIVSpE9tg==", null, false, "Admin", "", false, "mahirkursun" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "NET" },
+                    { 2, "Csharp" },
+                    { 3, "HTML" },
+                    { 4, "CSS" },
+                    { 5, "Javascript" },
+                    { 6, "Java" },
+                    { 7, "React" },
+                    { 8, "C++" },
+                    { 9, "Python" },
+                    { 10, "Angular" }
                 });
 
             migrationBuilder.CreateIndex(

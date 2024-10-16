@@ -12,7 +12,7 @@ using ThecoderpageProject.Infrastructure.Context;
 namespace ThecoderpageProject.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241016091621_Initial")]
+    [Migration("20241016182905_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -54,15 +54,15 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9ebc6eab-741c-4ce9-9519-d45cebf5c646",
-                            ConcurrencyStamp = "7ef6d1ba-f508-4897-8c3f-06bbf2dec8e4",
+                            Id = "442c1f69-7f31-41f4-ab11-579568332ec3",
+                            ConcurrencyStamp = "d39551e9-2562-4ac8-aac7-9ddae425af83",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "1fcc83ce-f316-4810-8f94-55f9408eb226",
-                            ConcurrencyStamp = "28df024f-a2d1-4512-822d-e8301892dc21",
+                            Id = "558a91c6-76d7-47f4-8a1d-0272dc97c30b",
+                            ConcurrencyStamp = "8db034bc-4f16-41e8-b9b7-661c31854ef5",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -249,6 +249,27 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "db601adf-51fe-4225-8c4b-8024f19d1248",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "513061f7-5460-48e8-a649-b047d90c51ca",
+                            Email = "mahirkrsn@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Mahir",
+                            LastName = "Kurşun",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MAHIRKRSN@GMAIL.COM",
+                            NormalizedUserName = "MAHIRKURSUN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAjpF6/+bTSvYLgAati67wW9gJFVHOWRy9LxjAAB/xwcX9G0kkOpdsmyNsIVSpE9tg==",
+                            PhoneNumberConfirmed = false,
+                            Role = "Admin",
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "mahirkursun"
+                        });
                 });
 
             modelBuilder.Entity("ThecoderpageProject.Domain.Entities.Category", b =>
@@ -266,6 +287,58 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "NET"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Csharp"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "HTML"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "CSS"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Javascript"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Java"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "React"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "C++"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Python"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Angular"
+                        });
                 });
 
             modelBuilder.Entity("ThecoderpageProject.Domain.Entities.Comment", b =>

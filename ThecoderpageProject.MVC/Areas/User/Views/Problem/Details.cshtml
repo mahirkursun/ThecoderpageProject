@@ -66,8 +66,8 @@
     <div class="card-footer">
         <form asp-controller="Comment" asp-action="Create" method="post" class="d-flex">
             <input type="hidden" name="ProblemId" value="@Model.Id" />
-            <input type="text" name="Content" placeholder="Yorumunuzu yazın..." class="form-control me-2" required />
-            <button type="submit" class="btn btn-primary">Yorum Ekle</button>
+            <input type="text" name="Content" placeholder="Yorumunuzu yazın..." class="form-control me-2" id="commentInput" onkeyup="checkCommentLength()" required />
+            <button type="submit" class="btn btn-primary disabled-button" id="commentButton" disabled>Yorum Ekle</button>
         </form>
     </div>
 
@@ -98,3 +98,30 @@
 <div class="text-center mt-3">
     <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-secondary">Listeye Geri Dön</a>
 </div>
+
+
+
+
+@section Scripts {
+    <script>
+        function checkCommentLength() {
+            var commentInput = document.getElementById("commentInput");
+            var commentButton = document.getElementById("commentButton");
+            if (commentInput.value.length >= 3) {
+                commentButton.disabled = false;
+                commentButton.classList.remove("disabled-button");
+            } else {
+                commentButton.disabled = true;
+                commentButton.classList.add("disabled-button");
+            }
+        }
+    </script>
+}
+
+<style>
+    .disabled-button {
+        background-color: #d3d3d3; /* Light gray color */
+        border-color: #d3d3d3; /* Light gray color */
+        cursor: not-allowed;
+    }
+</style>

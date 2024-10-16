@@ -77,7 +77,7 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
             await _problemService.Create(problemDTO);
             TempData["Success"] = $"{problemDTO.Title} başarıyla eklendi";
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         // User/Problem/Update/5
@@ -154,7 +154,7 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(int id, string  userId)
+        public async Task<IActionResult> Details(int id, string userId)
         {
             var problem = await _problemService.GetProblemById(id);
             if (problem == null)

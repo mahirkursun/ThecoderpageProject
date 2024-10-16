@@ -7,6 +7,14 @@
 <h1 class="text-center">My Problems</h1>
 
 <div class="container mt-4">
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center">
+            Henüz problem paylaşmadınız.
+        </div>
+    }
+    else
+    {
     <div class="row">
         @foreach (var problem in Model)
         {
@@ -28,4 +36,5 @@
             </div>
         }
     </div>
+    }
 </div>
