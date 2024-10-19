@@ -8,71 +8,77 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
-    <header>
-        <div class="fixed-nav">
-            <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom">
-                <div class="container-fluid">
-                    <a class="navbar-brand" asp-area="Admin" asp-controller="Problem" asp-action="Index">Thecoderpage</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="adminNavbar">
-                        <ul class="navbar-nav me-auto">
+<body class="m-0">
+    <header class="d-flex flex-column mt-0">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="Admin" asp-controller="Home" asp-action="Index" >Thecoderpage</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="adminNavbar">
+                    <ul class="navbar-nav ms-auto">
+                        @if (User.Identity.IsAuthenticated)
+                        {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="Index">Kullanıcılar</a>
+                                <form asp-area="Identity" asp-controller="Account" asp-action="Logout" method="post" style="display:inline;">
+                                    <button type="submit" class="nav-link btn btn-link" style="padding: 0; border: none; background: none;">Çıkış Yap</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Login">Giriş Yap</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="Index">Kategoriler</a>
+                                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Register">Kayıt Ol</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-controller="Problem" asp-action="Index">Problemler</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-controller="Comment" asp-action="Index">Yorumlar</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-controller="Report" asp-action="Index">Raporlar</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-
-
-                        <ul class="navbar-nav">
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <li class="nav-item">
-                                    <form asp-area="Identity" asp-controller="Account" asp-action="Logout" method="post" style="display:inline;">
-                                        <button type="submit" class="nav-link btn btn-link" style="padding: 0; border: none; background: none;">Çıkış Yap</button>
-                                    </form>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Login">Giriş Yap</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Register">Kayıt Ol</a>
-                                </li>
-                            }
-                        </ul>
-                    </div>
+                        }
+                    </ul>
                 </div>
-            </nav>
-        </div>
-        
+            </div>
+        </nav>
     </header>
-    <div class="container mt-4">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="d-flex">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light border-end flex-column" style="width:12%">
+            <div class="container-fluid flex-column">
+                <div class="collapse navbar-collapse flex-column" id="adminNavbar" style="font-size: 17px">
+                    <ul class="navbar-nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Anasayfa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Problem" asp-action="Index">Problems</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Comment" asp-action="Index">Comments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="Index">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="Index">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Report" asp-action="Index">Reports</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Like" asp-action="Index">Likes</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container mt-4">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
     @*Footer*@
     @Html.Partial("Footer/_Footer_PV")
-
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

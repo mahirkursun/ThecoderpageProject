@@ -23,7 +23,8 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
             _context = context;
         }
         private  DbSet<AppUser> Users =>_context.Users; // Change this line
-        
+
+
         public async Task<AppUser> DeleteUser(string id)
         {
             var user = await Users.FirstOrDefaultAsync(u => u.Id == id);

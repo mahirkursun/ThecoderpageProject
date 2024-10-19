@@ -16,15 +16,13 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
     public class UserManager : IUserService
     {
         private readonly IUserRepository<AppUser> _userRepository;
-        private readonly IMapper _mapper; 
+        private readonly IMapper _mapper;
 
         public UserManager(IUserRepository<AppUser> userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mapper = mapper;
         }
-
-       
 
         public async Task Update(UpdateUserDTO userDTO)
         {
@@ -75,5 +73,7 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             }
             return _mapper.Map<UpdateUserDTO>(user);
         }
+
+
     }
 }

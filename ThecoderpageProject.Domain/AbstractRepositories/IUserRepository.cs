@@ -9,7 +9,6 @@ namespace ThecoderpageProject.Domain.AbstractRepositories
 {
     public interface IUserRepository<T> where T : AppUser
     {
-        
         Task<T> GetUserById(string id);
         Task<IEnumerable<T>> GetUsers();
         Task<T> UpdateUser(T user);

@@ -69,7 +69,17 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            return View(report);
+
+            var model = new UpdateReportDTO
+            {
+                Id = report.Id,
+                ProblemId = report.ProblemId,
+                ReportReason = report.ReportReason,
+                UserId = report.UserId,
+                ReportedAt = report.ReportedAt
+            };
+
+            return View(model);
         }
 
         [HttpGet]

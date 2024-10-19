@@ -49,7 +49,7 @@ namespace ThecoderpageProject.MVC.Areas.Identity.Controllers
                     {
 
                         // Admin paneline yönlendir Problem listesine
-                        return RedirectToAction("Index", "Problem", new { area = "Admin" });
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
                     }
                     else
                     {

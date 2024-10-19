@@ -47,12 +47,24 @@
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
 
+                <!-- Dropdown Menü Başlangıcı -->
                 <td>
-                    <a asp-action="Update" asp-route-id="@item.Id">Update</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            
+                            <li><a class="dropdown-item" asp-action="Update" asp-route-id="@item.Id">Update</a></li>
+                            <li><a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id">Details</a></li>
+                            <li><a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id">Delete</a></li>
 
+                        </ul>
+                    </div>
                 </td>
+
+
+                
             </tr>
         }
     </tbody>

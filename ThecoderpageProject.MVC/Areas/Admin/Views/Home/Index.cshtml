@@ -1,0 +1,148 @@
+﻿@model ThecoderpageProject.MVC.Models.HomeViewModel
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h1>Admin Dashboard</h1>
+<br />
+<div>
+  
+    <div class="row">
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Users</h5>
+                    <p class="card-text">@Model.Users.Count()</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Categories</h5>
+                    <p class="card-text">@Model.Categories.Count()</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Problems</h5>
+                    <p class="card-text">@Model.Problems.Count()</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Comments</h5>
+                    <p class="card-text">@Model.Comments.Count()</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Reports</h5>
+                    <p class="card-text">@Model.Reports.Count()</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Likes</h5>
+                    <p class="card-text">@Model.Likes.Count()</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Charts</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <canvas id="userChart"></canvas>
+        </div>
+        <div class="col-md-4">
+            <canvas id="problemChart"></canvas>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var userChartCtx = document.getElementById('userChart').getContext('2d');
+        var userChart = new Chart(userChartCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Users', 'Problems', 'Comments', 'Likes'],
+                datasets: [{
+                    label: 'Statistics',
+                    data: [@Model.Users.Count(), @Model.Problems.Count(), @Model.Comments.Count(), @Model.Likes.Count()],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        var problemChartCtx = document.getElementById('problemChart').getContext('2d');
+        var problemChart = new Chart(problemChartCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Users', 'Problems', 'Comments', 'Likes'],
+                datasets: [{
+                    label: 'Statistics',
+                    data: [@Model.Users.Count(), @Model.Problems.Count(), @Model.Comments.Count(), @Model.Likes.Count()],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}

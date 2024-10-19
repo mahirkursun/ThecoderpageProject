@@ -12,7 +12,6 @@ namespace ThecoderpageProject.Application.Models.VMs
         public int Id { get; set; }
         public int ProblemId { get; set; }
         public string UserId { get; set; }
-        public bool HasLiked { get; set; }
         public int LikeCount { get; set; }
     }
 }

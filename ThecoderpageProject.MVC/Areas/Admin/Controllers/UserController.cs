@@ -26,7 +26,6 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
             return View(users);
         }
 
-
         // Admin/User/Update/5
         [HttpGet]
         public async Task<IActionResult> Update(string id)

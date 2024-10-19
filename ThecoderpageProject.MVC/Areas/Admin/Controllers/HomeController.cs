@@ -1,12 +1,12 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using ThecoderpageProject.Application.Services.AbstractServices;
-using ThecoderpageProject.Domain.Entities;
 using ThecoderpageProject.MVC.Models;
 
-namespace ThecoderpageProject.MVC.Controllers
+namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -27,14 +27,11 @@ namespace ThecoderpageProject.MVC.Controllers
             _likeService = likeService;
         }
 
-        public async Task<IActionResult> Index(int? categoryId)
+
+        public async Task<IActionResult> Index()
         {
-
-
             var categories = await _categoryService.GetCategories();
-            var problems = categoryId.HasValue
-                ? await _problemService.GetProblemsByCategory(categoryId.Value)
-                : await _problemService.GetAll();
+            var problems = await _problemService.GetAll();
 
             var comments = await _commentService.GetAll();
             var users = await _userService.GetAll();
@@ -54,4 +51,6 @@ namespace ThecoderpageProject.MVC.Controllers
             return View(model);
         }
     }
+
+   
 }
