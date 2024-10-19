@@ -9,8 +9,6 @@ namespace ThecoderpageProject.Domain.Enums
     public enum ProblemStatus
     {
         Open = 1,
-        Pending = 2,
-        InProgress = 3,
-        Resolved = 4
+        Resolved = 2
     }
 }

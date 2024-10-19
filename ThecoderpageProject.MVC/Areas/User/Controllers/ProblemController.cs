@@ -5,6 +5,7 @@ using System.Security.Claims;
 using ThecoderpageProject.Application.Models.DTOs;
 using ThecoderpageProject.Application.Models.VMs;
 using ThecoderpageProject.Application.Services.AbstractServices;
+using ThecoderpageProject.Domain.Enums;
 
 namespace ThecoderpageProject.MVC.Areas.User.Controllers
 {
@@ -97,17 +98,17 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(UpdateProblemDTO problemDTO)
+        public async Task<IActionResult> Update(int id, ProblemStatus status)
         {
-            if (!ModelState.IsValid)
+            var problem = await _problemService.GetProblemById(id);
+            if (problem == null)
             {
-                TempData["Error"] = "Girdiğiniz verileri kontrol edin";
-                return View(problemDTO);
+                return NotFound();
             }
 
-            await _problemService.Update(problemDTO);
-            TempData["Success"] = $"{problemDTO.Title} başarıyla güncellendi";
-            return RedirectToAction(nameof(Index));
+            problem.Status = status;
+            await _problemService.Update(problem);
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         [HttpGet]
