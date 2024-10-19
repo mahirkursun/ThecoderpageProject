@@ -14,11 +14,11 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
     public class ProblemController : Controller
     {
         private readonly IProblemService _problemService;
-        private readonly IVoteService _voteService;
+        private readonly ILikeService _voteService;
         private readonly ICategoryService _categoryService;
  
 
-        public ProblemController(IProblemService problemService, IVoteService voteService,ICategoryService categoryService) // Update constructor
+        public ProblemController(IProblemService problemService, ILikeService voteService,ICategoryService categoryService) // Update constructor
         {
             _problemService = problemService;
             _voteService = voteService;
@@ -37,15 +37,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
             /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
 
-            foreach (var problem in problems)
-            {
-                // Kullanıcının bu problem için oy verip vermediğini kontrol edin
-                var userVote = await _voteService.GetVoteByUserIdAndProblemId(userId, problem.Id);
-                if (userVote != null)
-                {
-                    problem.UserVoteType = userVote.VoteType; // Kullanıcının verdiği oy tipini sakla (upvote veya downvote)
-                }
-            }
+            
             return View(problems);
         }
 

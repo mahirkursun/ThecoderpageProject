@@ -21,11 +21,10 @@ namespace ThecoderpageProject.Domain.Entities
         public ProblemStatus Status { get; set; }
         public int CategoryId { get; set; }
 
-        public VoteType? VoteType { get; set; }
-
 
         // Navigation properties
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Like> Likes { get; set; }
         public virtual AppUser User { get; set; } // Referencing AppUser
         public virtual Category Category { get; set; }
     }

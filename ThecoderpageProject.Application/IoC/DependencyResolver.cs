@@ -21,7 +21,7 @@ namespace ThecoderpageProject.Application.IoC
             builder.RegisterType<CommentManager>().As<ICommentService>();
             builder.RegisterType<CategoryManager>().As<ICategoryService>();
             builder.RegisterType<ReportManager>().As<IReportService>();
-            builder.RegisterType<VoteManager>().As<IVoteService>();
+            builder.RegisterType<LikeManager>().As<ILikeService>();
 
             builder.Register(context => new  MapperConfiguration(config =>
             {

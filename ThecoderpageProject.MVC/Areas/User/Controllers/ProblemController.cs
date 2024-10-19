@@ -13,16 +13,16 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
     public class ProblemController : Controller
     {
         private readonly IProblemService _problemService;
-        private readonly IVoteService _voteService;
+        private readonly ILikeService _likeService;
         private readonly ICategoryService _categoryService;
         private readonly ICommentService _commentService;
         private readonly IUserService _userService;
         private readonly IReportService _reportService;
 
-        public ProblemController(IProblemService problemService, IVoteService voteService, ICategoryService categoryService, ICommentService commentService, IUserService userService, IReportService reportService) // Update constructor
+        public ProblemController(IProblemService problemService, ILikeService likeService, ICategoryService categoryService, ICommentService commentService, IUserService userService, IReportService reportService ) // Update constructor
         {
             _problemService = problemService;
-            _voteService = voteService;
+            _likeService = likeService;
             _categoryService = categoryService;
             _commentService = commentService;
             _userService = userService;
@@ -39,15 +39,7 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
             // Kullanıcının problemlerini alın
             var problems = await _problemService.GetProblemsByUserId(userId);
 
-            foreach (var problem in problems)
-            {
-                // Kullanıcının bu problem için oy verip vermediğini kontrol edin
-                var userVote = await _voteService.GetVoteByUserIdAndProblemId(userId, problem.Id);
-                if (userVote != null)
-                {
-                    problem.UserVoteType = userVote.VoteType; // Kullanıcının verdiği oy tipini sakla (upvote veya downvote)
-                }
-            }
+            
 
             return View(problems);
         }
@@ -99,6 +91,7 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
                 CreatedAt = problem.CreatedAt,
                 CategoryId = problem.CategoryId,
                 UserId = problem.UserId
+
             };
             return View(problemDTO);
         }
@@ -173,7 +166,8 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
                 UserId = problem.UserId,
                 Users = (await _userService.GetAll()).ToList(),
                 Comments = (await _commentService.GetCommentsByProblemId(id)).ToList(),
-                Reports = (await _reportService.GetAllReports()).ToList()
+                Reports = (await _reportService.GetAllReports()).ToList(),
+                Likes = await  _likeService.GetLikeByProblemId(id)
             };
             return View(problemDTO);
         }

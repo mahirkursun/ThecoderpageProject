@@ -9,11 +9,12 @@ using ThecoderpageProject.Domain.Entities;
 
 namespace ThecoderpageProject.Application.Services.AbstractServices
 {
-    public interface IVoteService
+    public interface ILikeService
     {
-        Task<Vote> GetVoteByUserIdAndProblemId(string userId, int problemId);
-        Task AddVote(Vote vote);
-        Task UpdateVote(Vote vote);
-        Task RemoveVote(int voteId);
+        Task<IEnumerable<LikeVM>> GetLikeByProblemId(int problemId);
+        Task<IEnumerable<LikeVM>> GetAllLikes();
+        Task CreateLike(CreateLikeDTO model);
+        Task UpdateLike(UpdateLikeDTO model);
+        Task DeleteLike(int problemId);
     }
 }

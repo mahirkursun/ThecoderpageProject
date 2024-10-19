@@ -1,4 +1,5 @@
 ﻿
+
 <div class="container mt-4 card-header d-flex justify-content-center" style="border-radius: 5px; max-width: 69%">
     <div class="d-flex align-items-center justify-content-around px-4 py-3" style="width: 100%;">
         <p class="mb-0" style=" font-family: Segoe 'Segoe Print'; font-weight:600; font-size: 20px;">Kod yazarken karşılaştığınız sorunları paylaşın, çözümleri birlikte bulalım.</p>
@@ -8,7 +9,28 @@
         }
         else
         {
-            <button class="btn btn-secondary btn-lg" onclick="alert('Lütfen giriş yapınız.'); window.location.href='/Identity/Account/Login';">Problem Paylaş</button>
+            <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#loginPromptModal">Problem Paylaş</button>
         }
+    </div>
+</div>
+
+<!-- Login Prompt Modal -->
+<div class="modal fade" id="loginPromptModal" tabindex="-1" aria-labelledby="loginPromptModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginPromptModalLabel">Uyarı</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Problem paylaşmak için lütfen giriş yapınız.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <form method="get" action="@Url.Action("Login", "Account", new { area = "Identity" })">
+                    <button type="submit" class="btn btn-primary">Giriş Yap</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>

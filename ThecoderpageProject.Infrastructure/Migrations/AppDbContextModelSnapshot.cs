@@ -51,15 +51,15 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "442c1f69-7f31-41f4-ab11-579568332ec3",
-                            ConcurrencyStamp = "d39551e9-2562-4ac8-aac7-9ddae425af83",
+                            Id = "5553a8b9-84ca-4e24-bf2f-039af8bc4859",
+                            ConcurrencyStamp = "8a66d368-7503-4259-89bd-e571fedc91ff",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "558a91c6-76d7-47f4-8a1d-0272dc97c30b",
-                            ConcurrencyStamp = "8db034bc-4f16-41e8-b9b7-661c31854ef5",
+                            Id = "97defd51-cb03-4464-add2-f71c7d14487b",
+                            ConcurrencyStamp = "e3a7e08e-aef3-4238-b12d-0be8481fe4ff",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -250,9 +250,9 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "db601adf-51fe-4225-8c4b-8024f19d1248",
+                            Id = "86878c8a-ff83-4c15-a862-c7eb060d8b53",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "513061f7-5460-48e8-a649-b047d90c51ca",
+                            ConcurrencyStamp = "8b117168-7255-40b9-bd11-b27ff0031c5d",
                             Email = "mahirkrsn@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mahir",
@@ -260,7 +260,7 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MAHIRKRSN@GMAIL.COM",
                             NormalizedUserName = "MAHIRKURSUN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAjpF6/+bTSvYLgAati67wW9gJFVHOWRy9LxjAAB/xwcX9G0kkOpdsmyNsIVSpE9tg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELJEYhZnPXxXaxQnIiqQMdmY1QIzovClsCwR2Q2jKGeHbMZ9HgkvxbkLDTP6zNOwcA==",
                             PhoneNumberConfirmed = false,
                             Role = "Admin",
                             SecurityStamp = "",
@@ -369,6 +369,33 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("ThecoderpageProject.Domain.Entities.Like", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProblemId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProblemId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Likes");
+                });
+
             modelBuilder.Entity("ThecoderpageProject.Domain.Entities.Problem", b =>
                 {
                     b.Property<int>("Id")
@@ -397,9 +424,6 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("VoteType")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -438,36 +462,6 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Reports");
-                });
-
-            modelBuilder.Entity("ThecoderpageProject.Domain.Entities.Vote", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ProblemId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("VoteType")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("VotedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProblemId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Votes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -540,6 +534,25 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("ThecoderpageProject.Domain.Entities.Like", b =>
+                {
+                    b.HasOne("ThecoderpageProject.Domain.Entities.Problem", "Problem")
+                        .WithMany("Likes")
+                        .HasForeignKey("ProblemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ThecoderpageProject.Domain.Entities.AppUser", "User")
+                        .WithMany("Likes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Problem");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ThecoderpageProject.Domain.Entities.Problem", b =>
                 {
                     b.HasOne("ThecoderpageProject.Domain.Entities.Category", "Category")
@@ -576,28 +589,11 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ThecoderpageProject.Domain.Entities.Vote", b =>
-                {
-                    b.HasOne("ThecoderpageProject.Domain.Entities.Problem", "Problem")
-                        .WithMany()
-                        .HasForeignKey("ProblemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ThecoderpageProject.Domain.Entities.AppUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Problem");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("ThecoderpageProject.Domain.Entities.AppUser", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Likes");
 
                     b.Navigation("Problems");
                 });
@@ -605,6 +601,8 @@ namespace ThecoderpageProject.Infrastructure.Migrations
             modelBuilder.Entity("ThecoderpageProject.Domain.Entities.Problem", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618
         }

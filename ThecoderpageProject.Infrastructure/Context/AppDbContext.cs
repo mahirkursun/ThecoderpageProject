@@ -17,7 +17,7 @@ namespace ThecoderpageProject.Infrastructure.Context
         { }
 
         public DbSet<Report> Reports { get; set; }
-        public DbSet<Vote> Votes { get; set; }
+        public DbSet<Like> Likes { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Problem> Problems { get; set; }

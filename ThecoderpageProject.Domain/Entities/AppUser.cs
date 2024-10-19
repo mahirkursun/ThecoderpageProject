@@ -19,6 +19,7 @@ namespace ThecoderpageProject.Domain.Entities
         // Navigation properties
         public virtual ICollection<Problem> Problems { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Like> Likes { get; set; }
     }
 
 }

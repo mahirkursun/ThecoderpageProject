@@ -61,14 +61,14 @@ namespace ThecoderpageProject.MVC
             builder.Services.AddScoped<ICommentService, CommentManager>();
             builder.Services.AddScoped<ICategoryService, CategoryManager>();
             builder.Services.AddScoped<IReportService, ReportManager>();
-            builder.Services.AddScoped<IVoteService, VoteManager>();
+            builder.Services.AddScoped<ILikeService, LikeManager>();
 
             builder.Services.AddScoped<IUserRepository<AppUser>, UserRepository>();
             builder.Services.AddScoped<IProblemRepository<Problem>, ProblemRepository>();
             builder.Services.AddScoped<ICommentRepository<Comment>, CommentRepository>();
             builder.Services.AddScoped<ICategoryRepository<Category>, CategoryRepository>();
             builder.Services.AddScoped<IReportRepository<Report>, ReportRepository>();
-            builder.Services.AddScoped<IVoteRepository<Vote>, VoteRepository>();
+            builder.Services.AddScoped<ILikeRepository<Like>, LikeRepository>();
 
             builder.Services.ConfigureApplicationCookie(options =>
             {

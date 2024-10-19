@@ -47,10 +47,7 @@ namespace ThecoderpageProject.Infrastructure.EntityTypeConfig
                 .HasForeignKey(r => r.UserId)
                 .OnDelete(DeleteBehavior.Cascade); // Kullanıcı silindiğinde ilgili Raporlar silinsin
 
-            builder.HasMany<Vote>() // User -> Votes
-                .WithOne() // Bir Kullanıcı birden çok Oylama yapabilir
-                .HasForeignKey(v => v.UserId)
-                .OnDelete(DeleteBehavior.Restrict); // Kullanıcı silindiğinde ilgili Oylamalar silinsin
+            
         }
     }
 }

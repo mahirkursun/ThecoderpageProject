@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ThecoderpageProject.Domain.Enums;
 
-namespace ThecoderpageProject.Application.Models.DTOs
+namespace ThecoderpageProject.Domain.Entities
 {
-    public class CreateVoteDTO 
+    public class Like
     {
         public int Id { get; set; }
         public int ProblemId { get; set; }
         public string UserId { get; set; }
+        public DateTime CreatedAt { get; set; }
 
-        public VoteType voteType { get; set; } 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public virtual Problem Problem { get; set; }
+        public virtual AppUser User { get; set; }
     }
+
 }

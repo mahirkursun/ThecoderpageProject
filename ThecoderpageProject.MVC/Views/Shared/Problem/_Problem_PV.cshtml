@@ -76,6 +76,39 @@
             </a>
         </div>
 
+        <!--Beğeni-->
+        <div class="card-footer bg-light d-flex justify-content-start">
+            <div class="d-flex align-items-center me-3" style="border: 1px solid #ddd; border-radius: 10px; padding: 1px 10px;">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    var hasLiked = Model.Likes.Any(l => l.ProblemId == problem.Id && l.UserId == userId);
+
+                    <form method="post" action="/User/Like/ToggleLike" class="d-flex align-items-center w-100">
+                        <input type="hidden" name="problemId" value="@problem.Id" />
+                        <button type="submit" class="btn btn-link p-0 d-flex align-items-center w-100" style="text-align: left;">
+                            <i class="bi bi-heart-fill" style="color: @(hasLiked ? "red" : "gray"); margin:3px 3px 0 0;"></i>
+
+                        </button>
+                        <span class="ms-1" style="pointer-events: none; text-decoration: none; padding:5px;">@Model.Likes.Count(l => l.ProblemId == problem.Id)</span>
+                    </form>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-link p-0 d-flex align-items-center w-100" data-bs-toggle="modal" data-bs-target="#loginPromptModal" style="text-align: left;">
+                        <i class="bi bi-heart-fill" style="color: gray; margin:3px 3px 0 0;"></i>
+
+                    </button>
+
+                    <span class="ms-1" style="pointer-events: none; text-decoration: none;">@Model.Likes.Count(l => l.ProblemId == problem.Id)</span>
+                }
+            </div>
+            <div class="d-flex align-items-center" style="border: 1px solid #ddd; border-radius: 10px; padding: 3px 10px;">
+                <i class="bi bi-chat-fill me-1"></i>
+                <span>@Model.Comments.Count(c => c.ProblemId == problem.Id)</span>
+            </div>
+        </div>
+
         <!-- Yorumlar -->
         <div class="card-footer bg-light">
             <ul class="list-group mt-2">
@@ -102,5 +135,23 @@
         </div>
     </div>
 }
-
-
+<!-- Login Prompt Modal -->
+<div class="modal fade" id="loginPromptModal" tabindex="-1" aria-labelledby="loginPromptModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginPromptModalLabel">Uyarı</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Beğeni yapmak için lütfen giriş yapınız.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <form method="get" action="@Url.Action("Login", "Account", new { area = "Identity" })">
+                    <button type="submit" class="btn btn-primary">Giriş Yap</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

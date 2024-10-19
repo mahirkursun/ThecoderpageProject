@@ -45,8 +45,9 @@ namespace ThecoderpageProject.Application.AutoMapper
             CreateMap<Report, ReportVM>();
 
 
-            CreateMap<CreateVoteDTO, Vote>();
-            CreateMap<Vote, VoteVM>();
+            CreateMap<CreateLikeDTO, Like>();
+            CreateMap<Like, UpdateLikeDTO>();
+            CreateMap<Like, LikeVM>();
         }
 
     }

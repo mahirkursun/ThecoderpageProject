@@ -15,6 +15,8 @@ namespace ThecoderpageProject.MVC.Models
 
         public IEnumerable<ReportVM> Reports { get; set; } = new List<ReportVM>();
 
+        public IEnumerable<LikeVM> Likes { get; set; } = new List<LikeVM>();
+
         //CreateReportDTO çağrıldığında burada bir nesne oluşturulacak
         public ReportReason ReportReason { get; set; }
 
