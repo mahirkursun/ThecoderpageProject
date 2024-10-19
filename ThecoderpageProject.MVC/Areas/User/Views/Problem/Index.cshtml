@@ -27,14 +27,13 @@
                                 <a href="@Url.Action("Details", "Problem", new { id = problem.Id })" class="btn btn-primary">View Details</a>
                                 @if (problem.Status == ProblemStatus.Open)
                                 {
-
-                                    <form class="status-form d-inline ms-2" style="margin-right: 36px;" data-problem-id="@problem.Id">
+                                    <form asp-controller="Problem" asp-action="Update" method="post" class="status-form d-inline ms-2" style="margin-right: 36px;">
                                         <input type="hidden" name="id" value="@problem.Id" />
-                                        <select name="status" class="form-select form-select-sm w-150 p-2" style="width: 150%; ">
+                                        <select name="status" class="form-select form-select-sm w-150 p-2" style="width: 150%;" onchange="this.form.submit()">
                                             @foreach (var status in Enum.GetValues(typeof(ProblemStatus)))
                                             {
                                                 var isSelected = problem.Status == (ProblemStatus)status ? "selected" : "";
-                                                <option value="@( (int)status )" isSelected>
+                                                <option value="@((int)status)" isSelected>
                                                     @status
                                                 </option>
                                             }
@@ -43,12 +42,10 @@
                                 }
                                 else
                                 {
-                                    <span class="badge  bg-success  me-2 p-2" style="padding: 10px; font-size:13px; line-height: 1.7;">
+                                    <span class="badge bg-success me-2 p-2" style="padding: 10px; font-size:13px; line-height: 1.7;">
                                         Çözüm bulundu
                                     </span>
-
                                 }
-
                             </div>
                             <!-- Silme butonu -->
                             <form asp-controller="Problem" asp-action="DeleteConfirmed" method="post" class="position-absolute" style="top: 10px; right: 10px;">
@@ -65,35 +62,3 @@
     }
 </div>
 
-
-<!-- Notification message -->
-<div id="notification" class="alert alert-success" style="display:none;">
-    Status güncellendi.
-</div>
-@section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.status-form select').change(function () {
-                var form = $(this).closest('form');
-                var problemId = form.data('problem-id');
-                var status = $(this).val();
-
-                $.ajax({
-                    url: '@Url.Action("Update", "Problem", new { area = "User" })',
-                    type: 'POST',
-                    data: {
-                        id: problemId,
-                        status: status
-                    },
-                    success: function (response) {
-                        $('#notification').show().delay(3000).fadeOut();
-                    },
-                    error: function () {
-                        alert('Status güncellenirken bir hata oluştu.');
-                    }
-                });
-            });
-        });
-    </script>
-}
