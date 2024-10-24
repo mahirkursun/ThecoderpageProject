@@ -1,88 +1,96 @@
 ﻿@model IEnumerable<ProblemVM>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Problems";
 }
 
-<h1>Problems</h1>
+<h1 class="text-center mb-4">Problems</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-secondary">Create New</a>
+    <a asp-action="Create" class="btn btn-secondary mb-3">Create New</a>
 </p>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryId)
-            </th>
-            
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedAt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryId)
-                </td>
-                
-
-
-               
-                <!-- Dropdown Menü Başlangıcı -->
-                <td>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm" style="border-radius: 10px;">
+                <div class="card-body position-relative">
+                    <!-- Dropdown Menü -->
+                    <div class="dropdown position-absolute" style="top: 10px; right: 50px;">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-@item.Id" data-bs-toggle="dropdown" aria-expanded="false">
                             Actions
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <!-- Report Seçeneği -->
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-@item.Id">
                             <li>
                                 <a class="dropdown-item" asp-controller="Report" asp-action="Create" asp-route-problemId="@item.Id">Report</a>
                             </li>
                             <li><a class="dropdown-item" asp-action="Update" asp-route-id="@item.Id">Update</a></li>
                             <li><a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id">Details</a></li>
-                            <li><a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id">Delete</a></li>
-                           
                         </ul>
                     </div>
-                </td>
 
-                
-                <!-- Dropdown Menü Sonu -->
-                
-            </tr>
+                    <!-- Silme İkonu -->
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger position-absolute" style="top: 10px; right: 10px;">
+                        <i class="bi bi-trash" style="font-size: 1.5rem;"></i>
+                    </a>
+
+                    <!-- Problem Başlığı -->
+                    <h5 class="card-title text-primary">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </h5>
+
+                    <!-- Problem Açıklaması -->
+                    <p class="card-text text-muted">
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </p>
+
+                    <!-- Tarih ve Diğer Bilgiler -->
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <small class="text-muted">
+                            <i class="bi bi-clock"></i> @Html.DisplayFor(modelItem => item.CreatedAt)
+                        </small>
+                        <small class="text-muted">
+                            <i class="bi bi-person"></i>User: @Html.DisplayFor(modelItem => item.UserId)
+                        </small>
+
+                    </div>
+
+                    <!-- Kategori ve Durum -->
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <small class="text-muted">
+                            <i class="bi bi-tags"></i> Category: @Html.DisplayFor(modelItem => item.CategoryId)
+                        </small>
+                        <small class="text-muted">
+                            <i class="bi bi-check-circle"></i> Status: @Html.DisplayFor(modelItem => item.Status)
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+   
+    }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-    </tbody>
-</table>
+
+    .card-title {
+        font-family: 'Segoe Print', sans-serif;
+    }
+
+    .bi-trash:hover {
+        color: #dc3545;
+        transform: scale(1.1);
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    
+</style>

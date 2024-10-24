@@ -62,6 +62,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             problemDTO.UserId = userId;
+            
 
             await _problemService.Create(problemDTO);
             TempData["Success"] = $"{problemDTO.Title} başarıyla eklendi";
