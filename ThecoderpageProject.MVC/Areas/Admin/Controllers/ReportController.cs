@@ -15,73 +15,32 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
     public class ReportController : Controller
     {
         private readonly IReportService _reportService;
+        private readonly IUserService _userService;
 
-        public ReportController(IReportService reportService)
+        public ReportController(IReportService reportService, IUserService userService)
         {
             _reportService = reportService;
+            _userService = userService;
         }
 
         /*İncele*/
         public async Task<IActionResult> Index()
         {
             var reports = await _reportService.GetAllReports();
+            foreach (var report in reports)
+            {
+                var user = await _userService.GetUserById(report.UserId);
+               
 
+                report.UserName = user?.UserName ?? string.Empty;
+                
+
+            }
 
             return View(reports);
         }
 
-        [HttpGet]
-        public IActionResult Create(int problemId)
-        {
-
-            var model = new CreateReportDTO
-            {
-                ProblemId = problemId
-             
-            };
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(CreateReportDTO reportDTO)
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            reportDTO.UserId = userId;
-
         
-            
-
-            // Report kaydını oluştur
-            await _reportService.CreateReport(reportDTO);
-            TempData["Success"] = "Rapor başarıyla oluşturuldu.";
-
-            
-
-            // Problem rapor edilmişse ProblemController'a yönlendir
-            return RedirectToAction("Index", "Problem");
-        }
-        // Rapor detaylarını gösterir
-        public async Task<IActionResult> Details(int id)
-        {
-            var report = await _reportService.GetReportById(id);
-            if (report == null)
-            {
-                return NotFound();
-            }
-
-            var model = new UpdateReportDTO
-            {
-                Id = report.Id,
-                ProblemId = report.ProblemId,
-                ReportReason = report.ReportReason,
-                UserId = report.UserId,
-                ReportedAt = report.ReportedAt
-            };
-
-            return View(model);
-        }
-
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {

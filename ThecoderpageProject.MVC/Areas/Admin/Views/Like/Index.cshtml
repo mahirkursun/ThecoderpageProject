@@ -1,44 +1,58 @@
 ﻿@model IEnumerable<LikeVM>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Likes";
 }
 
-<h1>Likes</h1>
+<h1 class="text-center mb-4">Likes</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProblemId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProblemId)
-                </td>
-                <td>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Actions
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" asp-action="Details" asp-route-id="@item.ProblemId">Details</a></li>
-                        </ul>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm" style="border-radius: 10px;">
+                <div class="card-body position-relative">
+
+                    <!-- Kullanıcı Adı ve Avatar -->
+                    <div class="d-flex align-items-center position-absolute" style="top: 10px; left: 10px;">
+                        <img src="/images/avatar.png" alt="User Avatar" class="rounded-circle" width="40" height="40">
+                        <span class="ms-2 text-muted">@Html.DisplayFor(modelItem => item.UserName)</span>
                     </div>
-                </td>
-            </tr>
+
+
+                    <!-- İçerik Container -->
+                    <div class="container mt-5" style="padding:20px;  background-color:whitesmoke; border-radius:10px; min-height:70px;">
+                        <!-- Like Başlığı -->
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <h5 class="card-title text-primary">
+                                <i class="bi bi-hand-thumbs-up"></i> @item.ProblemTitle
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        min-height: 80px;
+    }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-    </tbody>
-</table>
+
+    .card-title {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .bi-trash:hover {
+        color: #dc3545;
+        transform: scale(1.1);
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+</style>

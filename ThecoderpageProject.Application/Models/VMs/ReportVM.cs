@@ -14,6 +14,7 @@ namespace ThecoderpageProject.Application.Models.VMs
         public DateTime ReportedAt { get; set; }
 
         public string UserId { get; set; }
+        public string UserName { get; set; }
         
         public int? ProblemId { get; set; }
     }

@@ -6,9 +6,6 @@
 
 <h1 class="text-center mb-4">Reports</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-secondary mb-3">Create New</a>
-</p>
 
 <div class="row">
     @foreach (var item in Model.OrderByDescending(r => r.ReportedAt))
@@ -20,19 +17,10 @@
                     <!-- Kullanıcı Adı ve Avatar -->
                     <div class="d-flex align-items-center position-absolute" style="top: 10px; left: 10px;">
                         <img src="/images/avatar.png" alt="User Avatar" class="rounded-circle" width="40" height="40">
-                        <span class="ms-2 text-muted">@Html.DisplayFor(modelItem => item.UserId)</span>
+                        <span class="ms-2 text-muted">@Html.DisplayFor(modelItem => item.UserName)</span>
                     </div>
 
-                    <!-- Dropdown Menü -->
-                    <div class="dropdown position-absolute" style="top: 10px; right: 50px;">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-@item.Id" data-bs-toggle="dropdown" aria-expanded="false">
-                            Actions
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-@item.Id">
-                            <li><a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id">Details</a></li>
-                            <li><a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id">Delete</a></li>
-                        </ul>
-                    </div>
+                    
 
                     <!-- Silme İkonu -->
                     <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger position-absolute" style="top: 10px; right: 10px;">
@@ -52,7 +40,7 @@
                         </div>
                         <!-- Report Açıklaması -->
                         <p class="card-text text-muted">
-                            Reported by User ID: @item.UserId for Problem ID: @item.ProblemId
+                            <b>Reported by User Name:</b>  @item.UserName <br /> for <b>Problem ID:</b> @item.ProblemId
                         </p>
                     </div>
                 </div>
@@ -64,7 +52,7 @@
 <style>
     .card {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        min-height: 280px;
+        min-height: 220px;
     }
 
     .card:hover {

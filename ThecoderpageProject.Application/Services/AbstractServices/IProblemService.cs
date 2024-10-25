@@ -21,6 +21,8 @@ namespace ThecoderpageProject.Application.Services.AbstractServices
 
         Task<IEnumerable<ProblemVM>> GetProblemsByCategory(int categoryId); //Kategoriye göre Problem getir
         Task<IEnumerable<ProblemVM>> GetProblemsByUserId(string userId); //User'a göre Problem getir
+
+
     }
 
 
