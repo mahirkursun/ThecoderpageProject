@@ -5,6 +5,7 @@ using System.Security.Claims;
 using ThecoderpageProject.Application.Models.DTOs;
 using ThecoderpageProject.Application.Models.VMs;
 using ThecoderpageProject.Application.Services.AbstractServices;
+using ThecoderpageProject.Domain.Entities;
 
 namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
 {
@@ -13,27 +14,28 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
     public class CommentController : Controller
     {
         private readonly ICommentService _commentService;
+        private readonly IUserService _userService;
 
-        public CommentController(ICommentService commentService)
+        public CommentController(ICommentService commentService, IUserService userService)
         {
             _commentService = commentService;
+            _userService = userService;
 
         }
 
-        string uri = "https://localhost:7244";
 
         // Admin/Comment/Index
         public async Task<IActionResult> Index()
         {
-           var comments = await _commentService.GetAll();
+            var comments = await _commentService.GetAll();
 
-            using (var httpClient = new HttpClient())
+            foreach (var comment in comments)
             {
-                using (var response = await httpClient.GetAsync($"{uri}/api/Comment"))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    comments = JsonConvert.DeserializeObject<List<CommentVM>>(apiResponse);
-                }
+                var user = await _userService.GetUserById(comment.UserId);
+
+                comment.UserName = user?.UserName ?? string.Empty;
+               
+
             }
             return View(comments);
         }
@@ -45,18 +47,24 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateCommentDTO commentDTO)
+        public async Task<IActionResult> Create(CreateCommentDTO commentDTO, int problemId)
         {
-            
+            // Verify if the ProblemId exists
+            var problemExists = await _commentService.GetCommentsByProblemId(commentDTO.ProblemId);
+            if (problemExists == null)
+            {
+                TempData["Error"] = "Problem bulunamadı";
+                return View(commentDTO);
+            }
+
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             commentDTO.UserId = userId;
-            commentDTO.ProblemId = 1;// Şimdilik 1 girildi
-
+            commentDTO.ProblemId = problemId;
             await _commentService.Create(commentDTO);
             TempData["Success"] = $"{commentDTO.Content} başarıyla eklendi";
             return RedirectToAction(nameof(Index));
-
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Update(int id)
@@ -137,6 +145,8 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            var user = await _userService.GetUserById(comment.UserId);
+            
 
             var commentDTO = new UpdateCommentDTO
             {
@@ -144,7 +154,8 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
                 Content = comment.Content,
                 UserId = comment.UserId,
                 ProblemId = comment.ProblemId,
-                CreatedAt = comment.CreatedAt
+                CreatedAt = comment.CreatedAt,
+                UserName = user.UserName,
             };
 
             return View(commentDTO);

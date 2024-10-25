@@ -1,71 +1,92 @@
 ﻿@model IEnumerable<UserVM>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Users";
 }
 
-<h1>Users</h1>
+<h1 class="text-center mb-4">Users</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Role)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-           
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Role)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
 
-                <!-- Dropdown Menü Başlangıcı -->
-                <td>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+<div class="row">
+    @foreach (var item in Model.OrderByDescending(u => u.CreatedAt))
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm" style="border-radius: 10px; background-color:">
+                <div class="card-body position-relative" style="@(item.Role == UserRole.Admin ? "background-color:cadetblue; border-radius: 10px;" : "")">
+
+                    <!-- Kullanıcı Adı ve Avatar -->
+                    <div class="d-flex align-items-center position-absolute" style="top: 10px; left: 10px;">
+                        <img src="/images/avatar.png" alt="User Avatar" class="rounded-circle" width="40" height="40">
+                        <span class="ms-2 text-muted">@Html.DisplayFor(modelItem => item.UserName)</span>
+                    </div>
+
+                    <!-- Dropdown Menü -->
+                    <div class="dropdown position-absolute" style="top: 10px; right: 50px;">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-@item.Id" data-bs-toggle="dropdown" aria-expanded="false">
                             Actions
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-@item.Id">
                             <li><a class="dropdown-item" asp-action="Update" asp-route-id="@item.Id">Update</a></li>
                             <li><a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id">Details</a></li>
-                            <li><a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id">Delete</a></li>
-
                         </ul>
                     </div>
-                </td>
 
+                    <!-- Silme İkonu -->
+                    @if(item.Role == UserRole.User)
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger position-absolute" style="top: 10px; right: 10px;">
+                            <i class="bi bi-trash" style="font-size: 1.5rem;"></i>
+                        </a>
+                    }
+                    
 
-                
-            </tr>
-        }
-    </tbody>
-</table>
+                    <!-- İçerik Container -->
+                    <div class="container mt-5" style="padding:20px; margin-bottom:-10px; background-color:whitesmoke; border-radius:10px; min-height:120px;">
+                        <!-- Kullanıcı Bilgileri -->
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <h5 class="card-title text-primary">
+                                @item.FirstName @item.LastName
+                            </h5>
+                            <small class="text-muted">
+                                <i class="bi bi-clock"></i> @Html.DisplayFor(modelItem => item.CreatedAt)
+                            </small>
+                        </div>
+                        <!-- Kullanıcı Email -->
+                        <p class="card-text text-muted">
+                            @item.Email
+                        </p>
+                    </div>
+                    <!-- Rol ve Kullanıcı Adı -->
+                    <div class="d-flex justify-content-start align-items-center mt-3" style="font-size:medium; margin: 0 5px">
+                        <small class="me-3" style="@(item.Role == UserRole.Admin ? "font-weight:bold; font-size:large;" : "")">
+                            <i class="bi bi-person-badge" ></i> Role: @item.Role
+                        </small>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        min-height: 280px;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .bi-trash:hover {
+        color: #dc3545;
+        transform: scale(1.1);
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+</style>

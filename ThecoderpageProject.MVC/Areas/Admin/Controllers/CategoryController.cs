@@ -131,25 +131,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
 
         }
 
-        // Admin/Category/Details/5
-        [HttpGet]
-        public async Task<IActionResult> Details(int id)
-        {
-            var category = await _categoryService.GetCategoryById(id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-
-            var categoryDTO = new UpdateCategoryDTO
-            {
-                Id = category.Id,
-                Name = category.Name,
-
-            };
-
-            return View(categoryDTO);
-        }
+        
 
 
     }

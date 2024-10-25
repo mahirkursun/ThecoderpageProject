@@ -19,6 +19,8 @@ namespace ThecoderpageProject.Application.Models.VMs
         [Required(ErrorMessage = "Username field is required.")]
         public string UserName { get; set; }
 
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
         [Required(ErrorMessage = "Email field is required.")]
         [EmailAddress(ErrorMessage = "Invalid email format.")]
         public string Email { get; set; }

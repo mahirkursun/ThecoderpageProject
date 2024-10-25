@@ -12,7 +12,7 @@ using ThecoderpageProject.Infrastructure.Context;
 namespace ThecoderpageProject.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241016205837_Initial")]
+    [Migration("20241025145104_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -54,15 +54,15 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5553a8b9-84ca-4e24-bf2f-039af8bc4859",
-                            ConcurrencyStamp = "8a66d368-7503-4259-89bd-e571fedc91ff",
+                            Id = "bdb5272f-e873-49a6-a4c7-1e530bcad883",
+                            ConcurrencyStamp = "df4950b3-2eb4-4d16-9272-9ce38576d04f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "97defd51-cb03-4464-add2-f71c7d14487b",
-                            ConcurrencyStamp = "e3a7e08e-aef3-4238-b12d-0be8481fe4ff",
+                            Id = "de073a60-82ac-48d9-978a-131f4d2f71b2",
+                            ConcurrencyStamp = "05aa7a7a-79a2-4f12-9681-70dab1ec2014",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -186,6 +186,9 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -253,9 +256,10 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "86878c8a-ff83-4c15-a862-c7eb060d8b53",
+                            Id = "bc85adfb-0e25-4fb5-9782-f8d35c169443",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8b117168-7255-40b9-bd11-b27ff0031c5d",
+                            ConcurrencyStamp = "caf2a87e-3bf9-458e-b95d-6610a413472d",
+                            CreatedAt = new DateTime(2024, 10, 25, 17, 51, 3, 75, DateTimeKind.Local).AddTicks(565),
                             Email = "mahirkrsn@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Mahir",
@@ -263,7 +267,7 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MAHIRKRSN@GMAIL.COM",
                             NormalizedUserName = "MAHIRKURSUN",
-                            PasswordHash = "AQAAAAIAAYagAAAAELJEYhZnPXxXaxQnIiqQMdmY1QIzovClsCwR2Q2jKGeHbMZ9HgkvxbkLDTP6zNOwcA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF7eILABJxCIw1XWGZhObNuLj5la0J640otGj4d5ileyVWGXunbbyXWkbJdIKkAowA==",
                             PhoneNumberConfirmed = false,
                             Role = "Admin",
                             SecurityStamp = "",

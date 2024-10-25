@@ -13,6 +13,7 @@ namespace ThecoderpageProject.Application.Models.DTOs
         public string Content { get; set; }
 
         public string UserId { get; set; }
+        public string UserName { get; set; }
         public int ProblemId { get; set; }
         public DateTime CreatedAt { get; set; }
 

@@ -34,6 +34,7 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -291,14 +292,14 @@ namespace ThecoderpageProject.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "5553a8b9-84ca-4e24-bf2f-039af8bc4859", "8a66d368-7503-4259-89bd-e571fedc91ff", "Admin", "ADMIN" },
-                    { "97defd51-cb03-4464-add2-f71c7d14487b", "e3a7e08e-aef3-4238-b12d-0be8481fe4ff", "User", "USER" }
+                    { "bdb5272f-e873-49a6-a4c7-1e530bcad883", "df4950b3-2eb4-4d16-9272-9ce38576d04f", "Admin", "ADMIN" },
+                    { "de073a60-82ac-48d9-978a-131f4d2f71b2", "05aa7a7a-79a2-4f12-9681-70dab1ec2014", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "86878c8a-ff83-4c15-a862-c7eb060d8b53", 0, "8b117168-7255-40b9-bd11-b27ff0031c5d", "mahirkrsn@gmail.com", false, "Mahir", "Kurşun", false, null, "MAHIRKRSN@GMAIL.COM", "MAHIRKURSUN", "AQAAAAIAAYagAAAAELJEYhZnPXxXaxQnIiqQMdmY1QIzovClsCwR2Q2jKGeHbMZ9HgkvxbkLDTP6zNOwcA==", null, false, "Admin", "", false, "mahirkursun" });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedAt", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "bc85adfb-0e25-4fb5-9782-f8d35c169443", 0, "caf2a87e-3bf9-458e-b95d-6610a413472d", new DateTime(2024, 10, 25, 17, 51, 3, 75, DateTimeKind.Local).AddTicks(565), "mahirkrsn@gmail.com", false, "Mahir", "Kurşun", false, null, "MAHIRKRSN@GMAIL.COM", "MAHIRKURSUN", "AQAAAAIAAYagAAAAEF7eILABJxCIw1XWGZhObNuLj5la0J640otGj4d5ileyVWGXunbbyXWkbJdIKkAowA==", null, false, "Admin", "", false, "mahirkursun" });
 
             migrationBuilder.InsertData(
                 table: "Categories",

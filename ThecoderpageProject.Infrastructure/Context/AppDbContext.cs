@@ -57,6 +57,7 @@ namespace ThecoderpageProject.Infrastructure.Context
                     Email = "mahirkrsn@gmail.com",
                     NormalizedEmail = "MAHIRKRSN@GMAIL.COM",
                     EmailConfirmed = false,
+                    CreatedAt = DateTime.Now,
                     PasswordHash = hasher.HashPassword(null, "Mhr.123"),
                     SecurityStamp = string.Empty,
                     FirstName = "Mahir",

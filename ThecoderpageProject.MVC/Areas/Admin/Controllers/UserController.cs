@@ -41,6 +41,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
                 Role = user.Role,
                 UserName = user.UserName,
                 Email = user.Email,
+                CreatedAt = user.CreatedAt
                 // Password alanını isteğe bağlı hale getirebilirsiniz
             };
 
@@ -76,6 +77,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
                 Role = user.Role,
                 UserName = user.UserName,
                 Email = user.Email,
+                CreatedAt = user.CreatedAt
                 // Password alanını isteğe bağlı hale getirebilirsiniz
             };
 
@@ -108,6 +110,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
                 Role = user.Role,
                 UserName = user.UserName,
                 Email = user.Email,
+                CreatedAt = user.CreatedAt
                 // Password alanını isteğe bağlı hale getirebilirsiniz
             };
 

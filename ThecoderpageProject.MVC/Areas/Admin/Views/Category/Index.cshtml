@@ -1,49 +1,73 @@
 ﻿@model IEnumerable<CategoryVM>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Categories";
 }
 
-<h1>Categories</h1>
+<h1 class="text-center mb-4">Categories</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-secondary">Create New</a>
+    <a asp-action="Create" class="btn btn-secondary mb-3">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-                <!-- Dropdown Menü Başlangıcı -->
-                <td>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm" style="border-radius: 10px;">
+                <div class="card-body position-relative">
+
+                    <!-- Dropdown Menü -->
+                    <div class="dropdown position-absolute" style="top: 18px; right: 50px;">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-@item.Id" data-bs-toggle="dropdown" aria-expanded="false">
                             Actions
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                           
-                            
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-@item.Id">
                             <li><a class="dropdown-item" asp-action="Update" asp-route-id="@item.Id">Update</a></li>
-                            <li><a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id">Details</a></li>
-                            <li><a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id">Delete</a></li>
-
+                            
                         </ul>
                     </div>
-                </td>
 
+                    <!-- Silme İkonu -->
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger position-absolute" style="top: 18px; right: 10px;">
+                        <i class="bi bi-trash" style="font-size: 1.5rem;"></i>
+                    </a>
 
-                <!-- Dropdown Menü Sonu -->
-        </tr>
-}
-    </tbody>
-</table>
+                    <!-- İçerik Container -->
+                    
+                        <!-- Kategori Başlığı -->
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <h5 class="card-title text-primary">
+                                @item.Name
+                            </h5>
+                            
+                        </div>
+                        
+               
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        min-height: 40px;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .bi-trash:hover {
+        color: #dc3545;
+        transform: scale(1.1);
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+</style>

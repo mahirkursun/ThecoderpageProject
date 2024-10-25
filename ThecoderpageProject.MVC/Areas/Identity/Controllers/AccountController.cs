@@ -90,7 +90,8 @@ namespace ThecoderpageProject.MVC.Areas.Identity.Controllers
                     Email = registerVM.Email,
                     FirstName = registerVM.FirstName,
                     LastName = registerVM.LastName,
-                    Role = registerVM.Role
+                    Role = registerVM.Role,
+                    CreatedAt = registerVM.CreatedAt
 
                 };
 
