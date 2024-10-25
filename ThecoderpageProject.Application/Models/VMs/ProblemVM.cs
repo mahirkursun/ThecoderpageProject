@@ -14,13 +14,16 @@ namespace ThecoderpageProject.Application.Models.VMs
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
         public string UserId { get; set; }
+        public string UserName { get; set; }
 
         public int CategoryId { get; set; }
+        public string Name { get; set; }//CategoryName
         public ProblemStatus Status { get; set; }
 
         
 
         public List<UserVM> Users { get; set; }
+        public List<CategoryVM> Categories { get; set; }
         public List<CommentVM> Comments { get; set; }
 
         public List<LikeVM> Likes { get; set; } = new List<LikeVM>();

@@ -14,6 +14,7 @@ namespace ThecoderpageProject.Application.Models.VMs
         public string LastName { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
+        public DateTime CreatedAt { get; set; }
         public UserRole Role { get; set; }
 
 

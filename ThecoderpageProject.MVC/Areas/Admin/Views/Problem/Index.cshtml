@@ -11,20 +11,25 @@
 </p>
 
 <div class="row">
-    @foreach (var item in Model)
+    @foreach (var item in Model.OrderByDescending(p => p.CreatedAt))
     {
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm" style="border-radius: 10px;">
                 <div class="card-body position-relative">
+
+                    <!-- Kullanıcı Adı ve Avatar -->
+                    <div class="d-flex align-items-center position-absolute" style="top: 10px; left: 10px;">
+                        <img src="/images/avatar.png" alt="User Avatar" class="rounded-circle" width="40" height="40">
+                        <span class="ms-2 text-muted">@Html.DisplayFor(modelItem => item.UserName)</span>
+                    </div>
+
                     <!-- Dropdown Menü -->
                     <div class="dropdown position-absolute" style="top: 10px; right: 50px;">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton-@item.Id" data-bs-toggle="dropdown" aria-expanded="false">
                             Actions
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-@item.Id">
-                            <li>
-                                <a class="dropdown-item" asp-controller="Report" asp-action="Create" asp-route-problemId="@item.Id">Report</a>
-                            </li>
+
                             <li><a class="dropdown-item" asp-action="Update" asp-route-id="@item.Id">Update</a></li>
                             <li><a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id">Details</a></li>
                         </ul>
@@ -35,36 +40,61 @@
                         <i class="bi bi-trash" style="font-size: 1.5rem;"></i>
                     </a>
 
-                    <!-- Problem Başlığı -->
-                    <h5 class="card-title text-primary">
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </h5>
-
-                    <!-- Problem Açıklaması -->
-                    <p class="card-text text-muted">
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </p>
-
-                    <!-- Tarih ve Diğer Bilgiler -->
-                    <div class="d-flex justify-content-between align-items-center mt-3">
-                        <small class="text-muted">
-                            <i class="bi bi-clock"></i> @Html.DisplayFor(modelItem => item.CreatedAt)
+                    <!-- İçerik Container -->
+                    <div class="container mt-5" style="padding:20px; margin-bottom:-10px; background-color:whitesmoke; border-radius:10px; min-height:120px;">
+                        <!-- Problem Başlığı -->
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <h5 class="card-title text-primary">
+                                @{
+                                    var title = item.Title;
+                                    if (title.Length > 40)
+                                    {
+                                        title = title.Substring(0, 40) + "...";
+                                    }
+                                }
+                                @title
+                            </h5>
+                            <small class="text-muted">
+                                <i class="bi bi-clock"></i> @Html.DisplayFor(modelItem => item.CreatedAt)
+                            </small>
+                        </div>
+                        <!-- Problem Açıklaması -->
+                        <p class="card-text text-muted">
+                            @{
+                                var description = item.Description;
+                                if (description.Length > 80)
+                                {
+                                    description = description.Substring(0, 80) + "...";
+                                }
+                            }
+                            @description
+                        </p>
+                    </div>
+                    <!-- Beğeni ve Yorum Sayısı -->
+                    <div class="d-flex justify-content-start align-items-center mt-3" style="font-size:medium; margin: 0 5px" >
+                        <small class="me-3">
+                            <i class="bi bi-hand-thumbs-up"></i> @item.Likes.Count Likes
                         </small>
-                        <small class="text-muted">
-                            <i class="bi bi-person"></i>User: @Html.DisplayFor(modelItem => item.UserId)
+                        <small>
+                            <i class="bi bi-chat-dots"></i> @item.Comments.Count Comments
                         </small>
-
                     </div>
 
-                    <!-- Kategori ve Durum -->
-                    <div class="d-flex justify-content-between align-items-center mt-2">
+                    <!-- Kategori ve Tarih -->
+                    <div class="d-flex justify-content-between align-items-center mt-2" style="padding:15px 0 5px 5px;" >
                         <small class="text-muted">
-                            <i class="bi bi-tags"></i> Category: @Html.DisplayFor(modelItem => item.CategoryId)
+                            <i class="bi bi-tags"></i> Category: @Html.DisplayFor(modelItem => item.Name)
                         </small>
+
                         <small class="text-muted">
                             <i class="bi bi-check-circle"></i> Status: @Html.DisplayFor(modelItem => item.Status)
                         </small>
                     </div>
+
+                    
+                    
+
+
                 </div>
             </div>
         </div>
@@ -74,7 +104,7 @@
 <style>
     .card {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-   
+        min-height: 280px;
     }
 
         .card:hover {
@@ -83,7 +113,7 @@
         }
 
     .card-title {
-        font-family: 'Segoe Print', sans-serif;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     .bi-trash:hover {
@@ -91,6 +121,4 @@
         transform: scale(1.1);
         transition: transform 0.2s ease, color 0.2s ease;
     }
-
-    
 </style>

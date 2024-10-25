@@ -14,16 +14,19 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
     public class ProblemController : Controller
     {
         private readonly IProblemService _problemService;
-        private readonly ILikeService _voteService;
         private readonly ICategoryService _categoryService;
- 
+        private readonly IUserService _userService;
+        private readonly ILikeService _likeService;
+        private readonly ICommentService _commentService;
 
-        public ProblemController(IProblemService problemService, ILikeService voteService,ICategoryService categoryService) // Update constructor
+        public ProblemController(IProblemService problemService, ILikeService likeService,ICategoryService categoryService, IUserService userService, ICommentService commentService) // Update constructor
         {
             _problemService = problemService;
-            _voteService = voteService;
             _categoryService = categoryService;
-       
+            _userService = userService;
+            _likeService = likeService;
+            _commentService = commentService;
+
 
         }
 
@@ -31,13 +34,22 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         // Admin/Problem/Index
         public async Task<IActionResult> Index()
         {
-            var problems = await _problemService.GetAll(); 
+            var problems = await _problemService.GetAll();
+            var likes = await _likeService.GetAllLikes();
+            var comments = await _commentService.GetAll();
 
-            /*ÖNEMLİ */
-            /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            foreach (var problem in problems)
+            {
+                var user = await _userService.GetUserById(problem.UserId);
+                var category = await _categoryService.GetCategoryById(problem.CategoryId);
+                
+                problem.UserName = user?.UserName ?? string.Empty;
+                problem.Name = category?.Name ?? string.Empty;
+                problem.Likes = likes.Where(l => l.ProblemId == problem.Id).ToList();
+                problem.Comments = comments.Where(c => c.ProblemId == problem.Id).ToList();
 
-            
+            }
+
             return View(problems);
         }
 
@@ -61,7 +73,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         public async Task<IActionResult> Create(CreateProblemDTO problemDTO)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            problemDTO.UserId = userId;
+            problemDTO.UserId = userId ?? string.Empty;
             
 
             await _problemService.Create(problemDTO);
@@ -78,6 +90,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            var categories = await _categoryService.GetCategories();
 
             var problemDTO = new UpdateProblemDTO
             {
@@ -87,10 +100,16 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
                 Status = problem.Status,
                 CreatedAt = problem.CreatedAt,
                 CategoryId = problem.CategoryId,
-                UserId = problem.UserId
+                UserId = problem.UserId,
+                Categories = categories.Select(c => new CategoryVM
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                }).ToList()
             };
             return View(problemDTO);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Update(UpdateProblemDTO problemDTO)
@@ -98,6 +117,8 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
             if (!ModelState.IsValid)
             {
                 TempData["Error"] = "Girdiğiniz verileri kontrol edin";
+                // Reload the categories to repopulate the dropdown
+                problemDTO.Categories = (await _categoryService.GetCategories()).ToList();
                 return View(problemDTO);
             }
 
@@ -105,6 +126,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
             TempData["Success"] = $"{problemDTO.Title} başarıyla güncellendi";
             return RedirectToAction(nameof(Index));
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
@@ -146,9 +168,21 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var problem = await _problemService.GetProblemById(id);
+          
+
             if (problem == null)
             {
                 return NotFound();
+            }
+            var user = await _userService.GetUserById(problem.UserId);
+            var category = await _categoryService.GetCategoryById(problem.CategoryId);
+            var likes = await _likeService.GetAllLikes();
+            var comments = await _commentService.GetAll();
+
+            foreach (var comment in comments)
+            {
+                var commentUser = await _userService.GetUserById(comment.UserId);
+                comment.UserName = commentUser?.UserName ?? string.Empty;
             }
 
             var problemDTO = new UpdateProblemDTO
@@ -159,7 +193,10 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
                 Status = problem.Status,
                 CreatedAt = problem.CreatedAt,
                 CategoryId = problem.CategoryId,
-                UserId = problem.UserId
+                UserName = user.UserName,
+                Name = category.Name,
+                Likes = likes.Where(l => l.ProblemId == problem.Id).ToList(),
+                Comments = comments.Where(c => c.ProblemId == problem.Id).ToList()
             };
             return View(problemDTO);
         }
