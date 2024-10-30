@@ -35,9 +35,11 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
 
                         <!--arama kutusu -->
-                        <form class="d-flex mx-auto" style="width: 40%;">
-                            <input type="text" class="form-control" placeholder="Search">
-                        </form>
+                        <div class="d-flex mx-auto" style="width: 40vw;">
+                            <form class="d-flex offset-md-3" style="width: 100%; box-shadow: 0px 0px 8px 2px rgb(141, 141, 157); border-radius:10px; " asp-action="Search" method="get">
+                                <input class="form-control" type="text" name="query" placeholder="Problem ara..." onkeydown="if (event.key === 'Enter') { this.form.submit(); return false; }" />
+                            </form>
+                        </div>
 
                         @*Identity*@
                         @Html.Partial("Identity/_Identity_PV")

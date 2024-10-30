@@ -8,6 +8,7 @@ using ThecoderpageProject.Application.Services.AbstractServices;
 
 namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
 {
+
     [Area("Admin")]
     [Authorize]
     public class UserController : Controller
@@ -49,7 +50,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(string id, UpdateUserDTO userDTO)
+        public async Task<IActionResult> Update(UpdateUserDTO userDTO)
         {
             if (!ModelState.IsValid)
             {

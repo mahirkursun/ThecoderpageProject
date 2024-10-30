@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using ThecoderpageProject.Application.Models.DTOs;
@@ -10,6 +11,7 @@ using ThecoderpageProject.MVC.Models;
 namespace ThecoderpageProject.MVC.Areas.User.Controllers
 {
     [Area("User")]
+    [Authorize]
     public class LikeController : Controller
     {
         private readonly ILikeRepository<Like> _likeRepository;
@@ -29,18 +31,16 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
             
 
             var likes = await _likeService.GetLikeByProblemId(problemId);
-            // If user is not authenticated, return forbidden
+           
             if (string.IsNullOrEmpty(userId))
             {
                 return Forbid();
             }
 
-            // Check if the user has already liked the problem
             var like = await _likeRepository.GetLikeByUserIdAndProblemId(userId, problemId);
 
             if (like == null)
             {
-                // If not liked, add a like
                 like = new Like
                 {
                     ProblemId = problemId,
@@ -51,11 +51,9 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
             }
             else
             {
-                // If already liked, remove the like
                 await _likeRepository.RemoveLike(like.Id);
             }
 
-            //url /User/Problem/Details/2 ise olduğu yerde kalsın:
             if (Request.Headers["Referer"].ToString().Contains("User/Problem/Details/" + problemId))
             {
                 return RedirectToAction("Details", "Problem", new { area = "User", id = problemId });
@@ -65,7 +63,6 @@ namespace ThecoderpageProject.MVC.Areas.User.Controllers
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
 
-            // Redirect back to the page where the like action was triggered
             
         }
 

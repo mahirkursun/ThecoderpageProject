@@ -13,7 +13,7 @@
                 <h4 class="mb-0">Problem Details</h4>
             </div>
             <div class="card-body">
-                <form asp-action="Update" method="post">
+                <form asp-action="Update" asp-route-id="@Model.Id" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
                     <input type="hidden" asp-for="Id" />
                     <div class="form-group mb-3">

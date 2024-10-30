@@ -33,18 +33,9 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
 
         public async Task<Problem> UpdateProblem(Problem problem)
         {
-            var problemToUpdate = await Problems.FirstOrDefaultAsync(p => p.Id == problem.Id);
-            if (problemToUpdate != null)
-            {
-                problemToUpdate.Title = problem.Title;
-                problemToUpdate.Description = problem.Description;
-                problemToUpdate.CreatedAt = problem.CreatedAt;
-                problemToUpdate.UserId = problem.UserId;
-                problemToUpdate.Status = problem.Status;
-                problemToUpdate.CategoryId = problem.CategoryId;
-                await _context.SaveChangesAsync();
-            }
-            return problemToUpdate;
+            _context.Problems.Update(problem);
+            await _context.SaveChangesAsync();
+            return problem;
         }
 
         public async Task<Problem> DeleteProblem(int id)

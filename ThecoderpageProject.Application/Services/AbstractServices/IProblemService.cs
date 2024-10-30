@@ -17,6 +17,8 @@ namespace ThecoderpageProject.Application.Services.AbstractServices
         Task Delete(int id);
 
         Task<IEnumerable<ProblemVM>> GetAll();
+        Task<IEnumerable<ProblemVM>> SearchProblems(string query);
+
 
 
         Task<IEnumerable<ProblemVM>> GetProblemsByCategory(int categoryId); //Kategoriye göre Problem getir

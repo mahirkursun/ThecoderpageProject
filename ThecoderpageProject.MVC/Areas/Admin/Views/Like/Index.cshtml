@@ -11,6 +11,9 @@
     {
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm" style="border-radius: 10px;">
+                
+
+                
                 <div class="card-body position-relative">
 
                     <!-- Kullanıcı Adı ve Avatar -->
@@ -29,7 +32,11 @@
                             </h5>
                         </div>
                     </div>
+                    <a asp-controller="Problem" asp-action="Details" asp-route-id="@item.ProblemId" style="text-decoration:none; color:cadetblue; margin:5px 10px;">
+                        Probleme git
+                    </a>
                 </div>
+               
             </div>
         </div>
     }

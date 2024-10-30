@@ -7,7 +7,6 @@
 <h1>Admin Dashboard</h1>
 <br />
 <div>
-  
     <div class="row">
         <div class="col-md-2">
             <div class="card">
@@ -36,6 +35,14 @@
         <div class="col-md-2">
             <div class="card">
                 <div class="card-body">
+                    <h5 class="card-title">Total Likes</h5>
+                    <p class="card-text">@Model.Likes.Count()</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card">
+                <div class="card-body">
                     <h5 class="card-title">Total Comments</h5>
                     <p class="card-text">@Model.Comments.Count()</p>
                 </div>
@@ -49,23 +56,22 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Total Likes</h5>
-                    <p class="card-text">@Model.Likes.Count()</p>
-                </div>
-            </div>
-        </div>
+        
     </div>
 
     <h2>Charts</h2>
     <div class="row">
         <div class="col-md-4">
+            <label>user Chart</label>
             <canvas id="userChart"></canvas>
         </div>
         <div class="col-md-4">
+            <label>problem Chart</label>
             <canvas id="problemChart"></canvas>
+        </div>
+        <div class="col-md-4">
+            <label>problem Status Chart</label>
+            <canvas id="problemStatusChart"></canvas>
         </div>
     </div>
 </div>
@@ -90,6 +96,7 @@
                             <tr>
                                 <td>@user.UserName</td>
                                 <td>@user.Email</td>
+                                <td>@user.CreatedAt</td>
                             </tr>
                         }
                     </tbody>
@@ -117,7 +124,7 @@
                             <tr>
                                 <td>@problem.Title</td>
                                 <td>@problem.Status</td>
-                                <td>@problem.CreatedAt.ToLongDateString()</td>
+                                <td>@problem.CreatedAt</td>
                             </tr>
                         }
                     </tbody>
@@ -201,5 +208,45 @@
                 }
             }
         });
+
+
+
+                                var problemStatusChartCtx = document.getElementById('problemStatusChart').getContext('2d');
+                                var problemStatusChart = new Chart(problemStatusChartCtx, {
+                                    type: 'doughnut',
+                                    data: {
+                                        labels: ['Open', 'Closed'],
+                                        datasets: [{
+                                            label: 'Problem Status',
+                                            data: [@Model.Problems.Count(p => p.Status == ProblemStatus.Open), @Model.Problems.Count(p => p.Status == ProblemStatus.Resolved)],
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(255, 206, 86, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 1)',
+                                                'rgba(54, 162, 235, 1)',
+                                                'rgba(255, 206, 86, 1)'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        plugins: {
+                                            legend: {
+                                                position: 'top',
+                                            },
+                                            tooltip: {
+                                                callbacks: {
+                                                    label: function (tooltipItem) {
+                                                        return tooltipItem.label + ': ' + tooltipItem.raw;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
     </script>
 }

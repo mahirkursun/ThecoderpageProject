@@ -88,6 +88,7 @@ namespace ThecoderpageProject.MVC
             });
 
 
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

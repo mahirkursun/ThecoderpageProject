@@ -3,7 +3,7 @@
 @if (Model.Problems.Count() == 0)
 {
     <div class="alert alert-warning" role="alert">
-        Bu kategoriye ait problem bulunamadı.
+        Bu kategoriye veya aramaya ait problem bulunamadı.
     </div>
 }
 
@@ -96,7 +96,7 @@
                 }
                 else
                 {
-                    <button type="button" class="btn btn-link p-0 d-flex align-items-center w-100" data-bs-toggle="modal" data-bs-target="#loginPromptModal" style="text-align: left;">
+                    <button type="button" class="btn btn-link p-0 d-flex align-items-center w-100" data-bs-toggle="modal" data-bs-target="#loginPromptModall" style="text-align: left;">
                         <i class="bi bi-heart-fill" style="color: gray; margin:3px 3px 0 0;"></i>
 
                     </button>
@@ -137,11 +137,11 @@
     </div>
 }
 <!-- Login Prompt Modal -->
-<div class="modal fade" id="loginPromptModal" tabindex="-1" aria-labelledby="loginPromptModalLabel" aria-hidden="true">
+<div class="modal fade" id="loginPromptModall" tabindex="-1" aria-labelledby="loginPromptModallLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="loginPromptModalLabel">Uyarı</h5>
+                <h5 class="modal-title" id="loginPromptModallLabel">Uyarı</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

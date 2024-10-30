@@ -38,17 +38,18 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
         public async Task Update(UpdateProblemDTO problemDTO)
         {
             var problem = await _problemRepository.GetProblemById(problemDTO.Id);
-            if (problem == null)
+            if (problem != null)
             {
-                throw new KeyNotFoundException($"Problem with ID {problemDTO.Id} not found.");
+                problem.Title = problemDTO.Title;
+                problem.Description = problemDTO.Description;
+                problem.Status = problemDTO.Status;
+                problem.CreatedAt = problemDTO.CreatedAt;
+                problem.UserId = problemDTO.UserId;
+                problem.CategoryId = problemDTO.CategoryId;
+
+                await _problemRepository.UpdateProblem(problem);
             }
-            problem.Title = problemDTO.Title;
-            problem.Description = problemDTO.Description;
-            problem.Status = problemDTO.Status;
-            problem.CreatedAt = problemDTO.CreatedAt;
-            problem.UserId = problemDTO.UserId;
-            problem.CategoryId = problemDTO.CategoryId;
-            await _problemRepository.UpdateProblem(problem);
+            
         }
         public async Task<UpdateProblemDTO> GetProblemById(int id)
         {
@@ -80,20 +81,27 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
             return _mapper.Map<IEnumerable<ProblemVM>>(problems);
         }
 
-        public Task<IEnumerable<ProblemVM>> GetProblemsByCategory(int categoryId)
+        public async Task<IEnumerable<ProblemVM>> GetProblemsByCategory(int categoryId)
         {
-            var problems = _problemRepository.GetProblems().Result.Where(x => x.CategoryId == categoryId);
-            return Task.FromResult(_mapper.Map<IEnumerable<ProblemVM>>(problems));
+            var problems =await _problemRepository.GetProblems();
+            return _mapper.Map<IEnumerable<ProblemVM>>(problems.Where(p => p.CategoryId == categoryId));
 
 
         }
 
-        public Task<IEnumerable<ProblemVM>> GetProblemsByUserId(string userId)
+        public async Task<IEnumerable<ProblemVM>> GetProblemsByUserId(string userId)
         {
-            var problems =  _problemRepository.GetProblems().Result
-           .Where(p => p.UserId == userId);
-
-            return Task.FromResult(_mapper.Map<IEnumerable<ProblemVM>>(problems));
+            var problems = await _problemRepository.GetProblems();
+            return _mapper.Map<IEnumerable<ProblemVM>>(problems.Where(p => p.UserId == userId));
+            
         }
+
+        public async Task<IEnumerable<ProblemVM>> SearchProblems(string query)
+        {
+            var problems = await _problemRepository.GetProblems();
+            return _mapper.Map<IEnumerable<ProblemVM>>(problems.Where(p => p.Title.Contains(query) || p.Description.Contains(query)));
+
+        }
+
     }
 }

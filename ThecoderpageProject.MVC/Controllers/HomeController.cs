@@ -53,5 +53,21 @@ namespace ThecoderpageProject.MVC.Controllers
 
             return View(model);
         }
+        public async Task<IActionResult> Search(string query)
+        {
+            var problems = await _problemService.SearchProblems(query);
+
+            var model = new HomeViewModel
+            {
+                Problems = problems,
+                Categories = await _categoryService.GetCategories(),
+                Comments = await _commentService.GetAll(),
+                Users = await _userService.GetAll(),
+                Reports = await _reportService.GetAllReports(),
+                Likes = await _likeService.GetAllLikes()
+            };
+
+            return View("Index", model);
+        }
     }
 }

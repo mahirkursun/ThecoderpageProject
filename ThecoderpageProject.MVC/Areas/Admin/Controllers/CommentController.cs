@@ -91,11 +91,7 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(UpdateCommentDTO commentDTO)
         {
-            if (!ModelState.IsValid)
-            {
-                TempData["Error"] = "Girdiğiniz verileri kontrol edin";
-                return View(commentDTO);
-            }
+            
 
             await _commentService.Update(commentDTO);
             TempData["Success"] = $"{commentDTO.Content} başarıyla güncellendi";

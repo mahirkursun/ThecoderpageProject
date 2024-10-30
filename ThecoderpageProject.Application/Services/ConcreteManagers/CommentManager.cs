@@ -31,15 +31,15 @@ namespace ThecoderpageProject.Application.Services.ConcreteManagers
         public async Task Update(UpdateCommentDTO commentDTO)
         {
             var comment = await _commentRepository.GetCommentById(commentDTO.Id);
-            if (comment == null)
+            if (comment != null)
             {
-                throw new KeyNotFoundException($"Comment with ID {commentDTO.Id} not found.");
+                comment.Content = commentDTO.Content;
+                comment.CreatedAt = commentDTO.CreatedAt;
+                comment.UserId = commentDTO.UserId;
+                comment.ProblemId = commentDTO.ProblemId;
+                await _commentRepository.UpdateComment(comment);
             }
-            comment.Content = commentDTO.Content;
-            comment.CreatedAt = commentDTO.CreatedAt;
-            comment.UserId = commentDTO.UserId;
-            comment.ProblemId = commentDTO.ProblemId;
-            await _commentRepository.UpdateComment(comment);
+            
         }
 
         public async Task Delete(int id)

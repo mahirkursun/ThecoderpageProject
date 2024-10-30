@@ -114,18 +114,13 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(UpdateProblemDTO problemDTO)
         {
-            if (!ModelState.IsValid)
-            {
-                TempData["Error"] = "Girdiğiniz verileri kontrol edin";
-                // Reload the categories to repopulate the dropdown
-                problemDTO.Categories = (await _categoryService.GetCategories()).ToList();
-                return View(problemDTO);
-            }
+
 
             await _problemService.Update(problemDTO);
             TempData["Success"] = $"{problemDTO.Title} başarıyla güncellendi";
             return RedirectToAction(nameof(Index));
         }
+
 
 
         [HttpGet]

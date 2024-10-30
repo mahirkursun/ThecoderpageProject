@@ -5,46 +5,46 @@
         <div class="col-md-6 col-lg-4">
             <div class="card shadow-lg p-3 mb-5 bg-white rounded">
                 <div class="card-body">
-                    <h3 class="text-center mb-4">Register</h3>
+                    <h3 class="text-center mb-4">Kayıt Ol</h3>
                     <form asp-action="Register" method="post">
                         <div class="form-group mb-3">
-                            <label asp-for="FirstName" class="form-label"></label>
-                            <input asp-for="FirstName" class="form-control" placeholder="Enter your first name" />
+                            <label asp-for="FirstName" class="form-label">Adı</label>
+                            <input asp-for="FirstName" class="form-control" placeholder="Adınızı girin" />
                             <span asp-validation-for="FirstName" class="text-danger"></span>
                         </div>
 
                         <div class="form-group mb-3">
-                            <label asp-for="LastName" class="form-label"></label>
-                            <input asp-for="LastName" class="form-control" placeholder="Enter your last name" />
+                            <label asp-for="LastName" class="form-label">Soyadı</label>
+                            <input asp-for="LastName" class="form-control" placeholder="Soyadınızı girin" />
                             <span asp-validation-for="LastName" class="text-danger"></span>
                         </div>
 
                         <div class="form-group mb-3">
-                            <label asp-for="UserName" class="form-label"></label>
-                            <input asp-for="UserName" class="form-control" placeholder="Choose a username" />
+                            <label asp-for="UserName" class="form-label">Kullanıcı adı</label>
+                            <input asp-for="UserName" class="form-control" placeholder="Kullanıcı adı girin" />
                             <span asp-validation-for="UserName" class="text-danger"></span>
                         </div>
 
                         <div class="form-group mb-3">
                             <label asp-for="Email" class="form-label"></label>
-                            <input asp-for="Email" type="email" class="form-control" placeholder="Enter your email" />
+                            <input asp-for="Email" type="email" class="form-control" placeholder="Email girin" />
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
 
                         <div class="form-group mb-3">
-                            <label asp-for="Password" class="form-label"></label>
-                            <input asp-for="Password" type="password" class="form-control" placeholder="Enter your password" />
+                            <label asp-for="Password" class="form-label">Şifre</label>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Şifre girin" />
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
 
                         <div class="form-group mb-4">
-                            <label asp-for="ConfirmPassword" class="form-label"></label>
-                            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm your password" />
+                            <label asp-for="ConfirmPassword" class="form-label">Yeniden Şifre</label>
+                            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Şifrenizi yeniden girin" />
                             <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                         </div>
 
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                            <button type="submit" class="btn btn-primary btn-block">Kayıt Ol</button>
                         </div>
                     </form>
                 </div>

@@ -33,16 +33,9 @@ namespace ThecoderpageProject.Infrastructure.ConcreteRepositories
 
         public async Task<Comment> UpdateComment(Comment comment)
         {
-            var commentToUpdate = Comments.FirstOrDefault(c => c.Id == comment.Id);
-            if(commentToUpdate != null)
-            {
-                commentToUpdate.Content = comment.Content;
-                commentToUpdate.CreatedAt = comment.CreatedAt;
-                commentToUpdate.UserId = comment.UserId;
-                commentToUpdate.ProblemId = comment.ProblemId;
-                await _context.SaveChangesAsync();
-            }
-            return commentToUpdate;
+            _context.Comments.Update(comment);
+            await _context.SaveChangesAsync();
+            return comment;
         }
 
         public async Task<Comment> DeleteComment(int id)

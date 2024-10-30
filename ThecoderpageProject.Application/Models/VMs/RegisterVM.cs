@@ -10,28 +10,29 @@ namespace ThecoderpageProject.Application.Models.VMs
 {
     public class RegisterVM
     {
-        [Required(ErrorMessage = "First name field is required.")] 
+        [Required(ErrorMessage = "Ad alanı zorunludur.")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Last name field is required.")]
+        [Required(ErrorMessage = "Soyad alanı zorunludur.")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Username field is required.")]
+        [Required(ErrorMessage = "Kullanıcı adı alanı zorunludur.")]
         public string UserName { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        [Required(ErrorMessage = "Email field is required.")]
-        [EmailAddress(ErrorMessage = "Invalid email format.")]
+        [Required(ErrorMessage = "E-posta alanı zorunludur.")]
+        [EmailAddress(ErrorMessage = "Geçersiz e-posta formatı.")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Password field is required.")]
-        [StringLength(30, MinimumLength = 6, ErrorMessage = "Password must be at least 6 and at most 30 characters.")]
+        [Required(ErrorMessage = "Şifre alanı zorunludur.")]
+        [StringLength(30, MinimumLength = 6, ErrorMessage = "Şifre en az 6 ve en fazla 30 karakter olmalıdır.")]
         public string Password { get; set; }
 
-        [Compare("Password", ErrorMessage = "Passwords do not match.")] 
+        [Compare("Password", ErrorMessage = "Şifreler uyuşmuyor.")]
         public string ConfirmPassword { get; set; }
 
         public UserRole Role { get; set; } = UserRole.User; // Varsayılan rol
+
     }
 }
