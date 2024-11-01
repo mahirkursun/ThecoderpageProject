@@ -154,10 +154,26 @@ namespace ThecoderpageProject.MVC.Areas.Admin.Controllers
                 return NotFound();
             }
 
+            // Delete related comments
+            var comments = await _commentService.GetCommentsByProblemId(id);
+            foreach (var comment in comments)
+            {
+                await _commentService.Delete(comment.Id);
+            }
+
+            // Delete related likes
+            var likes = await _likeService.GetLikeByProblemId(id);
+            foreach (var like in likes)
+            {
+                await _likeService.DeleteLike(like.Id);
+            }
+
+            // Delete the problem
             await _problemService.Delete(id);
             TempData["Success"] = $"{problem.Title} başarıyla silindi";
             return RedirectToAction(nameof(Index));
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Details(int id)
